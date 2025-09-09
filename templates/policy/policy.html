@@ -1,0 +1,3306 @@
+    {% extends 'base.html' %}
+    {%load static %}
+
+    {% block inpagecss %}
+        body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        }
+
+        h2 {
+        text-align: center;
+        }
+
+        label {
+        display: block;
+        margin-bottom: 5px;
+        }
+
+        select, input {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 0px;
+        box-sizing: border-box;
+        }
+		
+		/* CMADD Turn button visiblility on and off */
+		
+		#saveasNameButton[disabled] {
+		    display:none;
+		}
+		
+		#saveNameButton[disabled] {
+		    display:none;
+		}
+		
+		/* CMADD end */
+
+        #constraintsContainer .constraintRow {
+        display: none;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+        }
+
+        #constraintsContainer .removeRow {
+        background-color: #4154f1;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 5px 0;
+        cursor: pointer;
+        border-radius: 8px;
+        }
+
+        #addConstraintRow, #saveButton, #clearButton {
+        background-color: #4154f1;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 10px 0;
+        cursor: pointer;
+        border-radius: 8px;
+        }
+
+
+        .common-button {
+        width: 200px;
+        background-color: #4154f1;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        padding: 5px 10px;
+        margin: 10px 0;
+        cursor: pointer;
+        border-radius: 8px;
+        }
+
+        /* Hide the actual file input */
+        #fileInput {
+            display: none;
+        }
+
+        /* Style the label to look like a button */
+        .file-label {
+            width: 200px;
+            background-color: #4154f1;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+
+            margin: 10px 0;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+        .button-container {
+            display: flex;
+            gap: 10px;
+        }
+
+
+        #refinementTargetContainer .refinementTargetRow {
+        display: none;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+        }
+
+        #refinementTargetContainer .removeRefinementTargetRow {
+        background-color: #4154f1;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 5px 0;
+        cursor: pointer;
+        border-radius: 8px;
+        }
+        #refinementTargetContainer {
+        border: 1px solid #ccc; /* Border for the box */
+        padding: 5px; /* Padding for internal spacing */
+        margin-bottom: 20px; /* Adjust margin as needed */
+        }
+
+        #refinementTargetContainer .box {
+        background-color: #f8f8f8; /* Background color for the box */
+        }
+		
+		/* CMADD - Mimic of above */
+		#refinementTarget2Container .refinementTarget2Row {
+        display: none;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+        }
+
+        #refinementTarget2Container .removeRefinementTarget2Row {
+        background-color: #4154f1;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 5px 0;
+        cursor: pointer;
+        border-radius: 8px;
+        }
+        #refinementTarget2Container {
+        border: 1px solid #ccc; /* Border for the box */
+        padding: 5px; /* Padding for internal spacing */
+        margin-bottom: 20px; /* Adjust margin as needed */
+        }
+
+        #refinementTarget2Container .box {
+        background-color: #f8f8f8; /* Background color for the box */
+        }
+		/* End CMADD */
+		
+		
+
+        #addRefinementTargetRow, #saveButton , #clearButton {
+        background-color: #4154f1;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 10px 0;
+        cursor: pointer;
+        border-radius: 8px;
+        }
+		
+		/* CMADD - Mimic of above but removed additional class references */
+		#addRefinementTarget2Row {
+        background-color: #4154f1;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 10px 0;
+        cursor: pointer;
+        border-radius: 8px;
+        }
+        /* End CMADD */
+
+        #refinementActorContainer .refinementActorRow {
+        display: none;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+        }
+
+        #refinementActorContainer .removeRefinementActorRow {
+        background-color: #4154f1;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 10px 0;
+        cursor: pointer;
+        border-radius: 8px;
+        }
+        #refinementActorContainer {
+        border: 1px solid #ccc; /* Border for the box */
+        padding: 5px; /* Padding for internal spacing */
+        margin-bottom: 20px; /* Adjust margin as needed */
+        }
+
+        #refinementActorContainer .box {
+        background-color: #f8f8f8; /* Background color for the box */
+        }
+
+        #addRefinementActorRow, #saveButton , #clearButton {
+        background-color: #4154f1;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 10px 0;
+        cursor: pointer;
+        border-radius: 8px;
+        }
+
+
+        #refinementActionContainer .refinementActionRow {
+        display: none;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+        }
+
+        #refinementActionContainer .removeRefinementActionRow {
+        background-color: #4154f1;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 5px 0;
+        cursor: pointer;
+        border-radius: 8px;
+        }
+        #refinementActionContainer {
+        border: 1px solid #ccc; /* Border for the box */
+        padding: 5px; /* Padding for internal spacing */
+        margin-bottom: 20px; /* Adjust margin as needed */
+        }
+
+        #refinementActionContainer .box {
+        background-color: #f8f8f8; /* Background color for the box */
+        }
+
+        #addRefinementActionRow, #saveButton {
+        background-color: #4154f1;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 10px 0;
+        cursor: pointer;
+        border-radius: 8px;
+        }
+
+       /* #refinementActionContainer .refinementActionRow {
+        display: none;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+        } */
+
+       /* #refinementActionContainer .removeRefinementActionRow {
+        background-color: #4154f1;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 5px 0;
+        cursor: pointer;
+        border-radius: 8px;
+        } */
+        /*#refinementActionContainer { */
+        /* border: 1px solid #ccc; */ /* Border for the box */
+        /* padding: 5px; */ /* Padding for internal spacing */
+        /* margin-bottom: 20px; */ /* Adjust margin as needed */
+        /* } */
+
+        /* #refinementActionContainer .box { */
+        /* background-color: #f8f8f8; */ /* Background color for the box */
+        /* } */
+
+        /*#addRefinementActionRow, #saveButton {
+        background-color: #4154f1;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 10px 0;
+        cursor: pointer;
+        border-radius: 8px;
+        } */
+
+
+        #refinementPurposeContainer .refinementPurposeRow {
+        display: none;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+        }
+
+        #refinementPurposeContainer .removeRefinementPurposeRow {
+        background-color: #4154f1;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 5px 0;
+        cursor: pointer;
+        border-radius: 8px;
+        }
+        #refinementPurposeContainer {
+        border: 1px solid #ccc; /* Border for the box */
+        padding: 5px; /* Padding for internal spacing */
+        margin-bottom: 20px; /* Adjust margin as needed */
+        }
+
+        #refinementPurposeContainer .box {
+        background-color: #f8f8f8; /* Background color for the box */
+        }
+
+        #addRefinementPurposeRow, #saveButton, #uploadButton {
+        background-color: #4154f1;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 10px 0;
+        cursor: pointer;
+        border-radius: 8px;
+        }
+
+        #savedObjects {
+        margin-top: 20px;
+        }
+
+        #savedList {
+        list-style: none;
+        padding: 0;
+        }
+
+        #savedList li {
+        background-color: #f4f4f4;
+        border: 1px solid #ddd;
+        padding: 10px;
+        margin-bottom: 5px;
+        }
+
+        #queryTextbox {
+        width: 50%;
+        height: 150px;
+        float: center;
+        display: none;
+        }
+        #queryTextboxLabel {
+        display: none;
+        }
+
+        #constraintsContainer {
+        border: 1px solid #ccc; /* Border for the box */
+        padding: 5px; /* Padding for internal spacing */
+        margin-bottom: 20px; /* Adjust margin as needed */
+        }
+
+        #constraintsContainer .box {
+        background-color: #f8f8f8; /* Background color for the box */
+        }
+
+
+
+        .right-align {
+        float: right;
+        /* You can add more styles as needed */
+        }
+
+        #savedOdrl {
+        width: 100%;
+        box-sizing: border-box; /* This ensures that padding and border are included in the width */
+        }
+
+        .flex {
+        display: flex;
+        align-items: center; /* Align items vertically */
+        }
+        .flex > * {
+        margin-right: 10px; /* Add spacing between elements */
+        }
+
+        .form-card {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 20px;
+        margin-bottom: 20px;
+        background-color: #f9f9f9;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+        }
+
+        .form-actions {
+            margin-top: 10px;
+            text-align: right;
+        }
+
+        .remove-form-button {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+
+        .remove-form-button:hover {
+            background-color: #c82333;
+        }
+
+        .remove-form-button:focus {
+            outline: none;
+        }
+		
+.welcome-header{
+    font-family: Arial, sans-serif;
+	font-size: 18px;
+	line-height: 0.8;
+	text-align: center;
+}
+
+/* Menu Bar Styling */
+.menu-bar {
+    display: flex;
+    background-color: #007bff;
+    padding: 10px;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.menu-item {
+    position: relative; /* Ensure dropdown aligns relative to this */
+    margin-right: 20px;
+	margin-left: 20px;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.menu-item span:hover {
+    text-decoration: underline;
+}
+
+/* CMADD */
+.menu-item-TBD {
+    display: none; /* These are left in but to be deleted */
+	position: relative; /* Ensure dropdown aligns relative to this */
+    margin-right: 20px;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.menu-item span:hover {
+    text-decoration: underline;
+}
+
+/* Dropdown Content */
+.dropdown-content {
+    display: none; /* Hidden by default */
+    position: absolute;
+    top: 100%; /* Position directly below the menu item */
+    left: 0;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    min-width: 200px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+/* Ensure visibility when hovering over the menu item or dropdown */
+.menu-item:hover .dropdown-content,
+.dropdown-content:hover {
+    display: block;
+}
+
+/* CMADD - To support request for button to add new rule */
+/* Menu bar Button Styles */
+.menubar-button,
+.menubar-label {
+    /* display: block; */
+    /* width: 100%; */
+    padding: 5px;
+    /* background-color: white; */
+	background-color:white;
+    color: #007bff;
+    text-align: left;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.menubar-button:hover,
+.menubar-label:hover {
+    background-color: #f0f0f0;
+	text-decoration: underline;
+}
+
+
+
+/* Dropdown Button Styles */
+.dropdown-button,
+.dropdown-label {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    /* background-color: white; */
+	background-color:white;
+    color: #007bff;
+    text-align: left;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.dropdown-button:hover,
+.dropdown-label:hover {
+    background-color: #f0f0f0;
+}
+
+/* Hidden Inputs */
+input[type="file"] {
+    display: none;
+}
+
+        /* Modal container */
+.modal {
+    display: none; /* Initially hidden */
+    position: fixed; /* Fix position relative to the viewport */
+    top: 50%; /* Position from the top */
+    left: 50%; /* Position from the left */
+    transform: translate(-50%, -50%); /* Offset the modal by half of its own width and height to truly center it */
+    width: 80%; /* Adjust the width of the modal */
+    max-width: 700px; /* Max width */
+    max-height: 80%; /* Max height */
+    background-color: white; /* Modal background color */
+    border-radius: 12px; /* Rounded corners */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Shadow for visual effect */
+    padding: 20px; /* Padding inside the modal */
+    z-index: 9999; /* Ensure the modal is above other content */
+    overflow-y: auto; /* Allow scrolling if content overflows */
+    transition: opacity 0.3s ease-in-out; /* Smooth transition when showing/hiding */
+}
+
+/* Modal content */
+.modal-content {
+    padding: 20px;
+    text-align: center;
+}
+
+/* Close button */
+.close-button {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 30px;
+    color: #333; /* Darker close button for visibility */
+    cursor: pointer;
+    transition: color 0.2s; /* Smooth transition for button hover */
+}
+
+.close-button:hover {
+    color: #e74c3c; /* Red color on hover */
+}
+
+/* Modal header */
+h2 {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* rules list */
+#rulesList {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Grid layout */
+    gap: 20px; /* Space between items */
+    margin: 0;
+}
+
+#rulesList li {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s; /* Smooth hover effects */
+}
+
+#rulesList li:hover {
+    transform: translateY(-5px); /* Lift the item */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Add shadow on hover */
+}
+
+
+/* Ontology list */
+#ontologyList {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Grid layout */
+    gap: 20px; /* Space between items */
+    margin: 0;
+}
+
+#ontologyList li {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s; /* Smooth hover effects */
+}
+
+#ontologyList li:hover {
+    transform: translateY(-5px); /* Lift the item */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Add shadow on hover */
+}
+
+/* Modal for smaller screens */
+@media (max-width: 600px) {
+    .modal {
+        width: 90%; /* Reduce modal width on small screens */
+        max-height: 90%; /* Allow for more height on smaller devices */
+    }
+
+    .modal-content {
+        padding: 15px;
+    }
+
+    h2 {
+        font-size: 1.5em;
+    }
+
+    #ontologyList {
+        grid-template-columns: 1fr; /* Stack the items in a single column */
+    }
+
+    .close-button {
+        top: 10px;
+        right: 10px;
+    }
+}
+
+
+    {% endblock %}
+    {% block title %} Data Controller/Processor Home {% endblock %}
+    {% block content %}
+        <main id="main">
+            <section id="faq" class="faq">
+{#                    <header class="section-header">#}
+{#                        <p>ODRL Policy Editor</p>#}
+{#                    </header>#}
+
+                <!-- CMADD -->				
+								
+				<header id = "entry-header" class="welcome-header">
+                        <br> Welcome {{ user.username}} you are 
+                </header>
+				<header id = "entry-header" class="welcome-header">
+                        <br> 
+                </header>
+				
+				<header id = "entry-header" class="welcome-header">
+				    <p>Ver: Alpha - 0.1</p>
+				</header>
+				
+				
+									
+					
+                <div class="container" data-aos="fade-up"  style="min-height: 400px">
+
+                <!-- START div class row -->
+				<div class="row">
+				
+				<!-- START Menu Bar -->
+                <div class="menu-bar">
+                    <!-- START File Menu -->
+                    <div class="menu-item">
+                        <span>File Management</span>
+                        <div class="dropdown-content">
+                            <!-- <button id="newRuleButton" class="dropdown-button" style="background-color:#90EE90">New Rule</button> -->
+                            <button id="saveNameButton" class="dropdown-button" style="background-color:#90EE90">Save Policy</button>
+							<button id="saveasNameButton" class="dropdown-button" style="background-color:#90EE90">Save Policy As</button>
+							<button id="deleteNameButton" class="dropdown-button" style="background-color:#90EE90">Delete Policy</button>
+							<button id="downloadRuleButton" class="dropdown-button" style="background-color:#90EE90">Download Policy</button>
+							<!-- CM0311 -->
+						    <button id="namePublicButton" class="dropdown-button" style="background-color:#90EE90">Toggle API Visibility</button>
+                            
+                            
+							
+                            <!-- <label for="fileInput" class="dropdown-label">
+                                Upload Policy
+                                <input type="file" id="fileInput" hidden>
+                            </label> -->
+							
+							<!-- This code has been left in the short term as interface reworked. 
+							It can be ignored it is here to make sure previous functional flow can be reviewed
+							and retrieved in case found to be needed.
+							
+							<button id="listRulesButton" class="dropdown-button">List Rules</button>
+							
+							<button id="saveProfileButton" class="dropdown-button">Save Profile</button>
+							<button id="saveProfileAsButton" class="dropdown-button">Save Profile As</button>
+							<button id="deleteButton" class="dropdown-button">Delete Profile</button> -->
+                        </div>
+                    </div>
+					<!-- END File Menu -->
+					
+
+                    <!-- START Config Menu -->
+					<!-- CMADD - These are left here to allow old code to reference -->
+					<!--         Should be removed in a fuller tidy up -->
+                    <div class="menu-item-TBD">
+                        <span>Config</span>
+                        <div class="dropdown-content">
+                            <label for="ontologyFileInput" class="dropdown-label">
+                                Upload Ontology File
+                                <input type="file" id="ontologyFileInput" hidden>
+                            </label>
+                            <button id="viewOntologiesButton" class="dropdown-button">View Ontologies</button>
+                        </div>
+                    </div>
+					
+					<!-- START new rule button -->
+					<!-- CMADD - These are left here to allow old code to reference -->
+					<!--         Should be removed in a fuller tidy up -->
+                    <div class="menu-item">
+                                                 
+                        <button id="newRuleButton" class="menubar-button" style="background-color:#34ebd8">New Rule</button>
+                        
+                    </div>
+					<!-- END Edit Menu -->
+                </div>
+				<!-- END Menu Bar -->
+				
+				<!-- START Modal Window for file upload prompting -->
+                <div id="fileuploadModal" class="modal" style="max-height: 30%">
+                    <div class="modal-content">
+                        <span class="close-button" id="closefileuploadModalButton">&times;</span>
+                        <label for="policyFileInput" class="dropdown-label">
+                                Click to upload Policy File
+                                <input type="file" id="policyFileInput" hidden>
+                         </label>
+                    </div>
+                </div>
+				<!-- END Modal Window for file upload prompting -->
+
+                <!-- START Modal Window for Viewing Ontologies -->
+                <div id="ontologyModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close-button" id="closeModalButton">&times;</span>
+                        <h2>Uploaded Ontologies</h2>
+                        <ul id="ontologyList">
+                            <!-- List of ontologies will be dynamically added here -->
+                        </ul>
+                    </div>
+                </div>
+				<!-- END Modal Window for Viewing Ontologies -->
+
+                <!-- START Modal Window for Listing Rules -->
+                <div id="rulesModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close-button" id="closeRuleModalButton">&times;</span>
+                        <h2>Saved Rules</h2>
+                        <ul id="rulesList">
+                            <!-- List of ontologies will be dynamically added here -->
+                        </ul>
+                    </div>
+                </div>
+				<!-- END Modal Window for Listing Rules -->
+				
+				<!-- START Modal Window for Saving Rules -->
+                <div id="nameModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close-button" id="closeNameModalButton">&times;</span>
+                        <h2>Enter Name</h2>
+                        <div>
+                            <label for="nameInput">Policy Name:</label>
+							<!-- CMADD -->
+                            <input type="text" id="odrlFileName" value="" >  <!-- placeholder="Enter rule name"> -->
+                       </div>
+                        <button id="saveRuleButton">Submit</button>
+                    </div>
+					
+					
+                </div>
+				<!-- END Modal Window for Saving Rules -->
+				
+				<!-- CMADD -->
+				<!-- START Modal Window for deleting policy -->
+				<div id="deletenameModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close-button" id="closedeleteNameModalButton">&times;</span>
+                        <h2>Delete Policy</h2>
+                        <div>
+                            <label for="nameInput">Policy Name:</label>
+							
+                            <input type="text" id="odrldeleteFileName" value="" >  <!-- placeholder="Enter rule name"> -->
+                       </div>
+                        <button id="deleteRuleButton">Submit</button>
+                    </div>
+					
+					
+                </div>
+				<!-- END Modal Window for deleting policy -->
+				
+				<!-- CM0311 -->					
+				<div id="publicNameModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close-button" id="closepublicNameModalButton">&times;</span>
+                        <h2>Toggle Ontology API Visibility?</h2>
+                        <div>
+                            <label for="nameInput">Ontology Name:</label>
+							
+                            <input type="text" id="publicFileName" value="" >  <!-- placeholder="Enter rule name"> -->
+                        </div>
+                        <button id="makeNamePublicButton">Submit</button>
+                    </div>
+                </div>
+				
+				        <!-- CMADD A policy is associated with a single dataset URI -->
+						<!-- This box allows the selection of that dataset -->
+						<!-- Within the form-cards below a read-only display of this URI is displayed -->
+						<!--     with the ability to refine using a free text box query definition -->
+						
+						<div id="refinementTarget2Container">
+                                    <div class="flex">
+                                        <label for="Target2Dropdown">Target:</label>
+                                        <!-- <select id="Target2Dropdown" class="dropdowns"> -->
+										    <!--{% for target in targets %} -->
+						                        <!-- <option value= "{{ SavedPol }}"> </option> -->
+							                    <!-- <option value= "{% url 'update' %}">{{ SavedPol }} </option> -->
+										        <!--<option value= "{{ target.label }}">{{ target.label }} </option> -->
+						                    <!--{% endfor %} -->
+                                        <!-- <button id="addRefinementTarget2Row" >Refine</button> -->
+										<!-- </select> -->
+										
+										<input list="targetlist" name="Target2Dropdown" id="Target2Dropdown" role="combobox" />
+                                        <datalist id="targetlist">
+                                            {% for target in targets %}
+						                        <option value= "{{ target.label }}">{{ target.label }} </option>
+						                    {% endfor %}
+                                        </datalist>
+                                    </div>
+
+                                    <!-- <div class="refinementTarget2Row">
+                                        <label for="refinementTarget2Dropdown">Refinement:</label>
+                                        <select id="refinementTarget2Dropdown" class="refinementTarget2Dropdown"></select>
+                                        <label for="operatorRefinementTarget2Dropdown"></label>
+                                        <select id = "operatorRefinementTarget2Dropdown" class="operatorRefinementTarget2Dropdown"></select>
+                                        <label for="refinementTarget2Value"></label>
+                                        <input id="refinementTarget2Value" type="text" class="refinementTarget2Value" placeholder="Value e.g., '2020-12-12', 'http://example.org/'">
+                                        <button class="removeRefinementTarget2Row">X</button>
+                                    </div> -->
+						
+						            <script type='text/javascript'>	
+                                    
+									var Target2Dropdown=document.getElementById("Target2Dropdown");
+	 
+	                                Target2Dropdown.onchange=function(){
+									    
+	                                    //var newTarget = this.options[this.selectedIndex];
+   										//const input = this.target;
+                                        //if (input.value.trim() !== "") input.defaultValue=input.value;
+										
+										var Target2Dropdown=document.getElementById("Target2Dropdown");
+										
+										var newTarget = this.value;
+										//var newTarget = Target2Dropdown.value;
+										
+										console.log("Target change fired " + newTarget);
+		                                
+		                                // Walk the list of existing form cards and update the target value displayed
+										cardlist=document.getElementsByClassName("form-card") // .getElementById("TargetDropdown");
+										for (let i = 1; i < cardlist.length; i++) {
+                                            
+											console.log("Card value is  " + cardlist.item(i).children[5].children[0].children[1].value);
+											
+											//   This code is rather 'hardwired' to the form structure/sequence 
+											//       would be more flexible if a specific ID added for the required field
+											//       and this was then used to select on.
+											//cardlist.item(i).children[5].children[0].children[1].value = newTarget.value;
+											console.log("newTarget value is  " + newTarget);
+											
+											
+											// This could be rationalised in a future tidy but is here to avoid structural Change
+											// If the user supplies a new value we need to add it to the card target dropdown
+											//   to be able to change the value as required
+											inList=false
+											for (let j=0; j < cardlist.item(i).children[5].children[0].children[1].options.length; j++){
+											     console.log("The next dropdown value is " + cardlist.item(i).children[5].children[0].children[1].options[j].text);
+												 if ( newTarget == cardlist.item(i).children[5].children[0].children[1].options[j].text){
+												     inList=true;
+													 console.log("Dropdown match found");
+											     }
+											     
+										    }
+											
+											if ( inList == false){
+											    console.log("No dropdown match found, update the dropdown options");
+											    															   
+											    var objOption = document.createElement("option");
+                                                objOption.text = newTarget;
+                                                objOption.value = newTarget;
+
+                                                cardlist.item(i).children[5].children[0].children[1].options.add(objOption);
+											}
+											    
+											
+											cardlist.item(i).children[5].children[0].children[1].value = newTarget;
+											
+											console.log("newTarget value is  now <<" + newTarget);
+											
+											console.log("New card value before change event is  <<" + cardlist.item(i).children[5].children[0].children[1].value); 
+											// Create event (using DOM API)
+                                            const changeEvent = new Event('change'); 
+                                            // Dispatch on card target dropdown (to trigger update of dropdown)
+                                            cardlist.item(i).children[5].children[0].children[1].dispatchEvent(changeEvent);
+											
+											console.log("Change card value  <<" + cardlist.item(i).children[5].children[0].children[1].value);
+											
+                                        }
+										
+		 
+	                                } 
+	
+                                    </script>
+						 </div>
+										
+				        
+                        <!-- START Set of form-cards (col-lg-12) -->
+                        <div class="col-lg-12">
+						
+						    <!-- START Form Card -->
+                            <div class="form-card" style="display: none">
+
+                                <!-- START Rule dropdown -->
+								
+								<div>
+                                    <label for="ruleDropdown">Rule:</label>
+                                    <select id="ruleDropdown" class="dropdowns" onchange="actionChosen()"></select>
+                                </div>
+								<!-- END Rule dropdown -->
+								
+								
+								
+								<!-- START Actor Block -->
+                                <div id="refinementActorContainer">
+								    <!-- START Actor row dropdown and refinement button -->
+                                    <div class="flex">
+                                        <label for="ActorDropdown">Actor:</label>
+                                        <select id="ActorDropdown" class="dropdowns"></select>
+                                        <button id="addRefinementActorRow" >Refine</button>
+                                    </div>
+									<!-- END Actor row dropdown and refinement button -->
+									
+									<!-- START Actor refinement row (a new one is displayed when the refine button above is pressed -->
+                                    <div class="refinementActorRow">
+                                        <label for="refinementActorDropdown">Refinement:</label>
+                                        <select id="refinementActorDropdown" class="refinementActorDropdown"></select>
+                                        <label for="operatorRefinementActorDropdown"></label>
+                                        <select id = "operatorRefinementActorDropdown" class="operatorRefinementActorDropdown"></select>
+                                        <label for="refinementActorValue"></label>
+                                        <input id="refinementActorValue" type="text" class="refinementActorValue" placeholder="Value e.g., '2020-12-12', 'http://example.org/'">
+                                        <button class="removeRefinementActorRow">X</button>
+                                    </div>
+									<!-- END Actor refinement row -->
+                                </div>
+								<!-- END Actor Block -->
+								
+								
+                                <!-- START Action Block -->
+                                <div id="refinementActionContainer">
+                                    <div class="flex">
+                                        <label for="ActionDropdown">Action:</label>
+                                        <select id="ActionDropdown" class="dropdowns" onchange="actionChosen()"></select>
+                                        <button id="addRefinementActionRow" >Refine</button>
+                                    </div>
+
+                                    <div class="refinementActionRow">
+                                        <label for="refinementActionDropdown">Refinement:</label>
+                                        <select id="refinementActionDropdown" class="refinementActionDropdown"></select>
+                                        <label for="operatorRefinementActionDropdown"></label>
+                                        <select id = "operatorRefinementActionDropdown" class="operatorRefinementActionDropdown"></select>
+                                        <label for="refinementActionValue"></label>
+                                        <input id="refinementActionValue" type="text" class="refinementActionValue" placeholder="Value e.g., '2020-12-12', 'http://example.org/'">
+                                        <button class="removeRefinementActionRow">X</button>
+                                    </div>
+
+                                </div>
+								<!-- END Action Block -->
+
+                                <div>
+                                    <label for="queryTextbox" id="queryTextboxLabel">Enter a Query:</label><textarea id="queryTextbox" class="queryTextbox" placeholder="Write your query here."></textarea>
+                                </div>
+
+                                <div id="refinementPurposeContainer">
+                                    <div class="flex">
+                                        <label for="PurposeDropdown">Purpose:</label>
+                                        <select id="PurposeDropdown" class="dropdowns"></select>
+                                        <button id="addRefinementPurposeRow" >Refine</button>
+                                    </div>
+
+                                    <div class="refinementPurposeRow">
+                                        <label for="refinementPurposeDropdown">Refinement:</label>
+                                        <select id="refinementPurposeDropdown" class="refinementPurposeDropdown"></select>
+                                        <label for="operatorRefinementPurposeDropdown"></label>
+                                        <select id = "operatorRefinementPurposeDropdown" class="operatorRefinementPurposeDropdown"></select>
+                                        <label for="refinementPurposeValue"></label>
+                                        <input id="refinementPurposeValue" type="text" class="refinementPurposeValue" placeholder="Value e.g., '2020-12-12', 'http://example.org/'">
+                                        <button class="removeRefinementPurposeRow">X</button>
+                                    </div>
+
+                                </div>
+
+                                <div id="refinementTargetContainer">
+                                    <div class="flex">
+                                        <label for="TargetDropdown">Target:</label>
+                                        <select id="TargetDropdown" class="dropdowns"></select>
+                                        <button id="addRefinementTargetRow" >Refine</button>
+                                    </div>
+
+                                    <div class="refinementTargetRow">
+                                        <label for="refinementTargetDropdown">Refinement:</label>
+                                        <select id="refinementTargetDropdown" class="refinementTargetDropdown"></select>
+                                        <label for="operatorRefinementTargetDropdown"></label>
+                                        <select id = "operatorRefinementTargetDropdown" class="operatorRefinementTargetDropdown"></select>
+                                        <label for="refinementTargetValue"></label>
+                                        <input id="refinementTargetValue" type="text" class="refinementTargetValue" placeholder="Value e.g., '2020-12-12', 'http://example.org/'">
+                                        <button class="removeRefinementTargetRow">X</button>
+                                    </div>
+                                </div>
+
+                                <div id="constraintsContainer">
+                                    <button id="addConstraintRow" >Add Constraint</button>
+                                    <div class="constraintRow">
+                                        <label for="constraintDropdown">Constraint:</label>
+                                        <select id = "constraintDropdown" class="constraintDropdown"></select>
+                                        <label for="operatorDropdown"></label>
+                                        <select id = "operatorDropdown" class="operatorDropdown"></select>
+                                        <label for="constraintValue"></label>
+                                        <input id="constraintValue" type="text" class="constraintValue" placeholder="Value e.g., '2020-12-12', 'http://example.org/'">
+                                        <button class="removeRow">X</button>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-actions">
+                                    <button class="remove-form-button">Remove Rule</button>
+                                </div>
+								
+                            </div>
+							<!-- END Form Card -->
+							
+							
+                        </div>
+						<!-- END Set of form-cards (col-lg-12) -->
+						
+                        <div id="savedObjects" style="display: none;">
+                            <h3>Saved Policy:</h3>
+                            <textarea id="savedOdrl" rows="1" cols="50"></textarea>
+                            <ul id="savedList"></ul>
+                        </div>
+                    </div>
+					<!-- END div class row -->
+					
+                </div>
+
+            </section>
+        </main><!-- End #main -->
+        <script>
+
+document.addEventListener('DOMContentLoaded', () => {
+// START ################### document.addEventListener('DOMContentLoaded',
+
+    // CMADD
+	// https://stackoverflow.com/questions/979975/get-the-values-from-the-get-parameters-javascript
+	function getQueryParams(qs) {
+        qs = qs.split('+').join(' ');
+
+        var params = {},
+            tokens,
+            re = /[?&]?([^=]+)=([^&]*)/g;
+
+        while (tokens = re.exec(qs)) {
+            params[decodeURIComponent(tokens[1])] = decodeURIComponent(tokens[2]);
+        }
+
+        return params;
+    }
+	
+	
+    var query = getQueryParams(document.location.search);
+	
+	
+	
+	if ( query.mode == "update"){
+			
+        document.getElementById("entry-header").innerHTML += ` editing policy : ` + query.policy;
+	}
+	else if ( query.mode == "delete"){
+	    document.getElementById("entry-header").innerHTML += ` deleting policy : ` + query.policy;
+	}
+	else if ( query.mode == "read"){
+	    document.getElementById("entry-header").innerHTML += ` reading policy : ` + query.policy;
+	}
+	else 
+	{
+	    document.getElementById("entry-header").innerHTML += ` creating a new policy`
+	}
+					
+	document.getElementById("saveNameButton").disabled = query.mode == "create";	
+
+    
+	
+	// END CMADD
+	
+	
+    // Get modal elements
+    const nameModal = document.getElementById('nameModal');
+	
+	// CMADD
+	const odrlFileName = document.getElementById('odrlFileName');	
+    odrlFileName.value=query.policy
+	if (query.mode == "update"){
+	    odrlFileName.setAttribute('readonly','');
+	}
+	
+    const saveButton = document.getElementById('saveNameButton');
+	// CMADD
+	const saveasButton = document.getElementById('saveasNameButton');
+	
+    const closeNameModalButton = document.getElementById('closeNameModalButton');
+
+    // Show modal on button click
+    saveButton.addEventListener('click', () => {
+	    // CMADD - Just in case save as pressed in update mode and then abandoned
+		saveAs=false
+		if (query.mode == "update"){
+	        odrlFileName.setAttribute('readonly','');
+	    }
+		// End CMADD
+	    nameModal.style.display = 'block';
+    });
+
+    // Close modal when clicking on the close button
+    closeNameModalButton.addEventListener('click', () => {
+	    
+        nameModal.style.display = 'none';
+    });
+
+    // Close modal when clicking outside the modal content
+    window.addEventListener('click', (event) => {
+        if (event.target === nameModal) {
+            nameModal.style.display = 'none';
+        }
+    });
+	
+	// CMADD
+	// Show modal on button click
+    saveasButton.addEventListener('click', () => {
+	    odrlFileName.removeAttribute('readonly');
+		saveAs = true;
+        nameModal.style.display = 'block';
+    });
+	
+	
+	// CMADD Adding a complete modal to cater for upload mode
+	const FileUploadModal = document.getElementById('fileuploadModal');
+	const closeFileUploadModalButton = document.getElementById('closefileuploadModalButton');
+	
+	// Close modal when clicking on the close button
+    closeFileUploadModalButton.addEventListener('click', () => {	    
+        FileUploadModal.style.display = 'none';
+    });
+
+    // Close modal when clicking outside the modal content
+    window.addEventListener('click', (event) => {
+        if (event.target === FileUploadModal) {
+            FileUploadModal.style.display = 'none';
+        }
+    });
+	
+	// CMADD Adding a complete modal for delete dialogue
+	const odrldeleteFileName = document.getElementById('odrldeleteFileName');	
+    odrldeleteFileName.value=query.policy
+	odrldeleteFileName.setAttribute('readonly','');
+	
+	
+    const deleteButton = document.getElementById('deleteNameButton');
+    const closedeleteNameModalButton = document.getElementById('closedeleteNameModalButton');
+
+    // Show modal on button click
+    deleteButton.addEventListener('click', () => {
+        deletenameModal.style.display = 'block';
+    });
+	
+	
+
+    // Close modal when clicking on the close button
+    closedeleteNameModalButton.addEventListener('click', () => {
+        deletenameModal.style.display = 'none';
+    });
+
+    // Close modal when clicking outside the modal content
+    window.addEventListener('click', (event) => {
+        if (event.target === deletenameModal) {
+            deletenameModal.style.display = 'none';
+        }
+    });
+	
+	const deletePolicyButton = document.getElementById('deleteRuleButton');
+	
+	deletePolicyButton.addEventListener('click', (e) => {
+	   
+	    var query = getQueryParams(document.location.search);
+        console.log("The policy is " + query.policy);
+	    console.log("The mode is " + query.mode);
+	
+	    let check_rules=[];
+	
+	    
+	    $.ajax({
+                type: 'GET',
+			
+                url: 'organization/get_uploaded_rules',  // Endpoint to fetch uploaded rules 
+                success: function (response) {
+                    console.log("delete AJAX call successful" );
+                    // Check if any rules exist
+                    if (response.odrls && response.odrls.length > 0) {
+				        //console.log("Processing the odrl rule list " + response.odrls.length);
+                        // Populate the list with rules
+					    response.odrls.forEach(function (rule) {
+					        //console.log("In delete returned items next " + rule.name + " : " + rule.id);
+					    
+                            check_rules.push({name: rule.name, id: rule.id} );
+						    //console.log("In delete the length of the array is " + check_rules.length);	
+                        });
+					
+					    // This is here because .ajax is asynchronous so ensures that 
+					    //    global check_rules is only accessed after call completed
+					    usedeleteCheckRules();
+					
+		
+                    
+                    } else {
+                        console.error('Error fetching rules in delete:', error);
+                    }
+
+               
+                },
+                error: function (error) {
+                    console.error('Error fetching rules in delete:', error);
+                }
+            });
+		
+	    function usedeleteCheckRules(){
+	        //console.log("AFTER AJAX in delete. The length of the array is " + check_rules.length);	
+		    let rule_name_id = check_rules.find(rule_name_id => rule_name_id.name === query.policy);
+	        //console.log("The policy id to delete is " + rule_name_id.id);
+	
+	        delete_rule(rule_name_id.id);
+	    }
+	   
+        
+    });
+	
+	// End CMADD
+	
+	// Mimic click event on Delete option button
+	if ( query.mode == "delete"){
+	
+	    //deleteButton=document.getElementById("deleteNameButton");
+		clickEvent = new Event("click", {"bubbles":true, "cancelable":false});
+		deleteNameButton.dispatchEvent(clickEvent);
+			
+	}
+    
+
+    const viewOntologiesButton = document.getElementById('viewOntologiesButton');
+    const ontologyModal = document.getElementById('ontologyModal');
+    const closeModalButton = document.getElementById('closeModalButton');
+    const ontologyList = document.getElementById('ontologyList');
+
+    // Open Modal
+    viewOntologiesButton.addEventListener('click', () => {
+        ontologyModal.style.display = 'block';
+        fetchOntologies();
+    });
+
+    // Close Modal
+    closeModalButton.addEventListener('click', () => {
+        ontologyModal.style.display = 'none';
+    });
+	
+	
+	
+	
+
+    // Fetch ontologies from the backend
+    function fetchOntologies() {
+	    
+        fetch('/organization/get_uploaded_ontologies/') // Update this with your actual endpoint
+            .then(response => response.json())
+            .then(data => {
+                populateOntologyList(data.ontologies);
+            })
+            .catch(error => {
+                console.error("Error fetching ontologies:", error);
+            });
+    }
+
+    // Populate the ontology list in the modal
+    function populateOntologyList(ontologies) {
+        ontologyList.innerHTML = ''; // Clear previous content
+        ontologies.forEach((ontology) => {
+            const listItem = document.createElement('li');
+            listItem.innerHTML = `
+                <span>${ontology.name} (${ontology.type})</span>
+                <button class="delete-ontology" data-id="${ontology.id}">Delete</button>
+            `;
+            ontologyList.appendChild(listItem);
+        });
+
+        // Add event listeners for delete buttons
+        const deleteButtons = document.querySelectorAll('.delete-ontology');
+        deleteButtons.forEach((button) => {
+            button.addEventListener('click', (e) => {
+                const ontologyId = parseInt(e.target.dataset.id, 10);
+                deleteOntology(ontologyId);
+            });
+        });
+    }
+
+    // Delete an ontology
+    function deleteOntology(id) {
+	    
+        fetch(`/organization/delete_ontology/${id}/`, { method: 'DELETE', headers: {
+                            'X-CSRFToken': '{{ csrf_token }}', // Include CSRF token
+                        } }) // Update with your delete endpoint
+            .then(response => {
+                if (response.ok) {
+                    fetchOntologies(); // Refresh the list
+                } else {
+                    console.error("Error deleting ontology:", response.statusText);
+                }
+            })
+            .catch(error => {
+                console.error("Error deleting ontology:", error);
+            });
+    }
+
+    // Close modal if clicked outside of content
+    window.addEventListener('click', (event) => {
+        if (event.target === ontologyModal) {
+            ontologyModal.style.display = 'none';
+        }
+    });
+});
+// END ################### document.addEventListener('DOMContentLoaded',
+
+// CMADD - These two functions have been moved out of $(document).ready(function() {
+// Put here provide global scope so that delete_rule works directly from the drop down
+//   Also took populate_rules out of the delete_rule func (commented out) so this will no longer work properly with the old dialogue
+
+function populate_rules()
+    {
+            $.ajax({
+            type: 'GET',
+			
+            url: 'organization/get_uploaded_rules',  // Endpoint to fetch uploaded rules 
+            success: function (response) {
+                // Clear the existing list
+                $('#rulesList').empty();
+
+                // Check if any rules exist
+                if (response.odrls && response.odrls.length > 0) {
+                    // Populate the list with rules
+                    response.odrls.forEach(function (rule) {
+                        $('#rulesList').append(
+                            `<li>
+                                <strong>${rule.name}</strong>
+                                <button class="load-rule" data-id="${rule.id}">Load</button>
+                                <button class="delete-rule" data-id="${rule.id}">Delete</button>
+                             </li>`
+                        );
+                    });
+
+                    // Bind click event to "View Details" buttons
+                    $('.delete-rule').click(function () {
+                        var ruleId = $(this).data('id');
+                        delete_rule(ruleId); // Fetch and display details of the selected rule
+                    });
+                    // Bind click event to "View Details" buttons
+                    $('.load-rule').click(function () {
+                        var ruleId = $(this).data('id');
+                        get_rule(ruleId); 
+                        $('#rulesModal').fadeOut();// Fetch and display details of the selected rule
+                    });
+                } else {
+                    $('#rulesList').append('<li>No rules saved yet.</li>');
+                }
+
+                // Show the modal
+                $('#rulesModal').fadeIn();
+            },
+            error: function (error) {
+                console.error('Error fetching rules:', error);
+            }
+        });
+    }
+	
+	
+	// Function to fetch and display rule details
+    function delete_rule(ruleId) {
+        $.ajax({
+            type: 'DELETE', // HTTP DELETE method
+            url: `organization/delete_rule/${ruleId}/`, // Endpoint to delete the rule by ID
+            headers: {
+                'X-CSRFToken': '{{ csrf_token }}' // CSRF token for secure requests
+            },
+            success: function (response) {
+                //populate_rules();
+				window.close();
+            },
+            error: function (error) {
+                console.error('Error deleting the rule:', error);
+                alert('Failed to delete the rule. Please try again.');
+            }
+        });
+    }
+	
+// End CMADD
+
+
+	
+
+
+var saveAs = false;
+
+
+// START ################### document.getElementById('ontologyFileInput').addEventListener('change', async (event
+        document.getElementById('ontologyFileInput').addEventListener('change', async (event) => {
+            const file = event.target.files[0];
+
+            if (file) {
+                try {
+                    const formData = new FormData();
+                    formData.append('ontologyFile', file); // Append the file to FormData
+
+                    // Send the file to the backend
+					/* CMCHANGE */
+                    const response = await fetch('organization/custom-ontology-upload', {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRFToken': '{{ csrf_token }}', // Include CSRF token
+                        },
+                        body: formData, // Send FormData with the file
+                    });
+
+                    if (response.ok) {
+                        alert('Ontology file uploaded and saved successfully!');
+                    } else {
+                        alert('Failed to upload ontology file.');
+                    }
+                } catch (error) {
+                    console.error('Error reading or uploading the file:', error);
+                    alert('An error occurred. Please try again.');
+                }
+            } else {
+                alert('No file selected.');
+            }
+        });
+// END ################### document.getElementById('ontologyFileInput').addEventListener('change', async (event
+{% comment %}
+
+        document.querySelector('.file-label').addEventListener('click', () => {
+            document.getElementById('ontologyFileInput').click(); // Trigger file input when the label is clicked
+        });
+{% endcomment %}
+
+            function _clearAdditionalRefinementRows(refinementName) {
+			    console.log("In _clearAdditionalRefinementRows: Removing rows for " + refinementName);
+                $('.refinement'+refinementName+'Row').not(':first').remove();
+				//$document.find('.refinement'+refinementName+'Row:gt(0)').remove();
+            }
+            function _clearRefinementRows(refinementName) {
+                $('.refinement'+refinementName+'Row').each(function () {
+                    $(this).find('select').val('');
+                    $(this).find('input').val('');
+                });
+            }
+            function _clearAdditionalRefinementRowsForm(refinementName, $form) {
+			    console.log("In _clearAdditionalRefinementRowsForm: Removing row for " + refinementName);
+                $form.find('.refinement'+refinementName+'Row').not(':first').remove();
+				//$form.filter('.refinement'+refinementName+'Row:gt(0)').remove();
+				//$form.$('.refinement'+refinementName+'Row').not(':first').remove();
+				//$form.find('.refinement'+refinementName+'Row:gt(0)').remove();
+				
+            }
+            function _clearRefinementRowsForm(refinementName, $form) {
+                $form.find('.refinement'+refinementName+'Row').each(function () {
+                    $(this).find('select').val('');
+                    $(this).find('input').val('');
+                });
+            }
+// START ################### function _fillRefinementDropdown(uri, refinementName)
+            // Function to fill refinement dropdown based on selected target
+            function _fillRefinementDropdown(uri, refinementName) {
+                _clearAdditionalRefinementRows(refinementName);
+                _clearRefinementRows(refinementName);
+				
+				console.log("WE ARE IN _FILLREFINEMENT DROPDOWN FOR " + uri);
+				console.log("WE ARE IN _FILLREFINEMENT DROPDOWN FOR " + refinementName);
+
+
+                    $.ajax({
+                        type: 'POST',
+                        url: 'organization/ajax_get_properties_from_properties_file',
+                        contentType: 'application/json',
+                        headers: {
+                            'X-CSRFToken': '{{ csrf_token }}'  // Include CSRF token
+                        },
+                        data: JSON.stringify({
+                            uri: uri
+                        }),
+                        success: function (response) {
+                            var refinementDropdown = $('#refinement' + refinementName + 'Dropdown');
+                            refinementDropdown.empty();
+                            $.each(response.fields, function (index, field) {
+                                refinementDropdown.append($('<option>', {
+                                    value: field.uri,
+                                    text: field.label
+                                }));
+                            });
+                        },
+                        error: function (error) {
+                            console.error('Error fetching column names:', error);
+                        }
+                    });
+                }
+
+// END ################### function _fillRefinementDropdown(uri, refinementName)
+
+// START ################### function _fillRefinementDropdownForm(uri, refinementName, $form) {
+            // Function to fill refinement dropdown based on selected target
+            function _fillRefinementDropdownForm(uri, refinementName, $form) {
+			
+			    console.log("WE ARE IN FILLREFINEMENT DROPDOWN FORM FOR " + uri + " AND " + refinementName);
+			
+                req_url = ""
+                if (refinementName=="Actor")
+                    req_url = 'organization/get_properties_of_a_class'
+                if (refinementName=="Action")
+                    req_url = 'organization/get_constraints_for_instances'
+                if (refinementName=="Purpose")
+                    req_url = 'organization/get_constraints_for_instances'
+                if (refinementName=="Target")
+                    req_url = 'organization/ajax_get_fields_from_datasets'
+                _clearAdditionalRefinementRowsForm(refinementName, $form);
+                _clearRefinementRowsForm(refinementName, $form);
+				
+				if ( refinementName == "Target"){
+				    // We need to provide an option for the user to input a freetext uri
+					// This code interrogates the datalist to check if the value input
+					//   is one of the selected options. 
+					//   If not then just return a QUERY item in the refinement dropdown.
+				    const targetchecklist = [];
+                    Array
+                        .from(document.getElementById("targetlist").options)
+                        .forEach((option) => {
+                            targetchecklist.push(option.value);
+                    });
+					//targetchecklist.forEach(function (item, index) {
+                    //                      console.log(item, index);
+                    //});
+					match=false
+					for (var i = 0; i < targetchecklist.length; i++) {
+                        console.log(targetchecklist[i]);
+						if ( uri == targetchecklist[i]) {
+						   console.log("Match to " + targetchecklist[i]);
+						   match=true
+						   break;
+						}
+                    }
+					
+					if (match == false){
+					    console.log("no match found " );
+						var refinementDropdown = $form.find('#refinement' + refinementName + 'Dropdown');
+                        refinementDropdown.empty();
+					    refinementDropdown.append($('<option>', {
+                                    value: "QUERY",
+                                    text: "QUERY"
+                        }));
+                        return;					    
+					}
+
+					console.log("The target datalist is " + targetchecklist);
+				}
+				
+                    $.ajax({
+                        type: 'POST',
+                        url: req_url,
+                        contentType: 'application/json',
+                        headers: {
+                            'X-CSRFToken': '{{ csrf_token }}'  // Include CSRF token
+                        },
+                        data: JSON.stringify({
+                            uri: uri
+                        }),
+                        success: function (response) {
+                            var refinementDropdown = $form.find('#refinement' + refinementName + 'Dropdown');
+                            refinementDropdown.empty();
+                            $.each(response.fields, function (index, field) {
+							    //console.log("The values are uri/value: " + field.uri + " label/text: " + field.label);
+                                refinementDropdown.append($('<option>', {
+                                    value: field.uri,
+                                    text: field.label
+                                }));
+                            });
+                        },
+                        error: function (error) {
+                            console.error('Error fetching column names:', error);
+                        }
+                    });
+                }
+// END ################### function _fillRefinementDropdownForm(uri, refinementName, $form) {
+
+// START ################### function _actions_for_dropdown_form(dropdownName, $form) {
+            function _actions_for_dropdown_form(dropdownName, $form) {
+                // Trigger when target dropdown changes
+                $form.find('#' + dropdownName + 'Dropdown').off('change').change(function() {
+                    var targetValue = $(this).val();
+					console.log("About to call _fillRefinementDropdownForm (on change)" + dropdownName + " / " + targetValue);
+                    _fillRefinementDropdownForm(targetValue, dropdownName, $form);
+                });
+
+                $form.find('#addRefinement' + dropdownName + 'Row').off('click').click(function() {
+				    console.log("We are clickng the add refinement button for " + dropdownName);
+                    if ($form.find('#' + dropdownName + 'Dropdown').val() !== null) {
+					    console.log("We are have found the dropdown ");
+                        let newRow = $form.find('.refinement' + dropdownName + 'Row:first').clone();
+						console.log("We have cloned the template from " + '.refinement' + dropdownName + 'Row:first');
+                        newRow.find('select').val('');
+                        newRow.find('input').val('');
+                        newRow.css('display', 'flex'); // Set display property to block for visibility
+						console.log("We have set values including visibility " );
+						
+						
+                        newRow.appendTo($form.find('#refinement' + dropdownName + 'Container'));
+						console.log("We have appended " + JSON.stringify(newRow) );
+                    }
+                });
+
+                // Use delegation for dynamically added elements
+                $form.find('#refinement' + dropdownName + 'Container').off('click', '.removeRefinement' + dropdownName + 'Row').on('click', '.removeRefinement' + dropdownName + 'Row', function() {
+				    console.log("From _actions_for_dropdown_form: Click remove refinement - Removing refinement row for " + dropdownName);
+                    $(this).closest('.refinement' + dropdownName + 'Row').remove();
+                });
+            }
+// END ################### function _actions_for_dropdown_form(dropdownName, $form) {
+
+
+// START ################### function _actions_for_dropdown(dropdownName){
+            function _actions_for_dropdown(dropdownName){
+                // Trigger when target dropdown changes
+                $('#'+dropdownName+'Dropdown').change(function () {
+                    var targetValue = $(this).val();
+                    _fillRefinementDropdown(targetValue, dropdownName);
+                });
+
+                $('#addRefinement'+dropdownName+'Row').click(function () {
+                    if ($('#'+dropdownName+'Dropdown').val() !== null) {
+                        let newRow = $('.refinement' + dropdownName + 'Row:first').clone();
+                        newRow.find('select').val('');
+                        newRow.find('input').val('');
+                        newRow.css('display', 'flex'); // Set display property to block for visibility
+                        newRow.appendTo('#refinement' + dropdownName + 'Container');
+
+                    }
+                });
+                // Remove refinement row
+                $('#refinement'+dropdownName+'Container').on('click', '.removeRefinement'+dropdownName+'Row', function () {
+				    console.log("From _actions_for_dropdown: Click remove refinement - Removing refinement row for " + dropdownName);
+                    $(this).closest('.refinement'+dropdownName+'Row').remove();
+                });
+
+            }
+// END ################### function _actions_for_dropdown(dropdownName){
+
+
+            _actions_for_dropdown("Actor");
+            _actions_for_dropdown("Action");
+            _actions_for_dropdown("Purpose");
+            _actions_for_dropdown("Target");
+
+// START ################### function actionChosen() {
+            function actionChosen() {
+                var action = document.getElementById("ActionDropdown").value;
+                var policyType = document.getElementById("ruleDropdown").value;
+
+                if (action === "http://www.w3.org/ns/odrl/2/execute" && policyType === "http://www.w3.org/ns/odrl/2/Prohibition") {
+                    var hiddenTextbox = document.getElementById("queryTextbox");
+                    hiddenTextbox.style.display = "block";
+
+                    var hiddenTextboxLabel = document.getElementById("queryTextboxLabel");
+                    hiddenTextboxLabel.style.display = "block";
+                }
+                else {
+                    var hiddenTextbox = document.getElementById("queryTextbox");
+                    hiddenTextbox.style.display = "none";
+                    hiddenTextbox.value = "";
+                    var hiddenTextboxLabel = document.getElementById("queryTextboxLabel");
+                    hiddenTextboxLabel.style.display = "none";
+                }
+            }
+// END ################### function actionChosen() {
+
+            var saveddata = [];
+			
+// START ################### function setOptgroupSelectListOptions(class_name, jsonData, type = "purpose") {
+            function setOptgroupSelectListOptions(class_name, jsonData, type = "purpose") {
+                var selectList = $('#' + class_name);
+                selectList.empty();
+                var optgroupgeneral;
+                if (type == "processing") {
+                    optgroupgeneral = $('<optgroup>', {label: "Processing Operations"}).appendTo(selectList);
+                } else {
+                    optgroupgeneral = $('<optgroup>', {label: "Others"}).appendTo(selectList);
+                }
+
+
+                $.each(jsonData.data.children, function (index, child) {
+
+                    if (child.children && child.children.length > 0) {
+                        var optgroup = $('<optgroup>', {label: child.node_name}).appendTo(selectList);
+                        $.each(child.children, function (subIndex, subChild) {
+                            var subOption = $('<option>', {
+                                value: subChild.node_name.toLowerCase(),
+                                text: subChild.node_name
+                            });
+                            optgroup.append(subOption);
+                        });
+                    } else {
+                        var option = $('<option>', {
+                            value: child.node_name.toLowerCase(),
+                            text: child.node_name
+                        });
+                        optgroupgeneral.append(option);
+                    }
+                });
+            }
+// END ################### function setOptgroupSelectListOptions(class_name, jsonData, type = "purpose") {
+
+// START ################### function reset_row(name)
+            
+            function reset_row(name)
+            {
+                var firstRefinementRow = $('#refinement'+name+'Container .refinement'+name+'Row:first');
+                firstRefinementRow.find('.refinement'+name+'Dropdown').val(''); // Reset the refinement dropdown
+                firstRefinementRow.find('.operatorRefinement'+name+'Dropdown').val(''); // Reset the operator dropdown
+                firstRefinementRow.find('.refinement'+name+'Value').val(''); // Reset the refinement value input field
+				
+				console.log("In reset_row: About to remove refinement row for " + name);
+
+                $('#refinement'+name+'Container .refinement'+name+'Row:not(:first)').remove();
+            }
+// END ################### function reset_row(name)
+
+// START ################### $(document).ready(function () {
+            $(document).ready(function () {
+			
+	
+    // Get the query params (mandatory and optional)	
+    var query = getQueryParams(document.location.search);
+    console.log("The policy is " + query.policy);
+	console.log("The mode is " + query.mode);
+	
+	// Using Object. keys() and Array. includes()
+	queryKeys=Object.keys(query);
+	if (queryKeys.includes("target")){
+	   console.log("The target is " + query.target);
+	}
+	else{
+	   console.log("The target parameter is not provided");
+	}
+	
+
+		
+	
+
+    
+                    // Open modal and fetch rules
+    $('#listRulesButton').click(function () {
+        // Perform AJAX request to fetch the rules
+        populate_rules();
+    });
+
+    // Close the modal
+    $('#closeRuleModalButton').click(function () {
+        $('#rulesModal').fadeOut();
+    });
+
+    // Optional: Close the modal when clicking outside the modal-content
+    $(window).click(function (event) {
+        if ($(event.target).is('#ontologyModal')) {
+            $('#rulesModal').fadeOut();
+        }
+    });
+	
+	
+	// CM0311
+	// Adding a complete modal for dialogue to make policy public
+	
+	
+	const publicFileName = document.getElementById('publicFileName');	
+    publicFileName.value=query.policy
+	publicFileName.setAttribute('readonly','');
+	
+	
+    const namePublicButton = document.getElementById('namePublicButton');
+    const closepublicNameModalButton = document.getElementById('closepublicNameModalButton');
+
+    // Show modal on button click
+    namePublicButton.addEventListener('click', () => {
+        publicNameModal.style.display = 'block';
+    });
+
+    // Close modal when clicking on the close button
+    closepublicNameModalButton.addEventListener('click', () => {
+        publicNameModal.style.display = 'none';
+    });
+
+    // Close modal when clicking outside the modal content
+    window.addEventListener('click', (event) => {
+        if (event.target === publicNameModal) {
+            publicNameModal.style.display = 'none';
+        }
+    });
+
+    
+	
+	
+	// CMADD
+	// https://stackoverflow.com/questions/979975/get-the-values-from-the-get-parameters-javascript
+	function getQueryParams(qs) {
+        qs = qs.split('+').join(' ');
+
+        var params = {},
+            tokens,
+            re = /[?&]?([^=]+)=([^&]*)/g;
+
+        while (tokens = re.exec(qs)) {
+            params[decodeURIComponent(tokens[1])] = decodeURIComponent(tokens[2]);
+        }
+
+        return params;
+    }
+
+    // Fill all dropdowns on page load
+	// This is being done prior to the card loads
+	// This means that the 0th card will have all the required values in
+	// This will then be copied when the new cards are being loaded
+	// If non default target values are being used then we will need to
+	//      update the dropdown when cards are loaded
+                fillDropdown('ruleDropdown',   {{ rules|safe }} );
+                fillDropdown('ActionDropdown', {{ actions|safe }} );
+                fillDropdown('TargetDropdown', {{ targets|safe }} );
+				// CMADD - Diagnostics next line
+				console.log("The target dropdown values are " + {{ targets|safe }});
+                fillDropdown('PurposeDropdown', {{ purposes|safe }} );
+                fillDropdown('constraintDropdown', {{ constraints|safe }} );
+                fillDropdown('operatorDropdown', {{ operators|safe }} );
+                fillDropdown('operatorRefinementTargetDropdown', {{ operators|safe }} );
+                fillDropdown('operatorRefinementActorDropdown', {{ operators|safe }} );
+                fillDropdown('operatorRefinementActionDropdown', {{ operators|safe }} );
+                fillDropdown('operatorRefinementPurposeDropdown', {{ operators|safe }} );
+                fillDropdown('operatorRefinementDropdown', {{ operators|safe }} );
+                fillDropdown('ActorDropdown', {{ actors|safe }} );
+	
+	let check_rules=[]
+	
+	if (( query.mode == "update") || ( query.mode == "read")){
+	    console.log("We are in update mode starting to load cards");
+		
+	    $.ajax({
+                type: 'GET',
+			
+                url: 'organization/get_uploaded_rules',  // Endpoint to fetch uploaded rules 
+                success: function (response) {
+                    console.log("AJAX call successful" );
+                    // Check if any rules exist
+                    if (response.odrls && response.odrls.length > 0) {
+				        console.log("Processing the odrl rule list " + response.odrls.length);
+                        // Populate the list with rules
+					    response.odrls.forEach(function (rule) {
+					        console.log("Returned items next " + rule.name + " : " + rule.id);
+					    
+                            check_rules.push({name: rule.name, id: rule.id} );
+						    console.log("The length of the array is " + check_rules.length);	
+                        });
+					
+					    // This is here because .ajax is asynchronous so ensures that 
+					    //    global check_rules is only accessed after call completed
+					    useCheckRules();
+					
+		
+                    
+                    } else {
+                        console.error('Error fetching rules:', error);
+                    }
+
+               
+                },
+                error: function (error) {
+                    console.error('Error fetching rules:', error);
+                }
+            });
+		
+	    function useCheckRules(){
+	        console.log("AFTER AJAX The length of the array is " + check_rules.length);	
+		    let rule_name_id = check_rules.find(rule_name_id => rule_name_id.name === query.policy);
+	        console.log("The policy id is " + rule_name_id.id);
+	
+	        get_rule(rule_name_id.id);
+			
+			
+	    }
+	} // End if update
+	
+	// This page may now be called via URL (with query params).
+	//  if so if in create mode the user can also specify the name of the target
+	//   to be used
+	
+	if ( query.mode == "create") {
+	    if (queryKeys.includes("target")){
+	        $('#Target2Dropdown').val(query.target);
+	}
+	
+	}
+	
+    if (query.policy == "... Create new policy via upload ...."){
+	   //document.getElementById('fileInput').click();
+	   FileUploadModal=document.getElementById('fileuploadModal');
+	   FileUploadModal.style.display = 'block';
+	   
+	   //console.log("We are trying to mimic the click");
+	   //const ToMimicSelect = document.getElementById("fileInput")
+       // pass in event type, options
+       // const clickEvent = new Event("change", {"bubbles":true, "cancelable":false});
+	   //const clickEvent = new Event("change");
+
+       //call event on element
+       //ToMimicSelect.dispatchEvent(clickEvent);
+	}
+
+    //=> "Button click mimiced!"	
+      
+					
+	// END CMADD
+	
+	// START ################### get_rule(ruleId) {
+	
+    function get_rule(ruleId) {
+    $.ajax({
+        type: 'GET', // HTTP GET method
+        url: `organization/get_rule/${ruleId}/`, // Endpoint to fetch the rule by ID
+        headers: {
+            'X-CSRFToken': '{{ csrf_token }}' // CSRF token for secure requests
+        },
+        success: function (response) {
+            try {
+			    console.log("GET RULE PROCESS")
+                // Ensure the response content is properly formatted
+                if (typeof response.content === 'string') {
+                    response.content = JSON.parse(response.content);
+                }
+				
+				console.log("GET RULE PROCESS ARRAY CHECK")
+
+                if (Array.isArray(response.content.data)) {
+                    // Clear previous content
+                    $('#jsonOutput').empty();
+					 console.log("GET RULE PROCESS ARRAY OUTPUT EMPTY")
+                     $("body").find('.form-card:gt(0)').remove(); // Remove existing cards if any
+                   
+                    response.content.data.forEach(function (item, index) {
+					    console.log("FOR EACH IN ARRAY")
+						// CMADD Adjusted timeout function .
+						// The timeout function forces asynchronous execution of jsonload
+						//    so we must make sure that header update happens after at least
+						//    one card has been loaded.
+						
+                        setTimeout(function () {
+                            // Call loadJsonData for each item with a delay
+							console.log("LOADING NEXT ITEM")
+                            loadJsonData(item);
+							
+							var elem = $("body").find('.form-card:gt(0)').get();
+							console.log("Have got the elements ");
+                            if (elem.length === 0){
+				                console.log("No cards found");
+				                $('#Target2Dropdown').val("");
+                            }else{
+				                console.log("Have found cards");
+                                exampleVal=item.target;
+				                $('#Target2Dropdown').val(exampleVal);
+
+                            }}, index * 1000); // was 1000 1-second interval
+						//console.log("LOADING NEXT ITEM")
+                        //loadJsonData(item);
+                    });
+                } else {
+                    console.error('Response content is not an array:', response.content);
+                    alert('Data format is invalid. Expected an array.');
+                }
+                        
+					
+				
+            } catch (error) {
+                console.error('Error parsing the response content:', error);
+                alert('Failed to parse the response. Please check the format.');
+            }
+        },
+        error: function (error) {
+            console.error('Error fetching the rule:', error);
+            alert('Failed to fetch the rule. Please try again.');
+        }
+    });
+}
+    // END ################### get_rule(ruleId) {
+	
+	            // START ################### fillDropdown(dropdownId, data) {
+                function fillDropdown(dropdownId, data) {
+                    var dropdown = $('#' + dropdownId);
+                    dropdown.empty();
+					
+					console.log("<< INTO FILL DROPDOWN")
+
+
+                    // Recursive function to populate the dropdown with indentation for nested children
+                    function populateDropdown(data, parent = "", level = 0) {
+                        // Sort data alphabetically by label at each level
+                        data.sort((a, b) => a.label.localeCompare(b.label));
+
+                        data.forEach(item => {
+                            // Construct display text with indentation based on hierarchy level
+                            //var displayText = (level > 0 ? '-'.repeat(level * 4) : '') + item.label;
+                            txt = ""
+                            if (parent =="")
+                            {
+                                txt = item.label
+                            }
+                            else
+                            {
+                                txt = parent + "->" + item.label
+                            }
+                            //console.log("About to append dropdown option " + item.uri )
+							dropdown.append($('<option>', {
+                                value: item.uri,
+                                text: txt
+                            }));
+                            // Recursively handle children if present
+                            if (item.children && item.children.length > 0) {
+                                populateDropdown(item.children, txt, level + 1); // Increment level for children
+                            }
+                        });
+                    }
+                    
+					// Need to check to see if a non default Target dropdown value required
+					console.log("The dropdown is " + dropdownId);
+					if ( dropdownId == "TargetDropdown" ) {
+					    console.log("We have detected the target dropdown");
+					    // Get the header Target Value
+						var headerTargetvalue = $('#Target2Dropdown').val();
+						
+						console.log("The header value is " + headerTargetvalue);
+						
+						if ( headerTargetvalue != "") {
+						    // Go throough the data provide and see if header target value is in there
+							headerValuePresent = false;
+							data.forEach(item => {
+							    if ( headerTargetvalue == item.uri){
+								    headerValuePresent = true;
+								}
+							
+							});
+							if ( headerValuePresent == false){
+							    // Append this value to data if it is not already there
+								data.push(headerTargetvalue);
+							}
+						
+						}
+					
+					}
+					
+                    // Start populating the dropdown
+                    populateDropdown(data,"", 0);
+
+                    // Set the dropdown's selected index to none
+                    dropdown.prop('selectedIndex', -1);
+
+                }
+				// END ################### fillDropdown(dropdownId, data) {
+
+
+                
+
+                $('#addRefinementRow').click(function () {
+                    let newRow = $('.refinementRow:first').clone();
+                    newRow.find('select').val('');
+                    newRow.find('input').val('');
+                    newRow.css('display', 'flex'); // Set display property to block for visibility
+                    newRow.appendTo('#refinementContainer');
+                });
+                // Remove refinement row
+                $('#refinementContainer').on('click', '.removeRefinementRow', function () {
+				    console.log("In click for #refinementContainer - about to remove refinementRow")
+                    $(this).closest('.refinementRow').remove();
+                });
+
+                // Add new constraint row
+                $('#addConstraintRow').click(function () {
+                    let newRow;
+                    if (document.getElementById('constraintsContainer').getElementsByClassName('constraintRow').length > 0) {
+                        newRow = $('#constraintsContainer .constraintRow:first').clone();
+                        newRow.find('input').val('');
+                        newRow.find('select').val('');
+                        newRow.css('display', 'flex');
+                        newRow.appendTo('#constraintsContainer');
+                    }
+                    else {
+                        newRow = document.createElement('div');
+                        newRow.classList.add('constraintRow');
+                        const label = document.createElement('label');
+                        label.setAttribute('for', 'constraintDropdown');
+                        label.innerText = "Constraint:";
+                        const select = document.createElement('select');
+                        select.setAttribute('id', 'constraintDropdown');
+                        select.classList.add('constraintDropdown');
+                        newRow.append(label);
+                        newRow.append(select);
+                        const label2 = document.createElement('label');
+                        label2.setAttribute('for', 'operatorDropdown');
+                        const select2 = document.createElement('select');
+                        select2.setAttribute('id', 'operatorDropdown');
+                        select2.classList.add('operatorDropdown');
+                        newRow.append(label2);
+                        newRow.append(select2);
+                        const label3 = document.createElement('label');
+                        label3.setAttribute('for', 'constraintValue');
+                        const text = document.createElement('input');
+                        text.setAttribute('id', 'constraintValue');
+                        text.classList.add('constraintValue');
+                        text.placeholder = "Value e.g., '2020-12-12', 'http://example.org/'";
+                        newRow.append(label3);
+                        newRow.append(text);
+                        const button = document.createElement('button');
+                        button.classList.add('removeRow');
+                        button.innerText = "Remove";
+                        newRow.append(button);
+                        $('#constraintsContainer').append(newRow);
+                        fillDropdown('constraintDropdown', {{ constraints|safe }} );
+                        fillDropdown('operatorDropdown', {{ operators|safe }} );
+                    }
+                });
+
+                // Remove constraint row
+                $('#constraintsContainer').on('click', '.removeRow', function () {
+                    $(this).closest('.constraintRow').remove();
+                });
+
+                $('#clearButton').click(function () {
+
+                        // Reset the form to initial state
+                        $('#ruleDropdown, #ActorDropdown, #ActionDropdown, #TargetDropdown, #PurposeDropdown, #operatorDropdown, #constraintDropdown').each(function (){
+                            this.selectedIndex=-1;
+                        })
+                        $('#queryTextbox').val('');
+
+                        // Reset the first constraint row
+                        var firstConstraintRow = $('#constraintsContainer .constraintRow:first');
+                        firstConstraintRow.find('.constraintDropdown').val(''); // Reset the constraint dropdown
+                        firstConstraintRow.find('.operatorDropdown').val(''); // Reset the operator dropdown
+                        firstConstraintRow.find('.constraintValue').val(''); // Reset the constraint value input field
+
+                        // Reset the first refinement row
+                        var firstRefinementRow = $('#refinementContainer .refinementRow:first');
+                        firstRefinementRow.find('.refinementDropdown').val(''); // Reset the refinement dropdown
+                        firstRefinementRow.find('.operatorRefinementDropdown').val(''); // Reset the operator dropdown
+                        firstRefinementRow.find('.refinementValue').val(''); // Reset the refinement value input field
+
+
+
+                        $('#constraintsContainer .constraintRow:not(:first)').remove();
+						console.log("In clearbutton click - about to remove refinemnt row");
+                        $('#refinementContainer .refinementRow:not(:first)').remove();
+
+                        reset_row("Actor");
+                        reset_row("Action");
+                        reset_row("Purpose");
+                        reset_row("Target");
+
+                        var hiddenTextbox = document.getElementById("queryTextbox");
+                        hiddenTextbox.style.display = "none";
+                        hiddenTextbox.value = "";
+
+                        var hiddenTextboxLabel = document.getElementById("queryTextboxLabel");
+                        hiddenTextboxLabel.style.display = "none";
+                    }
+                );
+
+                $('#uploadButton22').click(function () {
+                    var jsonText = $('#jsonTextarea').val();
+                    try {
+                        var jsonData = JSON.parse(jsonText);
+                        loadJsonData(jsonData);
+                    } catch (error) {
+                        alert('Invalid JSON format.');
+                    }
+                });
+                $('#newRuleButton').click(function(){ loadJsonData({})
+
+                });
+
+                $('#uploadButton').click(function () {
+                    $("body").find('.form-card:gt(0)').remove();
+                    var jsonText = $('#jsonTextarea').val();
+                    try {
+                        var jsonData = JSON.parse(jsonText);
+                        if (Array.isArray(jsonData)) {
+                            // Iterate over each dictionary in the array with a delay
+                            jsonData.forEach(function (data, index) {
+                                setTimeout(function () {
+                                    loadJsonData(data);
+                                }, index * 1000); // 1000 ms = 1 second
+                            });
+                        } else {
+                            alert('JSON data is not an array.');
+                        }
+                    } catch (error) {
+                        alert('Invalid JSON format.');
+                    }
+                });
+				
+				// START ################### function applyFormActions($form) {
+
+                function applyFormActions($form) {
+
+                    $form.find('.removeRow').click(function () {
+					    console.log("In remove row click about to remover parent");
+                        $(this).parent().remove();
+                    });
+                    $form.find('.remove-form-button').click(function() {
+                        var formCard = $(this).closest('.form-card');
+                        if (formCard.length > 0) {
+                            formCard.remove();
+                        }
+                    });
+                        // Add new constraint row within the form
+                    $form.find('#addConstraintRow').click(function () {
+                        let newRow;
+                        if ($form.find('#constraintsContainer').find('.constraintRow').length > 0) {
+                            newRow = $form.find('#constraintsContainer .constraintRow:first').clone();
+                            newRow.find('input').val('');
+                            newRow.find('select').val('');
+                            newRow.css('display', 'flex');
+                            newRow.appendTo($form.find('#constraintsContainer'));
+                        } else {
+                            newRow = document.createElement('div');
+                            newRow.classList.add('constraintRow');
+                            const label = document.createElement('label');
+                            label.setAttribute('for', 'constraintDropdown');
+                            label.innerText = "Constraint:";
+                            const select = document.createElement('select');
+                            select.setAttribute('id', 'constraintDropdown');
+                            select.classList.add('constraintDropdown');
+                            newRow.append(label);
+                            newRow.append(select);
+                            const label2 = document.createElement('label');
+                            label2.setAttribute('for', 'operatorDropdown');
+                            const select2 = document.createElement('select');
+                            select2.setAttribute('id', 'operatorDropdown');
+                            select2.classList.add('operatorDropdown');
+                            newRow.append(label2);
+                            newRow.append(select2);
+                            const label3 = document.createElement('label');
+                            label3.setAttribute('for', 'constraintValue');
+                            const text = document.createElement('input');
+                            text.setAttribute('id', 'constraintValue');
+                            text.classList.add('constraintValue');
+                            text.placeholder = "Value e.g., '2020-12-12', 'http://example.org/'";
+                            newRow.append(label3);
+                            newRow.append(text);
+                            const button = document.createElement('button');
+                            button.classList.add('removeRow');
+                            button.innerText = "Remove";
+                            newRow.append(button);
+                            $form.find('#constraintsContainer').append(newRow);
+                            fillDropdown('constraintDropdown', {{ constraints|safe }});
+                            fillDropdown('operatorDropdown', {{ operators|safe }});
+                        }
+
+                        // Apply the remove click action to the new row
+                        applyFormActions($(newRow));
+                    });
+                }
+				// END ################### function applyFormActions($form) {
+				
+				// START ################### function loadJsonData(data) {
+                function loadJsonData(data) {
+                    var $originalForm = $('.form-card').first();
+                    var $newForm = $originalForm.clone();
+
+                    $newForm.css('display', '');
+
+                    $newForm.appendTo('.col-lg-12');
+					
+					
+					
+					console.log("Have appended a new form-card "); 
+		
+		           
+					
+					
+                    _actions_for_dropdown_form("Actor", $newForm);
+                    _actions_for_dropdown_form("Action", $newForm);
+                    _actions_for_dropdown_form("Purpose", $newForm);
+                    _actions_for_dropdown_form("Target", $newForm);
+					
+					
+
+                    // Populate HTML components within the duplicated form
+                    $newForm.find('#ruleDropdown').val(data.rule).trigger('change');
+                    $newForm.find('#ActorDropdown').val(data.actor).trigger('change');
+                    $newForm.find('#ActionDropdown').val(data.action).trigger('change');
+					
+					
+					
+					    // This code added to deal with the display of non-default targets when in update
+					    console.log("We updating the form target dropdown if required");
+						
+						inList=false
+						var target_dropdown=$newForm.find('#TargetDropdown')
+						var target_options=$newForm.find('#TargetDropdown option')
+						console.log("The target_options length is " + target_options.length)
+						for (let j=0; j < target_options.length; j++){
+							console.log("The next dropdown value is " + target_options[j].text);
+							if ( data.target == target_options[j].text){
+								inList=true;
+								console.log("Dropdown match found");
+							}
+											     
+						}
+											
+						if ( inList == false){
+							console.log("No dropdown match found, update the dropdown options");
+											    															   
+							var objOption = document.createElement("option");
+                            objOption.text = data.target;
+                            objOption.value = data.target;
+
+                            target_dropdown.append(objOption);
+					    }
+						
+			
+					
+					
+                    $newForm.find('#TargetDropdown').val(data.target).trigger('change');
+					
+					// DEMOTEST Fix
+					$('#Target2Dropdown').val(data.target);
+					
+					
+                    $newForm.find('#PurposeDropdown').val(data.purpose).trigger('change');
+                    $newForm.find('#queryTextbox').val(data.query).trigger('change');
+
+                    // Clear existing rows before loading new data
+					console.log("About to clear refinement rows before loading policy data");
+                    $newForm.find('.constraintRow:gt(0)').remove();
+                    $newForm.find('.refinementActorRow:gt(0)').remove();					
+                    $newForm.find('.refinementActionRow:gt(0)').remove();
+                    $newForm.find('.refinementPurposeRow:gt(0)').remove();
+                    $newForm.find('.refinementTargetRow:gt(0)').remove();
+					
+					
+
+                    applyFormActions($newForm);
+
+                    if (Object.keys(data).length > 0)
+                    {
+
+
+                        // Load constraints
+                        data.constraints.forEach(function (constraint) {
+                            newRow = $newForm.find('#constraintsContainer .constraintRow:first').clone();
+                            newRow.find('input').val(constraint.value);
+
+
+                            // Debug: Log values before setting them
+                            console.log('Setting constraintDropdown to:', constraint.operator);
+                            console.log('Setting operatorDropdown to:', constraint.type);
+
+                            // Set dropdown values
+                            var $constraintDropdown = newRow.find('.constraintDropdown');
+                            var $operatorDropdown = newRow.find('.operatorDropdown');
+
+                            // Set value if option exists
+                            if ($constraintDropdown.find(`option[value="${constraint.operator}"]`).length) {
+                                $constraintDropdown.val(constraint.operator);
+                            } else {
+                                console.warn('No matching option for constraintDropdown:', constraint.operator);
+                            }
+
+                            if ($operatorDropdown.find(`option[value="${constraint.type}"]`).length) {
+                                $operatorDropdown.val(constraint.type);
+                            } else {
+                                console.warn('No matching option for operatorDropdown:', constraint.type);
+                            }
+
+                            newRow.find('.constraintDropdown').val(constraint.type);
+                            newRow.find('.operatorDropdown').val(constraint.operator);
+                            newRow.css('display', 'flex');
+                            newRow.appendTo($newForm.find('#constraintsContainer'));
+
+                        });
+
+
+                        // Function to add refinement row with delay
+                        function addRefinementRowWithDelay($form, entity, entityName, type, operator, value, index) {
+                            setTimeout(function () {
+                                addRefinementRow($form, entity, entityName, type, operator, value);
+                            }, index * 1000); // 1000 ms = 1 second
+                        }
+
+                        // Load actor refinements synchronously with delay
+                        data.actorrefinements.forEach(function (refinement, index) {
+                            addRefinementRowWithDelay($newForm, data.actor, 'Actor', refinement.type, refinement.operator, refinement.value, index);
+                        });
+
+                        // Load action refinements synchronously with delay
+                        var actionRefinementsLength = data.actionrefinements.length;
+                        data.actionrefinements.forEach(function (refinement, index) {
+                            addRefinementRowWithDelay($newForm, data.action, 'Action', refinement.type, refinement.operator, refinement.value, index + actionRefinementsLength);
+                        });
+						
+						
+
+                        // Load purpose refinements synchronously with delay
+                        var purposeRefinementsLength = data.purposerefinements.length;
+                        data.purposerefinements.forEach(function (refinement, index) {
+                            addRefinementRowWithDelay($newForm, data.purpose, 'Purpose', refinement.type, refinement.operator, refinement.value, index + actionRefinementsLength);
+                        });
+
+                        // Load target refinements synchronously with delay
+                        var targetRefinementsLength = data.targetrefinements.length;
+                        data.targetrefinements.forEach(function (refinement, index) {
+                            addRefinementRowWithDelay($newForm, data.target, 'Target', refinement.type, refinement.operator, refinement.value, index + actionRefinementsLength + purposeRefinementsLength);
+                        });
+                    }
+					// CMADD
+					//    If there is no data then this is a new rule
+					//       Ensure that the value of the new card target dropdown matches the header value
+					else{
+					    console.log("Adding a rule");
+						
+						  // This code added to deal with the display of non-default targets when creating new rules
+					      console.log("We are updating the form target dropdown for the new rule if required");
+						
+						  inList=false
+						  var target_dropdown=$newForm.find('#TargetDropdown')
+						  var target_options=$newForm.find('#TargetDropdown option')
+						  console.log("The target_options length is " + target_options.length)
+						  for (let j=0; j < target_options.length; j++){
+							  console.log("The next dropdown value is " + target_options[j].text);
+							  if ( data.target == target_options[j].text){
+								  inList=true;
+								  console.log("Dropdown match found");
+							  }
+											     
+						  }
+											
+						  if ( inList == false){
+							  console.log("No dropdown match found, update the dropdown options for new Rule");
+											    															   
+							  var objOption = document.createElement("option");
+							  console.log("Updating with " + data.target);
+                              objOption.text = $('#Target2Dropdown').val();
+                              objOption.value = $('#Target2Dropdown').val();
+
+                              target_dropdown.append(objOption);
+					      }
+						  
+						$newForm.find('#TargetDropdown').val($('#Target2Dropdown').val()); 
+						$newForm.find('#TargetDropdown').change();
+					}
+					
+					
+					
+					// CMADD
+					// Make sure only the header value is used to define the target
+					console.log("Making the dropdown disabled");
+					$newForm.find('#TargetDropdown').prop("disabled", true); 
+					
+					// If in read mode disable all buttons and dropdowns and make input fields read-only
+					// This will repeat actions across the whole document every time a new policy rule is added
+					// It is here to ensure that we are executing AFTER the asynchonous AJAX calls
+					if (query.mode == "read"){
+					    $('#saveNameButton').prop("disabled",true);
+						$('#saveasNameButton').prop("disabled",true);
+						
+						$('#deleteNameButton').prop("disabled",true);
+						$('#deleteNameButton').css("display", "none");
+						$('#downloadRuleButton').prop("disabled",true);
+						$('#downloadRuleButton').css("display", "none");
+						$('#namePublicButton').prop("disabled",true);
+						$('#namePublicButton').css("display", "none");
+						
+						
+						$('#newRuleButton').prop("disabled",true);
+						$('#newRuleButton').css("display", "none");
+						
+						$('#Target2Dropdown').prop("disabled",true);
+						
+						
+						// Now go through all the rules making them disabled
+						// We can do this by selecting on the ids through the whole document
+						$(ruleDropdown).prop("disabled",true);
+						
+						// Actor elements
+                        console.log("<<>> Form load for " + $newForm.find('#ActorDropdown').val()); 
+
+                            // Header section						
+						$newForm.find('#ActorDropdown').prop("disabled",true);
+						$newForm.find('#addRefinementActorRow').prop("disabled",true);
+						$newForm.find('#addRefinementActorRow').css("display", "none");
+						
+						    // Refinement Rows 
+												
+						$('#refinementActorDropdown').prop("disabled",true);
+						$('#operatorRefinementActorDropdown').prop("disabled",true);
+						$('#refinementActorValue').prop("disabled",true);						
+						
+						$('.removeRefinementActorRow').prop("disabled",true);
+						$('.removeRefinementActorRow').css("display", "none");
+						
+						// Action elements
+						    // Header section						
+						$newForm.find('#ActionDropdown').prop("disabled",true);	
+						$newForm.find('#addRefinementActionRow').prop("disabled",true);
+						$newForm.find('#addRefinementActionRow').css("display", "none");
+						
+						    // Refinement Rows     
+												
+						$('#refinementActionDropdown').prop("disabled",true);
+						$('#operatorRefinementActionDropdown').prop("disabled",true);
+						$('#refinementActionValue').prop("disabled",true);						
+						
+						$('.removeRefinementActionRow').prop("disabled",true);
+						$('.removeRefinementActionRow').css("display", "none");	
+
+                        // Purpose elements
+						    // Header section						
+						$newForm.find('#PurposeDropdown').prop("disabled",true);	
+						$newForm.find('#addRefinementPurposeRow').prop("disabled",true);
+						$newForm.find('#addRefinementPurposeRow').css("display", "none");
+						
+						    // Refinement Rows     
+												
+						$('#refinementPurposeDropdown').prop("disabled",true);
+						$('#operatorRefinementPurposeDropdown').prop("disabled",true);
+						$('#refinementPurposeValue').prop("disabled",true);						
+						
+						$('.removeRefinementPurposeRow').prop("disabled",true);
+						$('.removeRefinementPurposeRow').css("display", "none");	
+						
+						// Target elements
+						    // Header section						
+						$newForm.find('#TargetDropdown').prop("disabled",true);	
+						$newForm.find('#addRefinementTargetRow').prop("disabled",true);
+						$newForm.find('#addRefinementTargetRow').css("display", "none");
+						
+						    // Refinement Rows     
+												
+						$('#refinementTargetDropdown').prop("disabled",true);
+						$('#operatorRefinementTargetDropdown').prop("disabled",true);
+						$('#refinementTargetValue').prop("disabled",true);						
+						
+						$('.removeRefinementTargetRow').prop("disabled",true);
+						$('.removeRefinementTargetRow').css("display", "none");	
+
+                        // Constraints elements
+						    // Header section						
+						$newForm.find('#addConstraintRow').prop("disabled",true);
+						$newForm.find('#addConstraintRow').css("display", "none");	
+
+                            // Constraint Rows     
+												
+						$('.constraintDropdown').prop("disabled",true);
+						$('.operatorDropdown').prop("disabled",true);
+						$('.constraintValue').prop("disabled",true);						
+						
+						$('.removeRow').prop("disabled",true);
+						$('.removeRow').css("display", "none");	
+
+
+                        // Also turn off the remove Rule Button						
+						$('.remove-form-button').prop("disabled",true);
+						$('.remove-form-button').css("display", "none");	
+						
+					
+					}
+					
+					
+
+                }
+				// END ################### function loadJsonData(data) {
+				
+				// START ################### function addRefinementRow(newForm, parent_value, entity, type, operator, value) {
+                function addRefinementRow(newForm, parent_value, entity, type, operator, value) {
+                    
+					//DELETME
+					//debugger
+                    //_clearAdditionalRefinementRows(entity);
+                    //_clearRefinementRows(entity);
+					// The above code was replaced (with below) from the original code
+					// This was causing an issue where the refinement rwo for the relevant block
+					// was being deleted and so the add refinement click function was not working
+					_clearAdditionalRefinementRowsForm(entity, newForm);
+                    _clearRefinementRowsForm(entity, newForm);
+
+                    req_url = ""
+                    if (entity=="Actor")
+                        req_url = 'organization/get_properties_of_a_class'
+                    if (entity=="Action")
+                        req_url = 'organization/get_constraints_for_instances'
+                    if (entity=="Purpose")
+                        req_url = 'organization/get_constraints_for_instances'
+                    if (entity=="Target")
+                        req_url = 'organization/ajax_get_fields_from_datasets'
+                    setTimeout(function() {
+                        console.log("World");
+                    }, 1000);
+                    $.ajax({
+                        type: 'POST',
+                        url: req_url,
+                        contentType: 'application/json',
+                        headers: {
+                            'X-CSRFToken': '{{ csrf_token }}'  // Include CSRF token
+                        },
+                        data: JSON.stringify({
+                            uri: parent_value
+                        }),
+                        success: function (response) {
+                            setTimeout(function() {  // Add delay here
+                                
+								
+								var refinementDropdown = $('#refinement' + entity + 'Dropdown');
+                                refinementDropdown.empty();
+                                $.each(response.fields, function (index, field) {
+                                    refinementDropdown.append($('<option>', {
+                                        value: field.uri,
+                                        text: field.label
+                                    }));
+                                });
+
+                                let newRow = $(`.refinement${entity}Row:first`).clone();
+
+                                // Set the values for the cloned element
+                                newRow.find(`select.refinement${entity}Dropdown`).val(type);
+                                newRow.find(`select.operatorRefinement${entity}Dropdown`).val(operator);
+                                newRow.find('input').val(value);
+
+                                if (value.trim() !== '') {
+                                    newRow.css({
+                                        'display': 'flex', // Overwrite the display property to make it visible
+                                        'justify-content': 'space-between',
+                                        'align-items': 'center',
+                                        'margin-bottom': '10px',
+                                        'visibility': 'visible' // Ensure the row itself is visible
+                                    });
+                                    {#newRow.appendTo();#}
+                                    c = newForm.find('#refinement' + entity + 'Container');
+                                    c.append(newRow);
+                                }
+								
+								
+							    
+							
+
+
+                            }, 1000);  // Delay in milliseconds (1000 ms = 1 second)
+                        },
+                        error: function (error) {
+                            console.error('Error fetching column names:', error);
+                        }
+                    });
+                }
+				// END ################### function addRefinementRow(newForm, parent_value, entity, type, operator, value) {
+				
+								
+				$('#saveRuleButton').click(function () {
+                    var saveddata = []; // Initialize saveddata array to store data from all forms
+                
+                    // Iterate over each form with class .form-card
+                    $('.form-card').each(function () {
+                        var form = $(this);
+                        var data = {
+                            rule: form.find('#ruleDropdown').val(),
+                            actor: form.find('#ActorDropdown').val(),
+                            action: form.find('#ActionDropdown').val(),
+                            target: form.find('#TargetDropdown').val(),
+                            purpose: form.find('#PurposeDropdown').val(),
+                            query: form.find('#queryTextbox').val(),
+                            constraints: [],
+                            actorrefinements: [],
+                            actionrefinements: [],
+                            purposerefinements: [],
+                            targetrefinements: []
+                        };
+                
+                        // Gather constraints data
+                        form.find('.constraintRow').each(function () {
+                            var constraint = {
+                                type: $(this).find('.constraintDropdown').val(),
+                                operator: $(this).find('.operatorDropdown').val(),
+                                value: $(this).find('.constraintValue').val()
+                            };
+                            data.constraints.push(constraint);
+                        });
+                
+                        // Gather actor refinements data
+                        form.find('.refinementActorRow').each(function () {
+                            var refinement = {
+                                type: $(this).find('.refinementActorDropdown').val(),
+                                operator: $(this).find('.operatorRefinementActorDropdown').val(),
+                                value: $(this).find('.refinementActorValue').val()
+                            };
+                            data.actorrefinements.push(refinement);
+                        });
+                
+                        // Gather action refinements data
+                        form.find('.refinementActionRow').each(function () {
+                            var refinement = {
+                                type: $(this).find('.refinementActionDropdown').val(),
+                                operator: $(this).find('.operatorRefinementActionDropdown').val(),
+                                value: $(this).find('.refinementActionValue').val()
+                            };
+                            data.actionrefinements.push(refinement);
+                        });
+                
+                        // Gather purpose refinements data
+                        form.find('.refinementPurposeRow').each(function () {
+                            var refinement = {
+                                type: $(this).find('.refinementPurposeDropdown').val(),
+                                operator: $(this).find('.operatorRefinementPurposeDropdown').val(),
+                                value: $(this).find('.refinementPurposeValue').val()
+                            };
+                            data.purposerefinements.push(refinement);
+                        });
+                
+                        // Gather target refinements data
+                        form.find('.refinementTargetRow').each(function () {
+                            var refinement = {
+                                type: $(this).find('.refinementTargetDropdown').val(),
+                                operator: $(this).find('.operatorRefinementTargetDropdown').val(),
+                                value: $(this).find('.refinementTargetValue').val()
+                            };
+                            data.targetrefinements.push(refinement);
+                        });
+                
+                        // Push collected data into saveddata array
+                        saveddata.push(data);
+                    });
+                
+                    // Convert saved data to ODRL format using the same logic as downloadRuleButton
+					// CMADD
+					var query_mode="update";
+					
+					if ( saveAs == false ){
+						query_mode = query.mode;
+					}
+					else{
+					    query_mode = "create"
+					}
+					
+                    $.ajax({
+                        type: 'POST',
+                        headers: {
+                            'X-CSRFToken': '{{ csrf_token }}',  // Include CSRF token
+                        },
+                        url: 'organization/convert_to_odrl', // Conversion endpoint
+                        contentType: 'application/json',
+                        data: JSON.stringify(saveddata),  // Send the data for conversion
+                        success: function (result) {
+                            // Handle success response
+                            console.log('ODRL Conversion successful:', result);
+                
+                            // Save the converted data (same structure as downloadRuleButton)
+                            $.ajax({
+                                type: 'POST',
+                                headers: {
+                                    'X-CSRFToken': '{{ csrf_token }}',
+                                },
+								// CMADD TBC
+								
+									
+                                url: 'organization/rule-upload?mode='+query_mode,  // Endpoint for saving the converted data
+                                contentType: 'application/json',
+                                data: JSON.stringify({
+                                    name: $('#odrlFileName').val(),  // Provide a file name or input for the ODRL file
+                                    content: result  // Send the saved data directly as the content
+                                }),  // Send the converted result as the content
+                                success: function (saveResult) {
+                                    // Handle save success
+                                    console.log('ODRL saved successfully:', saveResult);
+                                    $('#nameModal').hide();  // Hide the modal after saving
+									// CMADD
+									// Once a newly created  policy has been saved we only want to be able to update it
+									//if ( query.mode == "create" ){
+									    //query.mode = "update"
+									//}
+									window.location.href = (window.location.href.split('?')[0]) + "?policy="+$('#odrlFileName').val()+"&mode=update";
+                                },
+                                error: function (error) {
+                                    // Handle save error
+                                    console.error('Error saving:', error);
+                                    alert(error);
+                                }
+                            });
+                        },
+                        error: function (error) {
+                            // Handle conversion error
+                            console.error('Error during ODRL conversion:', error);
+                            alert('Error during ODRL conversion');
+                        }
+                    });
+                
+                    // Optionally log or manipulate data before sending to the server
+                    console.log(saveddata);
+                });
+
+                $('#saveRuleButton111').click(function () {
+                    var saveddata = []; // Initialize saveddata array to store data from all forms
+
+                    // Iterate over each form with class .form-card
+                    $('.form-card').each(function () {
+                        var form = $(this);
+                        var data = {
+                            rule: form.find('#ruleDropdown').val(),
+                            actor: form.find('#ActorDropdown').val(),
+                            action: form.find('#ActionDropdown').val(),
+                            target: form.find('#TargetDropdown').val(),
+                            purpose: form.find('#PurposeDropdown').val(),
+                            query: form.find('#queryTextbox').val(),
+                            constraints: [],
+                            actorrefinements: [],
+                            actionrefinements: [],
+                            purposerefinements: [],
+                            targetrefinements: []
+                        };
+
+                        // Gather constraints data
+                        form.find('.constraintRow').each(function () {
+                            var constraint = {
+                                type: $(this).find('.constraintDropdown').val(),
+                                operator: $(this).find('.operatorDropdown').val(),
+                                value: $(this).find('.constraintValue').val()
+                            };
+                            data.constraints.push(constraint);
+                        });
+
+                        // Gather actor refinements data
+                        form.find('.refinementActorRow').each(function () {
+                            var refinement = {
+                                type: $(this).find('.refinementActorDropdown').val(),
+                                operator: $(this).find('.operatorRefinementActorDropdown').val(),
+                                value: $(this).find('.refinementActorValue').val()
+                            };
+                            data.actorrefinements.push(refinement);
+                        });
+
+                        // Gather action refinements data
+                        form.find('.refinementActionRow').each(function () {
+                            var refinement = {
+                                type: $(this).find('.refinementActionDropdown').val(),
+                                operator: $(this).find('.operatorRefinementActionDropdown').val(),
+                                value: $(this).find('.refinementActionValue').val()
+                            };
+                            data.actionrefinements.push(refinement);
+                        });
+
+                        // Gather purpose refinements data
+                        form.find('.refinementPurposeRow').each(function () {
+                            var refinement = {
+                                type: $(this).find('.refinementPurposeDropdown').val(),
+                                operator: $(this).find('.operatorRefinementPurposeDropdown').val(),
+                                value: $(this).find('.refinementPurposeValue').val()
+                            };
+                            data.purposerefinements.push(refinement);
+                        });
+
+                        // Gather target refinements data
+                        form.find('.refinementTargetRow').each(function () {
+                            var refinement = {
+                                type: $(this).find('.refinementTargetDropdown').val(),
+                                operator: $(this).find('.operatorRefinementTargetDropdown').val(),
+                                value: $(this).find('.refinementTargetValue').val()
+                            };
+                            data.targetrefinements.push(refinement);
+                        });
+
+                        // Push collected data into saveddata array
+                        saveddata.push(data);
+                    });
+
+                    // Perform AJAX request
+                    $.ajax({
+                        type: 'POST',
+                        headers: {
+                            'X-CSRFToken': '{{ csrf_token }}',  // Include CSRF token
+                        },
+                        url: 'organization/rule-upload',  // Updated endpoint URL
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+                            name: $('#odrlFileName').val(),  // Provide a file name or input for the ODRL file
+                            content: saveddata  // Send the saved data directly as the content
+                        }),
+                        success: function (result) {
+                            // Handle success response
+                            console.log('ODRL saved successfully:', result);
+                        },
+                        error: function (error) {
+                            // Handle error response
+                            console.error('Error:', error);
+                            alert(error)
+                        },
+                        complete: function () {
+                        // Close the modal after the request completes
+                        $('#nameModal').hide(); // Hide the modal
+                    }
+                    });
+
+                    // Optionally log or manipulate data before sending to the server
+                    console.log(saveddata);
+                });
+
+                $('#downloadRuleButton').click(function () {
+                    var saveddata = []; // Initialize saveddata array to store data from all forms
+
+                    // Iterate over each form with class .form-card
+                    $('.form-card').each(function () {
+                        var form = $(this);
+                        var data = {
+                            rule: form.find('#ruleDropdown').val(),
+                            actor: form.find('#ActorDropdown').val(),
+                            action: form.find('#ActionDropdown').val(),
+                            target: form.find('#TargetDropdown').val(),
+                            purpose: form.find('#PurposeDropdown').val(),
+                            query: form.find('#queryTextbox').val(),
+                            constraints: [],
+                            actorrefinements: [],
+                            actionrefinements: [],
+                            purposerefinements: [],
+                            targetrefinements: []
+                        };
+
+                        // Gather constraints data
+                        form.find('.constraintRow').each(function () {
+                            var constraint = {
+                                type: $(this).find('.constraintDropdown').val(),
+                                operator: $(this).find('.operatorDropdown').val(),
+                                value: $(this).find('.constraintValue').val()
+                            };
+                            data.constraints.push(constraint);
+                        });
+
+                        // Gather actor refinements data
+                        form.find('.refinementActorRow').each(function () {
+                            var refinement = {
+                                type: $(this).find('.refinementActorDropdown').val(),
+                                operator: $(this).find('.operatorRefinementActorDropdown').val(),
+                                value: $(this).find('.refinementActorValue').val()
+                            };
+                            data.actorrefinements.push(refinement);
+                        });
+
+                        // Gather action refinements data
+                        form.find('.refinementActionRow').each(function () {
+                            var refinement = {
+                                type: $(this).find('.refinementActionDropdown').val(),
+                                operator: $(this).find('.operatorRefinementActionDropdown').val(),
+                                value: $(this).find('.refinementActionValue').val()
+                            };
+                            data.actionrefinements.push(refinement);
+                        });
+
+                        // Gather purpose refinements data
+                        form.find('.refinementPurposeRow').each(function () {
+                            var refinement = {
+                                type: $(this).find('.refinementPurposeDropdown').val(),
+                                operator: $(this).find('.operatorRefinementPurposeDropdown').val(),
+                                value: $(this).find('.refinementPurposeValue').val()
+                            };
+                            data.purposerefinements.push(refinement);
+                        });
+
+                        // Gather target refinements data
+                        form.find('.refinementTargetRow').each(function () {
+                            var refinement = {
+                                type: $(this).find('.refinementTargetDropdown').val(),
+                                operator: $(this).find('.operatorRefinementTargetDropdown').val(),
+                                value: $(this).find('.refinementTargetValue').val()
+                            };
+                            data.targetrefinements.push(refinement);
+                        });
+
+                        // Push collected data into saveddata array
+                        saveddata.push(data);
+                    });
+
+                    // Display saved objects (optional)
+                    // $('#savedList').append('<li>' + JSON.stringify(saveddata) + '</li>');
+
+                    // Perform AJAX request
+                    $.ajax({
+                        type: 'POST',
+                        headers: {
+                            'X-CSRFToken': '{{ csrf_token }}'  // Include CSRF token
+                        },
+                        url: 'organization/convert_to_odrl',
+                        contentType: 'application/json',
+                        data: JSON.stringify(saveddata),
+                        success: function (result) {
+                            // Handle success response
+                            console.log(result);
+                            var formattedResult = JSON.stringify(result, null, 2).replace(/\\n/g, '\n').replace(/\\"/g, '"');
+                            var formattedResult = JSON.stringify(result, null, 2).replace(/\\n/g, '\n').replace(/\\"/g, '"');
+                            $('#savedOdrl').val(formattedResult); // Assuming savedOdrl is a textarea or input field
+                            exportFormattedResultToJSON(formattedResult)
+                        },
+                        error: function (error) {
+                            // Handle error response
+                            console.error('Error:', error);
+                        }
+                    });
+
+                    // Optionally log or manipulate data before sending to the server
+                    console.log(saveddata);
+                });
+                function exportFormattedResultToJSON(formattedResult) {
+
+
+                    var jsonObject = JSON.parse(formattedResult);
+
+                    // Convert formattedResult to JSON string
+                    var jsonString = JSON.stringify(jsonObject, null, 2);
+
+                    // Create a Blob object with the JSON data
+                    var blob = new Blob([jsonString], { type: 'application/json' });
+					
+
+                    // Generate a temporary anchor element
+                    var a = document.createElement('a');
+                    var url = URL.createObjectURL(blob);
+                    a.href = url;
+                    a.download = 'odrl.json';
+
+                    // Append the anchor to the body and click it
+                    document.body.appendChild(a);
+                    a.click();
+
+                    // Remove the temporary anchor
+                    document.body.removeChild(a);
+                }
+                //$('#fileInput').change(function (event) {
+				// CM Add now adjusted to use policyFileInput via index page rather than from menu item
+				$('#policyFileInput').change(function (event) {
+				    console.log("We have received the change event for fileInput");
+                    $("body").find('.form-card:gt(0)').remove(); // Remove existing cards if any
+                    var input = event.target;
+                    var reader = new FileReader();
+                    reader.onload = function(){
+                        try {
+
+                            var jsonData = JSON.parse(reader.result);
+                            // Check if jsonData is a string and parse again if necessary
+                            if (typeof jsonData === 'string') {
+                                jsonData = JSON.parse(jsonData);
+                            }
+
+                            // Check if jsonData is an object (dictionary)
+                            if (typeof jsonData === 'object' && !Array.isArray(jsonData)) {
+                                // Clear previous content
+                                $('#jsonOutput').empty();
+                            jsonData.data.forEach(function (data, index) {
+                            setTimeout(function () {
+                                loadJsonData(data);
+								
+								// Added fix for target header value after upload
+							    //var elem = $("body").find('.form-card:gt(0)').get();
+							    //console.log("xxxxxxxx  Have got the elements after upload ");
+                                //if (elem.length === 0){
+				                //    console.log("No cards found");
+				                //    $('#Target2Dropdown').val("");
+                                //}else{
+				                //    console.log("Have found cards");
+                                //    exampleVal=elem.target;
+				                //    $('#Target2Dropdown').val(exampleVal);
+
+                                //}; 
+                            }, index * 1000); // 1000 ms = 1 second
+							
+							
+                            });
+
+                            } else {
+                                alert('JSON data is not an array.');
+                            }
+                        } catch (error) {
+                            alert('Invalid JSON format.');
+                        }
+                    };
+                    reader.readAsText(input.files[0]);
+					
+					// CMADD
+					FileUploadModal=document.getElementById('fileuploadModal');
+	                FileUploadModal.style.display = 'none';
+                });
+				
+				
+				// CM0311
+	            // Handler for toggling policy visibility
+	
+	            const makeNamePublicButton = document.getElementById('makeNamePublicButton');
+	            makeNamePublicButton.addEventListener('click', (e) => {
+	   
+	                var query = getQueryParams(document.location.search);
+                    console.log("The ontology to make public is  " + query.policy);
+	                console.log("The mode is " + query.mode);
+	
+	                let check_rules=[];
+	
+	    
+	                $.ajax({
+                            type: 'GET',
+				
+				
+			
+                            url: 'organization/get_uploaded_rules/',  // Endpoint to fetch uploaded rules 
+                            success: function (response) {
+                                console.log("make public get uploaded AJAX call successful" );
+                                // Check if any rules exist
+                                if (response.odrls && response.odrls.length > 0) {
+				                    console.log("Processing the policy list " + response.odrls.length);
+                                    // Populate the list with ontologies
+					                response.odrls.forEach(function (policy) {
+					                    console.log("In make public returned items next " + policy.name + " : " + policy.id);
+					    
+                                        check_rules.push({name: policy.name, id: policy.id} );
+						                console.log("In make public the length of the array is " + check_rules.length);	
+                                    });
+					
+					                // This is here because .ajax is asynchronous so ensures that 
+					                //    global check_rules is only accessed after call completed
+					                usemakepublicCheckPols();
+					
+		
+                    
+                                } else {
+                                    console.error('Error fetching policies in make public:', error);
+                                }
+
+               
+                            },
+                            error: function (error) {
+                                console.error('Error fetching policies in make public:', error);
+                            }
+                        });
+		
+	                function usemakepublicCheckPols(){
+	                    console.log("AFTER AJAX in delete. The length of the array is " + check_rules.length);	
+		                let policy_name_id = check_rules.find(policy_name_id => policy_name_id.name === query.policy);
+	                    console.log("The policy id to delete is " + policy_name_id.id);
+	
+	                    makepublicPolicy(policy_name_id.id);
+			
+						
+	                }
+	   
+        
+                });
+	
+   
+                // Make an policy public
+                function makepublicPolicy(id) {
+	      
+	    
+                    fetch(`/organization/toggle_policy_api_visiblity/${id}/`, { method: 'POST', headers: {
+                                        'X-CSRFToken': '{{ csrf_token }}', // Include CSRF token
+                                    } }) 
+                        .then(response => {
+                            if (response.ok) {
+                                console.log(response.statusText);
+					            alert(response.statusText);
+					            window.close();
+                            } else { 
+                                console.error("Error toggling policy API visibility: ", response.statusText);
+                            }
+                        })
+                        .catch(error => {
+                            console.error("Error toggling policy API visibility: ", error);
+                        });
+                }	
+				
+				// DELETEME
+				async function pauseUntilEvent (clickListenerPromise) {
+                    console.log('XX__XX__XX__XX >>>>>> start')
+                    await clickListenerPromise
+                    console.log('XX__XX__XX__XXend')
+                }
+
+                function createClickListenerPromise (target) {
+                    return new Promise((resolve) => target.addEventListener('click', resolve))
+                }
+
+                // pauseUntilEvent(createClickListenerPromise(document.querySelector('#Target2Dropdown')))
+
+				
+            });
+// END ################### $(document).ready(function () {
+
+        </script>
+    {% endblock %}
+    ```

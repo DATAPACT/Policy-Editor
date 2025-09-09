@@ -1,0 +1,697 @@
+    {% extends 'base.html' %}
+    {%load static %}
+
+    {% block inpagecss %}
+        body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        }
+
+        h2 {
+        text-align: center;
+        }
+
+        label {
+        display: block;
+        margin-bottom: 5px;
+        }
+
+        select, input {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 0px;
+        box-sizing: border-box;
+        }
+		
+
+        /* Hide the actual file input */
+        #fileInput {
+            display: none;
+        }
+
+        /* Style the label to look like a button */
+        .file-label {
+            width: 200px;
+            background-color: #4154f1;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+
+            margin: 10px 0;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+        .button-container {
+            display: flex;
+            gap: 10px;
+        }
+       
+        
+        .right-align {
+        float: right;
+        /* You can add more styles as needed */
+        }
+
+
+        .flex {
+        display: flex;
+        align-items: center; /* Align items vertically */
+        }
+        .flex > * {
+        margin-right: 10px; /* Add spacing between elements */
+        }
+
+        
+		
+.welcome-header{
+    font-family: Arial, sans-serif;
+	font-size: 18px;
+	line-height: 0.8;
+	text-align: center;
+}
+
+/* Menu Bar Styling */
+.menu-bar {
+    display: flex;
+    background-color: #007bff;
+    padding: 10px;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.menu-item {
+    position: relative; /* Ensure dropdown aligns relative to this */
+    margin-right: 20px;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.menu-item span:hover {
+    text-decoration: underline;
+}
+
+/* Dropdown Content */
+.dropdown-content {
+    display: none; /* Hidden by default */
+    position: absolute;
+    top: 100%; /* Position directly below the menu item */
+    left: 0;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    min-width: 200px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+/* Ensure visibility when hovering over the menu item or dropdown */
+.menu-item:hover .dropdown-content,
+.dropdown-content:hover {
+    display: block;
+}
+
+/* Dropdown Button Styles */
+.dropdown-button,
+.dropdown-label {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    /* background-color: white; */
+	background-color:white;
+    color: #007bff;
+    text-align: left;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.dropdown-button:hover,
+.dropdown-label:hover {
+    background-color: #f0f0f0;
+}
+
+/* Hidden Inputs */
+input[type="file"] {
+    display: none;
+}
+
+        /* Modal container */
+.modal {
+    display: none; /* Initially hidden */
+    position: fixed; /* Fix position relative to the viewport */
+    top: 50%; /* Position from the top */
+    left: 50%; /* Position from the left */
+    transform: translate(-50%, -50%); /* Offset the modal by half of its own width and height to truly center it */
+    width: 80%; /* Adjust the width of the modal */
+    max-width: 700px; /* Max width */
+    max-height: 80%; /* Max height */
+    background-color: white; /* Modal background color */
+    border-radius: 12px; /* Rounded corners */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Shadow for visual effect */
+    padding: 20px; /* Padding inside the modal */
+    z-index: 9999; /* Ensure the modal is above other content */
+    overflow-y: auto; /* Allow scrolling if content overflows */
+    transition: opacity 0.3s ease-in-out; /* Smooth transition when showing/hiding */
+}
+
+/* Modal content */
+.modal-content {
+    padding: 20px;
+    text-align: center;
+}
+
+/* Close button */
+.close-button {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 30px;
+    color: #333; /* Darker close button for visibility */
+    cursor: pointer;
+    transition: color 0.2s; /* Smooth transition for button hover */
+}
+
+.close-button:hover {
+    color: #e74c3c; /* Red color on hover */
+}
+
+/* Modal header */
+h2 {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+
+
+/* Modal for smaller screens */
+@media (max-width: 600px) {
+    .modal {
+        width: 90%; /* Reduce modal width on small screens */
+        max-height: 90%; /* Allow for more height on smaller devices */
+    }
+
+    .modal-content {
+        padding: 15px;
+    }
+
+    h2 {
+        font-size: 1.5em;
+    }
+
+    
+    .close-button {
+        top: 10px;
+        right: 10px;
+    }
+}
+
+
+    {% endblock %}
+    {% block title %} Data Controller/Processor Home {% endblock %}
+    {% block content %}
+        <main id="main">
+            <section id="faq" class="faq">
+{#              <header class="section-header">#}
+{#                  <p>ODRL Editor Ontology Manager</p>#}
+{#              </header>#}
+
+                <!-- CMADD -->				
+								
+				<header id = "entry-header" class="welcome-header">
+                        <br> Welcome {{ user.username}} you are 
+                </header>
+				
+				<header id = "entry-header" class="welcome-header">
+                        <br> 
+                </header>
+				
+				
+									
+					
+                <div class="container" data-aos="fade-up"  style="min-height: 400px">
+
+                    <div class="row">
+                        <div class="menu-bar">
+                            <!-- File Menu -->
+                            <div class="menu-item">
+                                <span>File Management</span>
+                                <div class="dropdown-content">
+                                    <button id="deleteNameButton" class="dropdown-button" style="background-color:#90EE90">Delete Ontology</button>
+									<!-- CM0311 -->
+									<button id="namePublicButton" class="dropdown-button" style="background-color:#90EE90">Toggle API Visibility</button>
+			                    </div>
+								
+                            </div>
+
+						</div>
+                    </div>
+				
+				    <!-- START Modal Window for file upload prompting -->
+                    <div id="ontoluploadModal" class="modal" style="max-height: 30%">
+                        <div class="modal-content">
+                            <span class="close-button" id="closeontoluploadModalButton">&times;</span>
+                            <label for="ontolFileInput" class="dropdown-label">
+                                    Click to upload Ontology File
+                                    <input type="file" id="ontolFileInput" hidden>
+                             </label>
+                        </div>
+                    </div>
+				    <!-- END Modal Window for file upload prompting -->
+                
+                    <div id="nameModal" class="modal">
+                        <div class="modal-content">
+                            <span class="close-button" id="closeNameModalButton">&times;</span>
+                            <h2>Enter Name</h2>
+                            <div>
+                                <label for="nameInput">Rule Name:</label>
+							    <!-- CMADD -->
+                                <input type="text" id="odrlFileName" value="" >  <!-- placeholder="Enter rule name"> -->
+                            </div>
+                            <button id="saveRuleButton">Submit</button>
+                        </div>					
+                    </div>
+				
+
+				    <div id="deletenameModal" class="modal">
+                        <div class="modal-content">
+                            <span class="close-button" id="closedeleteNameModalButton">&times;</span>
+                            <h2>Delete Ontology</h2>
+                            <div>
+                                <label for="nameInput">Ontology Name:</label>
+							
+                                <input type="text" id="odrldeleteFileName" value="" >  <!-- placeholder="Enter rule name"> -->
+                            </div>
+                            <button id="deleteRuleButton">Submit</button>
+                        </div>
+                    </div>
+					
+					<!-- CM0311 -->
+					
+					<div id="publicNameModal" class="modal">
+                        <div class="modal-content">
+                            <span class="close-button" id="closepublicNameModalButton">&times;</span>
+                            <h2>Toggle Ontology API Visibility?</h2>
+                            <div>
+                                <label for="nameInput">Ontology Name:</label>
+							
+                                <input type="text" id="publicFileName" value="" >  <!-- placeholder="Enter rule name"> -->
+                            </div>
+                            <button id="makeNamePublicButton">Submit</button>
+                        </div>
+                    </div>
+                        
+                </div>
+           
+            </section>
+        </main><!-- End #main -->
+        <script>
+		
+ 
+// https://stackoverflow.com/questions/979975/get-the-values-from-the-get-parameters-javascript
+function getQueryParams(qs) {
+    qs = qs.split('+').join(' ');
+
+    var params = {},
+        tokens,
+        re = /[?&]?([^=]+)=([^&]*)/g;
+
+    while (tokens = re.exec(qs)) {
+        params[decodeURIComponent(tokens[1])] = decodeURIComponent(tokens[2]);
+    }
+
+    return params;
+}
+
+// START ################### document.getElementById('ontologyFileInput').addEventListener('change', async (event
+document.getElementById('ontolFileInput').addEventListener('change', async (event) => {
+    const file = event.target.files[0];
+
+    if (file) {
+        try {
+            const formData = new FormData();
+            formData.append('ontologyFile', file); // Append the file to FormData
+
+            // Send the file to the backend
+				
+            const response = await fetch('organization/custom-ontology-upload', {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRFToken': '{{ csrf_token }}', // Include CSRF token
+                        },
+                        body: formData, // Send FormData with the file
+                    });
+
+            if (response.ok) {
+                alert('Ontology file uploaded and saved successfully!');
+				window.location.href = (window.location.href.split('?')[0]) + "?ontology="+$('#ontolFileInput').val().replace(/^.*[\\/]/, '') +"&mode=update";
+            } else {
+                alert('Failed to upload ontology file.');
+            }
+				
+			ontolUploadModal=document.getElementById('ontoluploadModal');
+	        ontolUploadModal.style.display = 'none';
+					
+        } catch (error) {
+            console.error('Error reading or uploading the file:', error);
+            alert('An error occurred. Please try again.');
+        }
+    } else {
+        alert('No file selected.');
+    }
+});
+// END ################### document.getElementById('ontologyFileInput').addEventListener('change', async (event
+
+// START ################### $(document).ready(function () {
+$(document).ready(function () {
+	
+	    	
+    var query = getQueryParams(document.location.search);
+	
+	query.mode == "create"
+	
+   	
+	if ( query.mode == "update"){
+			
+        document.getElementById("entry-header").innerHTML += ` viewing ontology : ` + query.ontology;
+	}
+	else
+	{
+	    document.getElementById("entry-header").innerHTML += ` adding a new ontology`
+	}
+	
+    // Get modal elements
+    const nameModal = document.getElementById('nameModal');
+	
+	const odrlFileName = document.getElementById('odrlFileName');	
+    odrlFileName.value=query.ontology
+	if (query.mode == "update"){
+	    odrlFileName.setAttribute('readonly','');
+	}
+	
+    	
+    const closeNameModalButton = document.getElementById('closeNameModalButton');
+
+    
+    // Close modal when clicking on the close button
+    closeNameModalButton.addEventListener('click', () => {
+	    
+        nameModal.style.display = 'none';
+    });
+
+    // Close modal when clicking outside the modal content
+    window.addEventListener('click', (event) => {
+        if (event.target === nameModal) {
+            nameModal.style.display = 'none';
+        }
+    });
+	
+	
+	
+		
+	// CM0311
+	// Adding a complete modal for dialogue to make Ontology public
+	const publicFileName = document.getElementById('publicFileName');	
+    publicFileName.value=query.ontology
+	publicFileName.setAttribute('readonly','');
+	
+	
+    const namePublicButton = document.getElementById('namePublicButton');
+    const closepublicNameModalButton = document.getElementById('closepublicNameModalButton');
+
+    // Show modal on button click
+    namePublicButton.addEventListener('click', () => {
+        publicNameModal.style.display = 'block';
+    });
+
+    // Close modal when clicking on the close button
+    closepublicNameModalButton.addEventListener('click', () => {
+        publicNameModal.style.display = 'none';
+    });
+
+    // Close modal when clicking outside the modal content
+    window.addEventListener('click', (event) => {
+        if (event.target === publicNameModal) {
+            publicNameModal.style.display = 'none';
+        }
+    });
+	
+	
+	
+	
+	// Adding a complete modal for make public dialogue
+	const odrldeleteFileName = document.getElementById('odrldeleteFileName');	
+    odrldeleteFileName.value=query.ontology
+	odrldeleteFileName.setAttribute('readonly','');
+	
+	
+    const deleteButton = document.getElementById('deleteNameButton');
+    const closedeleteNameModalButton = document.getElementById('closedeleteNameModalButton');
+
+    // Show modal on button click
+    deleteButton.addEventListener('click', () => {
+        deletenameModal.style.display = 'block';
+    });
+
+    // Close modal when clicking on the close button
+    closedeleteNameModalButton.addEventListener('click', () => {
+        deletenameModal.style.display = 'none';
+    });
+
+    // Close modal when clicking outside the modal content
+    window.addEventListener('click', (event) => {
+        if (event.target === deletenameModal) {
+            deletenameModal.style.display = 'none';
+        }
+    });
+	
+	// Adding a complete modal to cater for upload mode
+	const OntolUploadModal = document.getElementById('ontoluploadModal');
+	const closeontolUploadModalButton = document.getElementById('closeontoluploadModalButton');
+	
+	// Close modal when clicking on the close button
+    closeontolUploadModalButton.addEventListener('click', () => {	    
+        OntolUploadModal.style.display = 'none';
+    });
+
+    // Close modal when clicking outside the modal content
+    window.addEventListener('click', (event) => {
+        if (event.target === OntolUploadModal) {
+            ontolUploadModal.style.display = 'none';
+        }
+    });
+	
+	
+	// Handler for deletion
+	
+	const deletePolicyButton = document.getElementById('deleteRuleButton');
+	deletePolicyButton.addEventListener('click', (e) => {
+	   
+	    var query = getQueryParams(document.location.search);
+        console.log("The ontology is " + query.ontology);
+	    console.log("The mode is " + query.mode);
+	
+	    let check_ontols=[];
+	
+	    
+	    $.ajax({
+                type: 'GET',
+				
+				//CMADD - Adjusted for ontology delete
+			
+                url: 'organization/get_uploaded_ontologies/',  // Endpoint to fetch uploaded rules 
+                success: function (response) {
+                    console.log("delete AJAX call successful" );
+                    // Check if any rules exist
+                    if (response.ontologies && response.ontologies.length > 0) {
+				        console.log("Processing the ontology list " + response.ontologies.length);
+                        // Populate the list with rules
+					    response.ontologies.forEach(function (ontol) {
+					        console.log("In delete returned items next " + ontol.name + " : " + ontol.id);
+					    
+                            check_ontols.push({name: ontol.name, id: ontol.id} );
+						    console.log("In delete the length of the array is " + check_ontols.length);	
+                        });
+					
+					    // This is here because .ajax is asynchronous so ensures that 
+					    //    global check_rules is only accessed after call completed
+					    usedeleteCheckOntols();
+					
+		
+                    
+                    } else {
+                        console.error('Error fetching rules in delete:', error);
+                    }
+
+               
+                },
+                error: function (error) {
+                    console.error('Error fetching rules in delete:', error);
+                }
+            });
+		
+	    function usedeleteCheckOntols(){
+	        console.log("AFTER AJAX in delete. The length of the array is " + check_ontols.length);	
+		    let ontol_name_id = check_ontols.find(ontol_name_id => ontol_name_id.name === query.ontology);
+	        console.log("The policy id to delete is " + ontol_name_id.id);
+	
+	        deleteOntology(ontol_name_id.id);
+			
+						
+	    }
+	   
+        
+    });
+	    
+
+    const ontologyModal = document.getElementById('ontologyModal');
+    const closeModalButton = document.getElementById('closeNameModalButton');
+    
+    // Close Modal
+    closeModalButton.addEventListener('click', () => {
+        ontologyModal.style.display = 'none';
+    });
+	
+   
+    // Delete an ontology
+    function deleteOntology(id) {
+	    
+        fetch(`/organization/delete_ontology/${id}/`, { method: 'DELETE', headers: {
+                            'X-CSRFToken': '{{ csrf_token }}', // Include CSRF token
+                        } }) // Update with your delete endpoint
+            .then(response => {
+                if (response.ok) {
+                    console.log("The ontology has been deleted");
+					alert("The ontology has been deleted");
+					window.close();
+                } else {
+                    console.error("Error deleting ontology:", response.statusText);
+                }
+            })
+            .catch(error => {
+                console.error("Error deleting ontology:", error);
+            });
+    }
+
+    // Close modal if clicked outside of content
+    window.addEventListener('click', (event) => {
+        if (event.target === ontologyModal) {
+            ontologyModal.style.display = 'none';
+        }
+    });
+    
+ 
+    // Optional: Close the modal when clicking outside the modal-content
+    $(window).click(function (event) {
+        if ($(event.target).is('#ontologyModal')) {
+            $('#rulesModal').fadeOut();
+        }
+    });
+ 	
+    var query = getQueryParams(document.location.search);
+    console.log("The ontology is " + query.ontology);
+	console.log("The mode is " + query.mode);
+	
+    if (query.ontology == "... Add new ontology ...."){
+	   
+       // Display the upload modal	   
+	   OntolUploadModal.style.display = 'block';
+	}
+    
+
+    // CM0311
+	// Handler for making public
+	
+	const makeNamePublicButton = document.getElementById('makeNamePublicButton');
+	makeNamePublicButton.addEventListener('click', (e) => {
+	   
+	    var query = getQueryParams(document.location.search);
+        console.log("The ontology to make public is  " + query.ontology);
+	    console.log("The mode is " + query.mode);
+	
+	    let check_ontols=[];
+	
+	    
+	    $.ajax({
+                type: 'GET',
+				
+				
+			
+                url: 'organization/get_uploaded_ontologies/',  // Endpoint to fetch uploaded rules 
+                success: function (response) {
+                    console.log("make public get uploaded AJAX call successful" );
+                    // Check if any rules exist
+                    if (response.ontologies && response.ontologies.length > 0) {
+				        console.log("Processing the ontology list " + response.ontologies.length);
+                        // Populate the list with ontologies
+					    response.ontologies.forEach(function (ontol) {
+					        console.log("In make public returned items next " + ontol.name + " : " + ontol.id);
+					    
+                            check_ontols.push({name: ontol.name, id: ontol.id} );
+						    console.log("In make public the length of the array is " + check_ontols.length);	
+                        });
+					
+					    // This is here because .ajax is asynchronous so ensures that 
+					    //    global check_rules is only accessed after call completed
+					    usemakepublicCheckOntols();
+					
+		
+                    
+                    } else {
+                        console.error('Error fetching ontologies in make public:', error);
+                    }
+
+               
+                },
+                error: function (error) {
+                    console.error('Error fetching ontologies in make public:', error);
+                }
+            });
+		
+	    function usemakepublicCheckOntols(){
+	        console.log("AFTER AJAX in delete. The length of the array is " + check_ontols.length);	
+		    let ontol_name_id = check_ontols.find(ontol_name_id => ontol_name_id.name === query.ontology);
+	        console.log("The policy id to delete is " + ontol_name_id.id);
+	
+	        makepublicOntology(ontol_name_id.id);
+			
+						
+	    }
+	   
+        
+    });
+	
+   
+    // Make an ontology public
+    function makepublicOntology(id) {
+
+        fetch(`/policy-editor/organization/toggle_ontology_api_visibility/${id}/`, { method: 'POST', headers: {
+                            'X-CSRFToken': '{{ csrf_token }}', // Include CSRF token
+                        } }) 
+            .then(response => {
+                if (response.ok) {
+                    console.log(response.statusText);
+					alert(response.statusText);
+					window.close();
+                } else { 
+                    console.error("Error toggling ontology API visibility: ", response.statusText);
+                }
+            })
+            .catch(error => {
+                console.error("Error toggling ontology API visibility: ", error);
+            });
+    }	
+
+});
+// END ################### $(document).ready(function () {
+
+        </script>
+    {% endblock %}
+    ```

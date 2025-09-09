@@ -1,0 +1,474 @@
+    {% extends 'base.html' %}
+    {%load static %}
+
+    {% block inpagecss %}
+        
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+        ul li a {
+            display: block;
+            width: 100%;
+            text-decoration: none;
+            padding: 5px;
+        }
+        ul li a:hover {
+            background-color: #ccc;
+        }
+		
+		.form-select {
+               
+              color: black;
+			  background-color: white;
+            
+             
+           }
+    
+	.public a {
+       background-color: #90EE90
+    }
+	
+	.private a {
+       background-color: #6495ED
+    }
+
+    {% endblock %}
+    {% block title %} Data Controller/Processor Home {% endblock %}
+    {% block content %}
+        <main id="main">
+            
+			
+			<section id="faq" class="faq">
+                    <header class="section-header">
+                        <p>Welcome {{ user.username}} this is the Policy Editor</p>
+                    </header>
+					
+					
+					
+					<!-- <ul>
+                        <li><a href="">link1</a></li>
+                        <li><a href="">link2</a></li>
+                        <li><a href="">link3</a></li>
+                    </ul> -->
+					
+					<body class="text-center">
+					    <!-- <form>
+                        
+                            <label for="data"> You are currently logged into:</label><br>
+						    <input id="data" type="text" name="data" value={{ request.get_host }}><br> -->
+							<!-- <input id="data" type="text" name="data" value={{ request.get_host }}><br> -->
+							
+                            <!-- <input id="submit" type="submit" value="Submit"> -->
+                        <!-- </form> -->
+						<div class="container">
+						    <p>Ver: Alpha - 0.1</p>
+						</div>
+					
+					    <br>
+                        <div class="container">
+                            
+							<p>Your current policies</p>
+							<!-- CM0311 -->
+							<p>(Green = Public, Blue = Private)</p>
+							
+                            <div class="container pt-3" style="width:700px;", onclick="ReadSelected()">
+                                <select class="form-select" name="policy" id="policy" size="5" >					    
+						            <option value="IGNORE" selected="selected">
+                                        Select Policy
+                                    </option>
+									<option value="... Create new policy ....">
+                                        ... Create new policy ....
+                                    </option>
+									<option value="... Create new policy via upload ....">
+                                        ... Create new policy via upload ....
+                                    </option>
+							        {% for SavedPol in SavedPols %}
+						                <!-- <option value= "{{ SavedPol }}"> </option> -->
+							            <!-- <option value= "{% url 'update' %}">{{ SavedPol }} </option> -->
+										<option value= "{{ SavedPol.name }}">{{ SavedPol.name }} </option>
+						            {% endfor %}
+							        
+						        </select>
+						        <br>
+								
+								<script type='text/javascript'>	
+                                    var policyMenu=document.getElementById("policy");
+	 
+	                                policyMenu.onchange=function(){
+									    console.log("On change fired ");
+	                                    var userOption = this.options[this.selectedIndex];
+		                                // window.alert("CLICK FOUND VIA ON CHANGE");
+		                                if ( userOption.value != "IGNORE" ){
+		                                    /* For future use if required
+											   Not used currently as this will not detect click on same value twice in a row */
+		                                }
+		 
+	                                } 
+	
+                                </script>
+								
+								{% csrf_token %}
+								
+								<script>
+								    function ReadSelected(){
+									   
+                                       var selectedValues = $("#policy").val();
+									   
+									   console.log("On click fired ");
+									   
+                                       if ( selectedValues != "IGNORE" ){
+									       
+										   // window.alert("Selected values ReadSelected are " + selectedValues);
+										   
+										   /* SEND DATA PACKET TO THE SERVER WITH REQUIRED POLICY NAME */
+										   
+										   var targetURL = "/testview";	
+										   const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+										   // https://stackoverflow.com/questions/43606056/proper-django-csrf-validation-using-fetch-post-request
+										   // https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+										   // https://www.geeksforgeeks.org/how-to-make-ajax-call-from-javascript/
+										   
+										   /* $.ajax({
+
+                                               // Our sample url to make request 
+                                               url:
+                                                  targetURL,
+
+                                               // Type of Request
+                                               type: "PUT",
+											   contentType: 'application/json',
+                                               headers: {
+                                                   'X-CSRFToken': '{{csrf_token}}'  // Include CSRF token
+                                               },
+											   data: JSON.stringify({
+                                                   Policy: selectedValues
+                                               }),
+
+                                               // Function to call when to
+                                               // request is ok 
+                                               success: function (data) {
+                                                   let x = JSON.stringify(data);
+                                                   window.alert("WE are back from Ajax");
+												   //window.alert("The data is " + JSON.stringify(data));
+												   //window.open(data, '_blank');
+                                               },
+
+                                               // Error handling 
+                                               error: function (error) {
+                                                   console.log(`Error ${error}`);
+                                               }
+                                            }); */
+
+
+                                           var mode="update"
+										   console.log("The selected value is " + selectedValues);
+										   if ( selectedValues == "... Create new policy ...." ){
+										       mode="create";
+										   }
+
+										   if ( selectedValues == "... Create new policy via upload ...." ){
+										       mode="create";
+										   }
+
+                                            var targetURL = "{% url 'update' %}".replace(/\/update\/?$/, "/update") +
+                                                            "?policy=" + selectedValues + "&mode=" + mode;
+                                            window.open(targetURL, "_blank", "popup");
+
+
+										   
+										   // https://stackoverflow.com/questions/43606056/proper-django-csrf-validation-using-fetch-post-request
+										   // https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+										   // https://www.geeksforgeeks.org/how-to-make-ajax-call-from-javascript/
+										   
+										   return
+										   
+										   $.ajax({
+
+                                               // Our sample url to make request 
+                                               url:
+                                                  targetURL,
+
+                                               // Type of Request
+                                               type: "GET",
+											   contentType: 'application/json',
+                                               headers: {
+                                                   'X-CSRFToken': '{{csrf_token}}'  // Include CSRF token
+                                               },
+											   data: JSON.stringify({
+                                                   None: ""
+                                               }),
+
+                                               // Function to call when to
+                                               // request is ok 
+                                               success: function (data) {
+                                                   let x = JSON.stringify(data);
+                                                   window.alert("WE are back from Ajax");
+												   //window.alert("The data is " + JSON.stringify(data));
+												   //window.open(data, '_blank');
+												   // https://stackoverflow.com/questions/62021506/how-to-open-web-page-returned-by-ajax-call
+												    //var tab = window.open($("#data").val() + targetURL, $("#data").val() +targetURL);
+												   
+                                                    //tab.document.write(data); 
+                                                    //tab.document.close();
+													
+													//window.open(targetURL,"_blank", "popup")
+													window.open(targetURL, targetURL, "popup")
+													
+													
+												   // const winURL = URL.createObjectURL(new Blob([data], {type:"text/html"}));
+												   
+												   // const win=window.open(
+												   //                      winURL,
+													//					 "win",
+													//					 'width=800, height=400,screenX=200, screenY=200'
+													//					 );
+                                               },
+
+                                               // Error handling 
+                                               error: function (error) {
+                                                   console.log(`Error ${error}`);
+                                               }
+                                            });
+										   
+										    
+										   
+									   }
+                                    }
+								</script>
+								
+                                <!-- <p>Disabled Select</p>
+                                <select class="form-select" disabled>
+                                    <option selected>
+                                        Select Profile
+                                    </option>
+							        {% for SavedPol in SavedPols %}
+						            
+							        <option value= "{{ SavedPol }}">{{ SavedPol }} </option>
+						            {% endfor %}
+                            
+                                </select> 
+						
+						        <br>
+						        {% for SavedPol in SavedPols %}
+						             - {{ SavedPol }}<br>
+						        {% endfor %} -->
+						    
+							</div>
+							
+						</div>
+					
+					</body>
+					
+					<body class="text-center">
+                        <div class="container">
+                            
+							<p>Your current loaded ontologies</p>
+							<!-- CM0311 -->
+							<p>ODRL_DPV is default ontology    (Green = Public, Blue = Private)</p>
+													
+                            <div class="container pt-3" style="width:700px;" onclick="ReadSelectedOntol()">
+                                <select class="form-select" id="ontology" size="5">					    
+						            <option selectedvalue="IGNORE" selected="selected">
+                                        Select Ontology
+									<option value="... Add new ontology ....">
+                                        ... Add new ontology ....
+                                    </option>
+                                    </option>
+							        {% for CustOnt in CustOntList %}
+						                <!-- <option value= "{{ SavedPol }}"> </option> -->
+							            <option value= "{{ CustOnt.name }}">{{ CustOnt.name }} </option>
+						            {% endfor %}
+							        
+						        </select>
+								
+								<!-- {% csrf_token %} -->
+								
+								<script>
+								    function ReadSelectedOntol(){
+									   
+                                       var selectedValues = $("#ontology").val();
+									   
+                                       if ( selectedValues != "IGNORE" ){
+									       
+										   const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+										   										   
+										   var mode="update"
+										   if ( selectedValues == "... Add new ontology ...." ){
+										       mode="create"
+										   }
+									
+                                            var targetURL = "{% url 'update_ontol' %}".replace(/\/update_ontol\/?$/, "/update_ontol") +
+                                                            "?ontology=" + selectedValues + "&mode=" + mode;
+                                            window.open(targetURL, "_blank", "popup");
+									   }
+                                    }
+								</script>
+						        						    
+							</div>
+							
+						</div>
+					
+					</body>
+					
+					<br>
+					
+					
+					<br>
+					
+                    <!-- CM2102 No longer required as default ontologies kept in the database -->
+					<!-- <body class="text-center">   -->
+                    <!--     <div class="container">   -->
+                    <!--         -->
+					<!-- 		<p>Additional standard ontologies</p>  -->
+					<!-- 		   -->
+                    <!--         {% for StdOnt in StdOnts %} -->
+					<!-- 	        - {{ StdOnt }}<br>   -->
+					<!-- 	    {% endfor %}   -->
+					<!-- 		-->
+					<!-- 	</div>   -->
+					
+					<!-- </body>	 -->				
+																	
+					<!-- <div class="text-center text-lg-start">
+                        <a href="{% url 'update' %}" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
+                        <span>Policy Editor</span>
+                        <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+					
+					
+					<div class="text-center text-lg-start">
+                        <a href="{% url 'logout' %}" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
+                        <span>Logout</span>
+                        <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div> -->
+					
+
+
+               
+
+            </section>
+			
+			
+			<!-- ======= Hero Section ======= -->
+            <section id="hero" class="hero d-flex align-items-center">
+
+                <!-- <div class="col-lg-6 hero-img" data-aos="zoom-out" data-aos-delay="200"> -->
+                    <!-- <img src="{% static 'img/team-shape.svg' %}" class="img-fluid" alt=""> -->
+                <!-- </div> -->
+				<!-- <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6 d-flex flex-column justify-content-center">
+                            <div data-aos="fade-up" data-aos-delay="600">
+                                <div class="text-center text-lg-start">
+                                    <a href="{% url 'update' %}" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
+                                    <span>Policy Editor</span>
+                                    <i class="bi bi-arrow-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+				</div> -->
+				
+				<div class="container">
+                    <div class="row">
+                        <div class="col-lg-6 d-flex flex-column justify-content-center">
+                            <div data-aos="fade-up" data-aos-delay="600">
+                                <div class="text-center text-lg-start">
+                                    <a href="{% url 'logout' %}" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
+                                    <span>Logout</span>
+                                    <i class="bi bi-arrow-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+				</div>
+        
+            </section><!-- End Hero -->
+        </main><!-- End #main -->
+		
+	
+	
+  <script type='text/javascript'>
+/*  
+     var policyMenu=document.getElementById("policy");
+	 
+	 policyMenu.onchange=function(){
+	     var userOption = this.options[this.selectedIndex];
+		 window.alert("CLICK FOUND");
+		 if ( userOption.value != "IGNORE" ){
+		     /* userOption.value 
+			 window.alert("CLICK FOUND 2");
+			 window.open({% url 'update' %},"UPDATE","");
+		 }
+		 
+	 } */
+	 
+	 // CM0311 
+	 $(document).ready(function () {
+	     
+		 OntologyList = document.getElementById("ontology").options;
+		          
+		 // Walk through all the ontologies listed and check public/private
+		 for (var j = 0, m = {{CustOntList|safe}}.length;  j < m; j++) { 
+		 
+			 display_name = {{CustOntList|safe}}[j].name 
+			 console.log("Next in ontology list is" + JSON.stringify(display_name))
+		     
+		     //for (var i = 0, l = OntologyList.childNodes.length; i < l; i++) {
+			 for (var i = 0, l = OntologyList.length; i < l; i++) {
+			     //console.log("The child node name is " + OntologyList.childNodes[i].nodeName)
+				 console.log("The next name is " + OntologyList[i].value)
+                 if (OntologyList[i].value === {{CustOntList|safe}}[j].name){
+				     if ({{CustOntList|safe}}[j].protection == 0){
+					     console.log("Detected a public ontology " + {{CustOntList|safe}}[j].name)
+					     //OntologyList[i].className = "active";
+						 OntologyList[i].style.backgroundColor = '#90EE90'
+				     }
+					 else
+					 {
+					     console.log("Detected a private ontology " + {{CustOntList|safe}}[j].name)
+					     //OntologyList[i].className = "private";
+						 OntologyList[i].style.backgroundColor = '#6495ED'
+					 }
+				 }
+			 }
+		 }
+		 
+		 PolicyList = document.getElementById("policy").options;
+		 
+		 // Walk through all the policies listed and check public/private
+		 for (var j = 0, m = {{SavedPols|safe}}.length;  j < m; j++) { 
+		 
+			 display_name = {{SavedPols|safe}}[j].name 
+			 console.log("Next in policy list is" + JSON.stringify(display_name))
+		     
+		     //for (var i = 0, l = OntologyList.childNodes.length; i < l; i++) {
+			 for (var i = 0, l = PolicyList.length; i < l; i++) {
+			     //console.log("The child node name is " + PolicyList.childNodes[i].nodeName)
+				 console.log("The next name is " + PolicyList[i].value)
+                 if (PolicyList[i].value === {{SavedPols|safe}}[j].name){
+				     if ({{SavedPols|safe}}[j].protection == 0){
+					     console.log("Detected a public ontology " + {{SavedPols|safe}}[j].name)
+					     //PolicyList[i].className = "active";
+						 PolicyList[i].style.backgroundColor = '#90EE90'
+				     }
+					 else
+					 {
+					     console.log("Detected a private ontology " + {{SavedPols|safe}}[j].name)
+					     //OntologyList[i].className = "private";
+						 PolicyList[i].style.backgroundColor = '#6495ED'
+					 }
+				 }
+			 }
+		 }
+	 });
+	
+ </script>
+ 
+ {% endblock %}

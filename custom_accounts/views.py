@@ -61,6 +61,7 @@ from custom_accounts.ajax_ontology import (
 )
 from custom_accounts.ajax_ontology import ontology_data_to_dict_tree
 import os
+import requests
 
 # because of the custom user model
 from django.contrib.auth import get_user_model
@@ -147,6 +148,8 @@ def signin(request):
                 
                 query_url=request_query.split("?")[0]
                 query_url=query_url.strip("/")
+                #query_url=query_url.strip("policy-editor/")
+                query_url=query_url.replace('policy-editor/', '')
                 print("Request url is " + query_url)
                 query=request_query.split("?")[1]
                 query_params=query.split("&")
@@ -393,10 +396,87 @@ def userhome(request):
     StdOnts=["Application specific integration of ODRL and DPV"]
     context={"CustOntList":ontol_list_default + ontol_list, "SavedPols":odrl_list, "StdOnts":StdOnts}
     # CM2403 NewIndex
-    return render(request, "common/USER_TEST.html",context)
-    #return render(request, "common/MainIndexPage.html",context)
+    #return render(request, "common/USER_TEST.html",context)
+    return render(request, "common/MainIndexPage.html",context)
     #return render(request, "users/index.html")
 
+@login_required(login_url="login")
+@user_passes_test(lambda u: u.role == "DATA_PROVIDER")
+def review_public(request):
+    # UITEST - Changed the entry oage next two lines
+    print("The data received userhome is " + str(request))
+    # Get the current user name
+   
+    try:    
+        # Get records for this user
+        # odrls = ODRLRuleUpload.objects.all()
+        url = "http://127.0.0.1:8001/policies"
+    
+        response = requests.get(url,  headers={"Content-Type":"application/json"})
+    
+        #print("The policy set returned is " + str(json.loads(response.content)[0]))
+        #print("The policy name is " + str(json.loads(response.content)[0]['name']))
+        #print("The policy id is " + str(json.loads(response.content)[0]['id']))
+    
+    except Exception as e:
+        print("The error returned is " + str(e))
+        return JsonResponse({"error": str(e)}, status=400)
+    
+    
+        
+    odrl_list = [
+        {"id": odrl['id'], "name": odrl['name'], "edit_uid": odrl['edit_uid'], "protection": odrl['protection']}
+        for odrl in json.loads(response.content)
+    ]
+    
+    
+    try:    
+        
+        url = "http://127.0.0.1:8001/ontologies"
+    
+        response = requests.get(url,  headers={"Content-Type":"application/json"})
+    
+        #print("The ontology set returned is " + str(response.content))
+    
+    except Exception as e:
+        print("The error returned is " + str(e))
+        return JsonResponse({"error": str(e)}, status=400)
+                
+    ontol_list = [
+        # CM0311
+        {"id": ontol['id'], "name": ontol['name'], "edit_uid": ontol['edit_uid'], "protection": ontol['protection']}
+        for ontol in json.loads(response.content)
+    ]
+    
+    # CustOntList=CustomOntologyUpload.objects.all()
+    # SavedPols=ODRLRuleUpload.objects.all()
+    
+    StdOnts=["Application specific integration of ODRL and DPV"]
+    context={"CustOntList":ontol_list, "SavedPols":odrl_list, "StdOnts":StdOnts}
+    # CM2403 NewIndex
+    #return render(request, "common/USER_TEST.html",context)
+    return render(request, "common/MainIndexPagePublic.html",context)
+    #return render(request, "users/index.html")
+    
+def get_public_rule(request, odrl_id):
+    if request.method == "GET":
+        
+        try:    
+            
+            url = "http://127.0.0.1:8001/policies/" + str(odrl_id)
+    
+            response = requests.get(url,  headers={"Content-Type":"application/json"})
+            
+            content_json = json.loads(response.content)  # Convert string to JSON
+            print("<<<<<< IN get_public_rule: The rule data is " + str(content_json))
+            
+            return JsonResponse({"id": content_json['id'], "name": content_json['name'], "content": content_json['content']})
+    
+        except Exception as e:
+            print("The error returned is " + str(e))
+            return JsonResponse({"error": str(e)}, status=400)
+            
+    return JsonResponse({"error": "Invalid request method."}, status=405)
 
 @login_required(login_url="login")
 @user_passes_test(lambda u: u.role == "DATACONTROLLER_PROCESSOR")
@@ -560,6 +640,7 @@ def filter_dicts_with_none_values(data):
 def convert_to_odrl(request):
     if request.method == "POST":
         # try:
+            print("We are in convert_to_odrl and the data posted is <<<<" + str(request.body) + ">>>>")
             translator = LogicTranslator()
             response = json.loads(request.body)
             filtered_response = filter_dicts_with_none_values(response)
@@ -898,7 +979,8 @@ def create_rule_dataset_no_user(request):
     # A list of accepted params and counts of those found to be present
     accepted_params={'mode':0,
                     'policy':0,
-                    'target':0}
+                    'target':0,
+                    'id':0}
     
     # A list of accepted params that are additionaly mandatory    
     mandatory_params=['mode', 'policy']
@@ -991,17 +1073,19 @@ def create_rule_dataset_no_user(request):
     request_mode = request.GET.get("mode")
     request_policy = request.GET.get("policy")
     
-    if (request_mode == "update") or (request_mode == "read") or (request_mode == "delete"):
-        checkResponse= check_rule_exists(ThisUserid, request_policy)
+    # Do not do checks if we are accessing the public repository
+    if accepted_params["id"] == 0:
+        if (request_mode == "update") or (request_mode == "read") or (request_mode == "delete"):
+            checkResponse= check_rule_exists(ThisUserid, request_policy)
             
-        if checkResponse == False:
-             return JsonResponse({"error": "Policy name does not exist for this user"}, status=405) 
+            if checkResponse == False:
+                 return JsonResponse({"error": "Policy name does not exist for this user"}, status=405) 
     
-    if (request_mode == "create") :
-        checkResponse= check_rule_exists(ThisUserid, request_policy)
+        if (request_mode == "create") :
+            checkResponse= check_rule_exists(ThisUserid, request_policy)
             
-        if checkResponse == True:
-             return JsonResponse({"error": "Policy name already exists for this user"}, status=405) 
+            if checkResponse == True:
+                 return JsonResponse({"error": "Policy name already exists for this user"}, status=405) 
              
              
     
@@ -1027,6 +1111,7 @@ def create_rule_dataset_no_user(request):
 
     rules = get_rules_from_odrl("./media/default_ontology/ODRL22.rdf", ThisUserid)
     actors = get_actor_hierarchy_from_dpv("./media/default_ontology/dpv.ttl", ThisUserid)
+    #print("The actor hierarchy is " + str(actors))
     
     #f = open("myfile.txt", "x")
     #f = open("myfile.txt", "w")
@@ -1039,7 +1124,7 @@ def create_rule_dataset_no_user(request):
     purposes = get_purpose_hierarchy_from_dpv("./media/default_ontology/dpv.rdf", ThisUserid)
     operators = get_operators_from_odrl("./media/default_ontology/ODRL22.rdf", ThisUserid)
 
-    rules.append({"label": "Obligation", "uri": "http://www.w3.org/ns/odrl/2/Obligation"})
+    rules.append({"label": "Obligation", "uri": "http://www.w3.org/ns/odrl/2/Obligation", "definition": "The obligation to perform an action (see also Duty)"})
 
     context = {
         "policy": request_policy,
@@ -1094,7 +1179,7 @@ def update_ontol(request):
             
     rules = get_rules_from_odrl("./media/default_ontology/ODRL22.rdf", ThisUserid)
     actors = get_actor_hierarchy_from_dpv("./media/default_ontology/dpv.ttl", ThisUserid)
-    #print("The actor hierarchy is " + str(actors))
+    print("The actor hierarchy is " + str(actors))
     actions = get_action_hierarchy_from_odrl("./media/default_ontology/ODRL22.rdf", ThisUserid)
     targets = get_dataset_titles_and_uris("./media/default_ontology/Datasets.ttl", ThisUserid)
     constraints = get_constraints_types_from_odrl("./media/default_ontology/ODRL22.rdf", ThisUserid)
@@ -1201,6 +1286,95 @@ def testview(request):
             
         except BaseException as b:
                 return bprint("The data received is " + str(request))
+    #print("The data received is " + str(request.body))
+    #print("The data received is " + str(request.method))
+    
+    #DATAPACKET=request.body
+    
+    #return JsonResponse({},status=200)
+    #if request.method == "PUT":
+        
+    #    request.method = "GET"
+    #    return redirect(reverse("create_rule_dataset_no_user"))
+         
+
+    #return render(request, "register_login/login.html")*/
+    
+def callComparisonAPI(request):
+    if request.method == "POST":
+        
+        print("We have reached callComparisonAPI view")
+        
+        
+        
+        try:
+            #curl -X 'POST' \
+            #     'https://dips.soton.ac.uk/policy-engine-api/detect_conflict' \
+            #     -H 'accept: application/json' \
+            #     -H 'Content-Type: application/json' \
+            #     -d request.body  
+                 
+            # The API endpoint
+            url = "https://dips.soton.ac.uk/policy-engine-api/detect_conflict"
+
+            # Data to be sent
+            #data = request.body.decode("utf-8")
+            
+            #print("The data for comparison is " + str(data))
+            
+            #data.replace('\n', '')  # Newline
+            #data.replace('\r', '')  # Carriage return
+            #data.replace('\t', '')  # Tab
+            #data.replace('\b', '')  # Backspace
+            #data.replace('\f', '')  # Form feed
+            #data.replace('\a', '')  # Alert sound
+            #data.replace('\\', '')  # Literal backslash
+            
+            
+            #new_data=""
+            #for i in range(1,len(data)-1):
+            #    if not data[i] == "\\":
+            #        new_data=new_data + data[i]
+                    
+            
+            
+            #json_object = json.loads(new_data)
+            print("YYYYYYYYYYYYYYYYYYY The body coming in is " + str(request.body) )
+            json_object2 = json.loads(json.loads(request.body))
+            
+            #print("The hand-built data for comparison is " + str(json_object) + "<< TYPE IS >>" + str(type(json_object)))
+            
+            #print("The value in p_one @context is ", str(json_object["p_one"]["@context"]))
+            #print("The value in p_one @id is ", str(json_object["p_one"]["@id"]))
+            #print("The value in p_one @type is ", str(json_object["p_one"]["@type"]))
+            #for next_perm in json_object["p_one"]["odrl:permission"]:
+                #print("The value of the next permission is " + str(next_perm))
+                
+            print("XXXXXXXXXXXXXXXXXXXXXXXXXXX The auto-built data for comparison is " + str(json_object2) + "<< TYPE IS >>" + str(type(json_object2)))
+            
+            #print("The value in p_one @context is ", str(json_object2["p_one"]["@context"]))
+            #print("The value in p_one @id is ", str(json_object2["p_one"]["@id"]))
+            #print("The value in p_one @type is ", str(json_object2["p_one"]["@type"]))
+            #for next_perm in json_object2["p_one"]["odrl:permission"]:
+                #print("XXXXXXXXXXXXXXXXXX    - The value of the next permission is " + str(next_perm))
+            
+            
+                
+
+            # A POST request to the API
+            response = requests.post(url, json= json_object2, headers={"Content-Type":"application/json", "accept": "application/json"})
+            
+            print("The response is " + str(response))
+            print("The response data is " + str(response.content.decode("utf-8")))
+            
+            return JsonResponse(response.content.decode("utf-8"), status=200, safe=False)
+            
+        except Exception as e:
+                print("The error returned is " + str(e))
+                
+                
+                    
+                return JsonResponse({"error": str(e)}, status=400)
     #print("The data received is " + str(request.body))
     #print("The data received is " + str(request.method))
     

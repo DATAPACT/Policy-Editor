@@ -11,10 +11,43 @@
   --tertiary-color: #64b5f6; 
   --primary-color: #aaaaaa;
   --secondary-color: #bbbbbb;
-  --tertiary-color: #cccccc;*/
+  --tertiary-color: #cccccc;
   --primary-color: #72bcd4;
   --secondary-color: #86c5da;
   --tertiary-color: #99cfe0;
+  --primary-color: #111184;
+  --secondary-color: #3C3CE8;
+  --tertiary-color: #99cfe0;
+  --header-primary-color: #111184;
+  --header-secondary-color: #070738;
+  --light-gray: #f5f7fa;
+  --hover-color: #e3f2fd;
+  --public-color: #66bb6a;
+  --private-color: #5c6bc0;
+  --shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+  --font-family: 'Segoe UI', Arial, sans-serif;
+  --border-radius: 6px;
+  --transition: all 0.25s ease;*/
+  
+  /* --primary-color: #1976d2;
+  --secondary-color: #2196f3;
+  --tertiary-color: #64b5f6; 
+  --primary-color: #aaaaaa;
+  --secondary-color: #bbbbbb;
+  --tertiary-color: #cccccc;
+  --primary-color: #72bcd4;
+  --secondary-color: #86c5da;
+  --tertiary-color: #99cfe0;
+  --primary-color: #111184;
+  --secondary-color: #3C3CE8;
+  --tertiary-color: #99cfe0; */
+  --primary-color: #819A91;
+  --secondary-color: #A7C1A8;
+  --tertiary-color: #D1D8BE;
+  /* --header-primary-color: #111184;
+  --header-secondary-color: #070738; */
+  --header-primary-color: #819A91;
+  --header-secondary-color: #A7C1A8;
   --light-gray: #f5f7fa;
   --hover-color: #e3f2fd;
   --public-color: #66bb6a;
@@ -107,7 +140,9 @@ ul li a:hover {
 .container2 {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  background-color: var(--primary-color);
+  /* background-color: var(--primary-color); */
+  
+  background-color: var(--light-gray);
   #padding: 18px;
   padding: 9px;
   border-radius: var(--border-radius);
@@ -156,9 +191,9 @@ ul li a:hover {
 }
  
 .grid-head-wrapper > .grid-head-item {
-  background: linear-gradient(to bottom, var(--secondary-color), var(--tertiary-color));
-  color: white;
-  font-size: 18px;
+  #background: linear-gradient(to bottom, var(--secondary-color), var(--tertiary-color));
+  color: black;
+  font-size: 16px;
   font-weight: 600;
   #padding: 14px 10px;
   padding: 7px 5px;
@@ -189,7 +224,9 @@ ul li a:hover {
 .container3 {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  background-color: var(--primary-color);
+  /* background-color: var(--primary-color); */
+  
+  background-color: var(--light-gray);
   padding: 18px;
   
   border-radius: var(--border-radius);
@@ -237,7 +274,7 @@ ul li a:hover {
  
 .grid-row-wrapper > .grid-item {
   background: white;
-  font-size: 20px;
+  font-size: 16px;
   padding: 12px 10px;
   border-bottom: 1px solid #e0e0e0;
   transition: var(--transition);
@@ -245,12 +282,38 @@ ul li a:hover {
 
 .grid-row-wrapper > .grid-item.selected {
   background: gray;
+  font-size: 16px;
+  padding: 12px 10px;
+  border-bottom: 1px solid #e0e0e0;
+  transition: var(--transition);
+}
+
+.grid-row-wrapper-2 {
+  display: contents;
+}
+ 
+.grid-row-wrapper-2 > .grid-item {
+  background: white;
+  font-size: 16px;
+  padding: 12px 10px;
+  border-bottom: 1px solid #e0e0e0;
+  transition: var(--transition);
+}
+
+#.grid-row-wrapper-2 > .grid-item.selected {
+#  background: gray;
+#  font-size: 20px;
+#  padding: 12px 10px;
+#  border-bottom: 1px solid #e0e0e0;
+#  transition: var(--transition);
+#}
+ .grid-row-wrapper-2 > .grid-dropdowns {
+  background: white;
   font-size: 20px;
   padding: 12px 10px;
   border-bottom: 1px solid #e0e0e0;
   transition: var(--transition);
 }
- 
 #.grid-row-wrapper:hover > .grid-item {
 #  background-color: var(--hover-color);
 #  transform: translateY(-2px);
@@ -290,7 +353,7 @@ ul li a:hover {
 /* Menu Bar Styling */
 .menu-bar {
   display: flex;
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  #background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
   #padding: 14px 20px;
   padding: 7px 10px;
   font-family: var(--font-family);
@@ -351,7 +414,7 @@ ul li a:hover {
 .menu-item {
   position: relative;
   margin: 0 20px;
-  color: white;
+  color: navy;
   font-size: 16px;
   cursor: pointer;
   user-select: none;
@@ -359,6 +422,20 @@ ul li a:hover {
   padding: 4px 6px;
   border-radius: var(--border-radius);
   transition: var(--transition);
+}
+
+.radio-inline {
+  position: relative;
+  #margin: 0 20px;
+  color: black;
+  accent-color: black;
+  font-size: 16px;
+  cursor: pointer;
+  user-select: none;
+  #padding: 8px 12px;
+  padding: 4px 6px;
+  #border-radius: var(--border-radius);
+  #transition: var(--transition);
 }
 
 .menu-item_ontol {
@@ -404,11 +481,11 @@ ul li a:hover {
  
 /* Button styles */
 .menubar-button {
-  background: linear-gradient(to bottom, var(--secondary-color), var(--primary-color));
+  /* background: linear-gradient(to bottom, var(--secondary-color), var(--primary-color)); */
   font-family: var(--font-family);
-  font-size: 18px;
+  font-size: 16px;
   box-shadow: var(--shadow);
-  color: white;
+  color: black;
   border: none;
   #padding: 10px 20px;
   padding: 5px 10px;
@@ -549,6 +626,83 @@ ul li a:hover {
 .grid-button:active {
   transform: translateY(1px);
 }
+
+
+/* Dropdown Button Styles */
+.dropdown-button,
+.dropdown-label {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    /* background-color: white; */
+	background-color:white;
+    color: #007bff;
+    text-align: left;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.dropdown-button:hover,
+.dropdown-label:hover {
+    background-color: #f0f0f0;
+}
+
+/* Hidden Inputs */
+input[type="file"] {
+    display: none;
+}
+
+/* Modal container */
+.modal {
+    display: none; /* Initially hidden */
+    position: fixed; /* Fix position relative to the viewport */
+    top: 50%; /* Position from the top */
+    left: 50%; /* Position from the left */
+    transform: translate(-50%, -50%); /* Offset the modal by half of its own width and height to truly center it */
+    width: 80%; /* Adjust the width of the modal */
+    max-width: 700px; /* Max width */
+    max-height: 80%; /* Max height */
+    background-color: white; /* Modal background color */
+    border-radius: 12px; /* Rounded corners */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Shadow for visual effect */
+    padding: 20px; /* Padding inside the modal */
+    z-index: 9999; /* Ensure the modal is above other content */
+    overflow-y: auto; /* Allow scrolling if content overflows */
+    transition: opacity 0.3s ease-in-out; /* Smooth transition when showing/hiding */
+}
+
+/* Modal content */
+.modal-content {
+    padding: 20px;
+    text-align: center;
+}
+
+/* Close button */
+.close-button {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 30px;
+    color: #333; /* Darker close button for visibility */
+    cursor: pointer;
+    transition: color 0.2s; /* Smooth transition for button hover */
+}
+
+.close-button:hover {
+    color: #e74c3c; /* Red color on hover */
+}
+
+/* Modal header */
+h2 {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+
 {% endblock %}
     {% block title %} Data Controller/Processor Home {% endblock %}
     {% block content %}
@@ -575,9 +729,9 @@ ul li a:hover {
 						
 						<div class="control_main_index_wrapper", id="control_main_index_wrapper">
 						
-						<div class="menu-text-bar">
+						<div class="menu-text-bar" style="display:none">
 						    Your Current Policies
-							<a href="{% url 'logout' %}" class="menubar-button" id="logout"> Logout</a>
+							<a href="{% url 'logout' %}" class="menubar-button" style="display:none" id="logout"> Logout</a>
 						</div>
 						
 						
@@ -590,15 +744,15 @@ ul li a:hover {
 					        <!--         Should be removed in a fuller tidy up -->
                             
 							
-							<div class="menu-item">
-							    <span id="MenuText">Ignore Policy Types</span>
+							<!--<div class="menu-item">
+							    <span id="MenuText" style="display:none">Ignore Policy Types</span>
 								
-								&nbsp;&nbsp;&nbsp;
+								&nbsp;&nbsp;&nbsp;-->
 							<!-- </div>
 							
 							    
 							<div class="menu-item">	-->
-								<button id="ignorePolicyType" class="menubar-button" >False</button>
+								<!--<button id="ignorePolicyType" class="menubar-button" style="display:none">False</button>
                                 
 								<script type='text/javascript'>	
 							       								   
@@ -621,7 +775,58 @@ ul li a:hover {
                                    }); 
 								                                  						   
 						        </script>
-                            </div>
+                            </div> -->
+							
+							<div class="menu-item" >
+							  <form>
+                                 <label class="radio-inline" id="UPTypes">
+                                     <input type="radio"  name="optradio" checked>Use Policy Types
+                                  </label>
+                                  <label class="radio-inline" id="IPTypes">
+                                    <input type="radio" name="optradio">Ignore Policy Types
+                                  </label>
+    
+                               </form>
+							   
+							   <script type='text/javascript'>	
+							       								   
+								   $('.radio-inline').off('click').click(function() {
+								   
+								        //var ignorePolicyTypeText = $('#IgnoreTypes').val();
+									   
+									    var thisId = $(this).attr('id');
+									   
+									    console.log("The radio button clicked is " + thisId);
+									   
+									    if ( thisId == "UPTypes"){
+										   
+									       
+									       $('#PPolicyHeadSpan').text("Provider Policy");
+										   $('#RPolicyHeadSpan').text("Requester Policy");
+									    } else {
+										   console.log("Change text " + thisId);
+									       $('#PPolicyHeadSpan').text("Policy 1");
+										   $('#RPolicyHeadSpan').text("Policy 2");
+									    }
+									   
+									   
+									   //if ( ignorePolicyTypeText == "False"){
+									   //    $('#IgnoreTypes').val("True");
+									   //    $(document).find('#ignorePolicyType').html("<i class='fa fa-check' style='font-size:16px'></i>");
+									   //}
+									   //else
+									   //{
+									   //    $('#IgnoreTypes').val("False");
+									   //    $(document).find('#ignorePolicyType').html("<i class='fa fa-times' style='font-size:16px'></i>");
+									   //}
+								                                    
+										
+                                   }); 
+								                                  						   
+						        </script> 
+							   
+							</div>
+							
 					        <!-- END Edit Menu -->
                         </div>
 				        <!-- END Menu Bar -->
@@ -630,9 +835,9 @@ ul li a:hover {
 						<div class="container2", id="policy_grid_head">
                             
                                 <div class="grid-head-wrapper">
-								    <div class="grid-head-item">Provider Policy</div>
+								    <div class="grid-head-item" id="PPolicyHead" ><span  id="PPolicyHeadSpan"> Provider Policy </span></div>
                                     <!-- <div class="grid-head-item">Policy Visibility</div> -->
-									<div class="grid-head-item">Requester Policy</div>
+									<div class="grid-head-item" id="RPolicyHead" ><span  id="RPolicyHeadSpan"> Requester Policy </span></div>
 									
 								</div>
 						</div>
@@ -648,36 +853,99 @@ ul li a:hover {
 									</div>
 									
 								</div>
+								
+								<div class="grid-row-wrapper-2" style="display: none">
+								    <div class="grid-item" id="policyName1">									    
+                                        
+										<!-- <label for="Policy1_Dropdown">Policy 1:</label> -->
+                                        <select id="Policy1_Dropdown" class="grid-dropdowns">
+										  <option value="IGNORE" selected="selected">Select a Policy</option>
+										</select>
+                                        
+                                    </div>
+									
+									<div class="grid-item" id="policyName2">
+									    
+										<!-- <label for="Policy2_Dropdown">Policy 1:</label> -->
+                                        <select id="Policy2_Dropdown" class="grid-dropdowns">
+										  <option value="IGNORE" selected="selected">Select a Policy</option>
+										</select>
+									</div>
+									
+								</div>
+								
+								<div class="grid-row-wrapper-2" ">
+								    <div class="grid-item" id="policyDownload_1">									    
+                                        
+										<!-- <label for="Policy1_Dropdown">Policy 1:</label> -->
+                                        <button id="DownloadPolicy_1" class="menubar-button" >Upload Policy File</button>
+                                        
+                                    </div>
+									
+									<div class="grid-item" id="policyDownload_2">
+									    
+										<!-- <label for="Policy2_Dropdown">Policy 1:</label> -->
+                                        <button id="DownloadPolicy_2" class="menubar-button" >Upload Policy File</button>
+									</div>
+									
+								</div>
                                 				
 																
 							<script type='text/javascript'>	
-							    {% for SavedPol in SavedPols %}			       
+							    //{% for SavedPol in SavedPols %}			       
 							   
-							        var $originalRow = $('.grid-row-wrapper').first();
-                                    var $newRow = $originalRow.clone();
-							        $newRow.css("display", "contents");
+							    //    var $originalRow = $('.grid-row-wrapper').first();
+                                //    var $newRow = $originalRow.clone();
+							    //    $newRow.css("display", "contents");
 								   
-								    $newRow.find('#policyName1 span').text("{{ SavedPol.name }}");
-									$newRow.find('#policyName2 span').text("{{ SavedPol.name }}");
+								//    $newRow.find('#policyName1 span').text("{{ SavedPol.name }}");
+								//	$newRow.find('#policyName2 span').text("{{ SavedPol.name }}");
 									
 									// $newRow.find('#ignorePolicyType').html("<i class='fa fa-times' style='font-size:16px'></i>");
 									
-									$newRow.appendTo('.container3'); 
+								//	$newRow.appendTo('.container3'); 
+								    	
+
+								   
+                                //{% endfor %}
+								
+								var $originalRow = $('.grid-row-wrapper-2').first();
+                                var $newRow = $originalRow.clone();
+							    $newRow.css("display", "contents");
+								
+								dropdown1=$newRow.find('#Policy1_Dropdown');
+								dropdown2=$newRow.find('#Policy2_Dropdown');
+								
+								{% for SavedPol in SavedPols %}			       
+							  
+								    
+									dropdown1.append($('<option>', {
+                                        value: "{{ SavedPol.id }}",
+                                        text: "{{ SavedPol.name }}"
+                                    }));
+																		
+									dropdown2.append($('<option>', {
+                                        value: "{{ SavedPol.id }}",
+                                        text: "{{ SavedPol.name }}"
+                                    }));
 								    	
 
 								   
                                 {% endfor %}
+								
+								$newRow.appendTo('.container3'); 
+
 
                      
 							       								   
-								$('.grid-item').off('click').click(function() {
+								//$('.grid-item').off('click').click(function() {
                                     
-								    console.log("Clicked on grid item index column is " + $(this).index() + " / " + $(this).attr('id'));
+								//    console.log("Clicked on grid item index column is " + $(this).index() + " / " + $(this).attr('id'));
 									
 									// Mark this item as 'selected' in this column
 									
-									var thisIndex = $(this).index();
-									var thisId = $(this).attr('id');
+								//	var thisIndex = $(this).index();
+								//	var thisId = $(this).attr('id');
 									
 									//$('.grid-row-wrapper').each(function(i, row) {
                                     //   $(row:nth-child(i)).remove('selected');
@@ -685,32 +953,82 @@ ul li a:hover {
 									
 									// Remove 'selected' class from all items in the same column as the clicked item
 									//
-									$('.grid-row-wrapper').each(function(i, row) {
+								//	$('.grid-row-wrapper').each(function(i, row) {
 									   //console.log("The grid-row-wrapper counter is " + i);
-									   $(row).children().each(function(j, child){
+								//	   $(row).children().each(function(j, child){
 									       //console.log("<< - The grid-row-wrapper child counter is " + j)
 										   //console.log("The id is " + $(child).attr('id'))
-										   if ( $(child).attr('id') == thisId ){
-										       $(child).removeClass('selected');										
-										   }
+								//		   if ( $(child).attr('id') == thisId ){
+								//		       $(child).removeClass('selected');										
+								//		   }
 										   //console.log("Removed selected class")
-									   })
+								//	   })
                                        
-                                    })
+                                //    })
 									
 									
-									$(this).addClass("selected");
-                                    if  ((thisId) == "policyName1") {
-                                        									
-								        $('#ProviderPolicy').val("Provider Policy Name");
+								//	$(this).addClass("selected");
+                                //    if  ((thisId) == "policyName1") {
+                                //        									
+								//        $('#ProviderPolicy').val("Provider Policy Name");
+								//	}
+								//	else{
+								//	    $('#RequesterPolicy').val("Requester Policy Name");
+								//	}
+									
+                                //}); 
+								
+								
+								
+								$('.grid-dropdowns').off('click').change(function() {
+                                    
+								    console.log("Changed grid dropdown " + $(this).index() + " / " + $(this).attr('id'));
+									
+									//if 
+									
+									// Mark this item as 'selected' in this column
+									
+									var thisIndex = $(this).index();
+									var thisId = $(this).attr('id');
+									
+									if  ((thisId) == "Policy1_Dropdown") { 
+									    
+									    console.log("Policy Name 1 value is set to <" + $('.grid-row-wrapper-2:gt(0) #Policy1_Dropdown').val() + ">");
+										console.log("Policy Name 1 text is set to <" + $('.grid-row-wrapper-2:gt(0) #Policy1_Dropdown :selected').text() + ">");
+										
+                                        if ( $('.grid-row-wrapper-2:gt(0) #Policy1_Dropdown').val() != "IGNORE") {
+                                            console.log("Setting the Provider Policy"); 										
+								            $('#ProviderPolicy').val($('.grid-row-wrapper-2:gt(0) #Policy1_Dropdown').val());
+										}
+										else{
+										    $('#ProviderPolicy').val('')
+										}
 									}
 									else{
-									    $('#RequesterPolicy').val("Requester Policy Name");
+									    console.log("Policy Name 2 value is set to <" + $('.grid-row-wrapper-2:gt(0) #Policy2_Dropdown').val() + ">");
+										console.log("Policy Name 2 text is set to <" + $('.grid-row-wrapper-2:gt(0) #Policy2_Dropdown :selected').text() + ">");
+										
+										if ( $('.grid-row-wrapper-2:gt(0) #Policy2_Dropdown').val() != "IGNORE") {
+										    console.log("Setting the Requester Policy"); 
+									        $('#RequesterPolicy').val($('.grid-row-wrapper-2:gt(0) #Policy2_Dropdown').val());
+										}
+										else{
+										    $('#RequesterPolicy').val('')
+										}
 									}
+									
+									//$('.grid-row-wrapper').each(function(i, row) {
+                                    //   $(row:nth-child(i)).remove('selected');
+                                    //})
+									
+									
 									
                                 }); 
 								
-						                                  						   
+						        
+
+
+                                							
 						        							
 						    </script>
                             
@@ -756,6 +1074,24 @@ ul li a:hover {
 										console.log("The Requester Policy is " + $('#RequesterPolicy').val());
 										console.log("The Provider Policy is " + $('#ProviderPolicy').val());
 										
+										//Policy1=fnGetPolicyODRL($('#RequesterPolicy').val());
+										Policy1=fnGetPolicyODRL("DEMOTEST1");
+										console.log("The requester policy content is " + JSON.stringify(Policy1));
+										
+									    //Policy2=fnGetPolicyODRL($('#ProviderPolicy').val());
+										Policy2=fnGetPolicyODRL("DEMOTEST2");
+										console.log("The requester policy content is " + JSON.stringify(Policy2))
+										
+										P1Role="requester";
+										P2Role="provider";
+										
+									    ComparisonResults=fnMakeComparison(Policy1,P1Role, Policy2, P2Role);
+										
+										getPolicyPair($('#RequesterPolicy').val(), 
+										                $('#ProviderPolicy').val())
+										
+										
+										
 										//var targetURL = "DUMMY" + selectedValues + "&mode=" + mode;	
 										//window.open(targetURL,"_blank", "popup")
                                    }); 
@@ -766,16 +1102,1127 @@ ul li a:hover {
 					        <!-- END Edit Menu -->
                         </div>
 						
+												
+						<p>
+						The results are
+						<p>
+
+                        <textarea id="comp_results" name="comp_results" rows="4" cols="100">
+                        Comparison results will appear here
+                        </textarea>
+						
 						
 						</div>
+						
+						
+						
+						<!-- START Modal Window for file upload prompting -->
+                        <div id="fileuploadModal" class="modal" style="max-height: 30%">
+                            <div class="modal-content">
+                                <span class="close-button" id="closefileuploadModalButton">&times;</span>
+                                <label for="policyFileInput" class="dropdown-label">
+                                    Click to upload Policy File
+                                    <input type="file" id="policyFileInput" hidden>
+                                </label>
+                            </div>
+                        </div>
+						
+						<script type='text/javascript'>	
+						    $('#DownloadPolicy_1').off('click').click(function() {
+								    FileUploadModal=document.getElementById('fileuploadModal');
+	                                FileUploadModal.style.display = 'block';
+                                });	
+								
+								
+							$('#policyFileInput').change(function (event) {
+				                console.log("We have received the change event for fileInput");
+                                
+                                var input = event.target;
+                                var reader = new FileReader();
+                                reader.onload = function(){
+                                    try {
+
+                                       var jsonData = JSON.parse(reader.result);
+                                       // Check if jsonData is a string and parse again if necessary
+                                       if (typeof jsonData === 'string') {
+                                           jsonData = JSON.parse(jsonData);
+                                       }
+
+                                       // Check if jsonData is an object (dictionary)
+                                       if (typeof jsonData === 'object' && !Array.isArray(jsonData)) {
+									       console.log("Data OK");
+ 
+                                       } else {
+                                           alert('JSON data is not an array.');
+                                       }
+                                    } catch (error) {
+                                        alert('Invalid JSON format.');
+                                    }
+                                };
+                                reader.readAsText(input.files[0]);
+					
+					
+					            FileUploadModal=document.getElementById('fileuploadModal');
+	                            FileUploadModal.style.display = 'none';
+                            });
+								
+							
+						</script>
+						
+						
+						
+						
+				        <!-- END Modal Window for file upload prompting -->
 	
 <script type='text/javascript'>
-	 
-	 $(document).ready(function () {
-	 
-		$(document).find('#ignorePolicyType').html("<i class='fa fa-times' style='font-size:16px'></i>");
+
+    // Get ODRL for policy name
+    function fnGetPolicyODRL(policyName) {
+	      
+	    
+        //fetch(`/policy-editor/organization/toggle_policy_api_visibility/${id}/`, { method: 'POST', headers: {
+        //                                'X-CSRFToken': '{{ csrf_token }}', // Include CSRF token
+        //                            } }) 
+        //    .then(response => {
+        //        if (response.ok) {
+        //            console.log(response.statusText);
+		//			alert(response.statusText);
+		//			window.close();
+        //        } else { 
+        //            console.error("Error toggling policy API visibility: ", response.statusText);
+        //        }
+        //    })
+        //    .catch(error => {
+        //        console.error("Error toggling policy API visibility: ", error);
+        //    });
+		
+		status="WAITING"
+		
+		policy_odrl = {}
+		
+		if (policyName == "DEMOTEST1"){
+		
+		  policy_odrl='{' +
+                       '"@context": {' +
+                           '"dash": "http://datashapes.org/dash#",' +
+                           '"rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",' +
+                           '"rdfs": "http://www.w3.org/2000/01/rdf-schema#",' +
+                           '"schema": "http://schema.org/",' +
+                           '"sh": "http://www.w3.org/ns/shacl#",' +
+                           '"xsd": "http://www.w3.org/2001/XMLSchema#",' +
+                           '"ex": "http://example.ex/",' +
+                           '"odrl": "http://www.w3.org/ns/odrl/2/"' +
+                        '},' +
+                        '"@id": "https://eu-upcast.github.io/shapes/mint#2policy17446325067569091",' +
+                        '"@type": "odrl:Policy",' +
+                        '"odrl:permission": [' +
+                            '{' +
+                                '"odrl:target": {' +
+                                    '"@type": "odrl:AssetCollection",' +
+                                    '"rdf:value": {' +
+                                        '"@id": "http://example.org/datasets/covid19Stats"' +
+                                    '}' +
+                                '},' +
+                                '"odrl:action": {' +
+                                    '"rdf:value": {' +
+                                        '"@id": "odrl:create"' +
+                                    '}' +
+                                '},' +
+                                '"odrl:assignee": {' +
+                                    '"@type": "odrl:PartyCollection",' +
+                                    '"rdf:value": {' +
+                                        '"@id": "https://w3id.org/dpv/owl#AcademicScientificOrganisation"' +
+                                    '}' +
+                                '}' +
+                            '},' +
+                            '{' +
+                                '"odrl:target": {' +
+                                    '"@type": "odrl:AssetCollection",' +
+                                        '"rdf:value": {' +
+                                        '"@id": "http://example.org/datasets/covid19Stats"' +
+                                    '}' +
+                                '},' +
+                                '"odrl:action": {' +
+                                    '"rdf:value": {' +
+                                        '"@id": "odrl:modify"' +
+                                    '}' +
+                                '},' +
+                                '"odrl:assignee": {' +
+                                    '"@type": "odrl:PartyCollection",' +
+                                    '"rdf:value": {' +
+                                        '"@id": "https://w3id.org/dpv/owl#AcademicScientificOrganisation"' +
+                                    '}' +
+                                '}' +
+                            '}' +
+                        ']' +
+                    '}'
+		}			
+		else if (policyName == "DEMOTEST2") {
+		  policy_odrl='{' +                       
+		                '"@context": {' +
+                            '"dash": "http://datashapes.org/dash#",' +
+                            '"rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",' +
+                            '"rdfs": "http://www.w3.org/2000/01/rdf-schema#",' +
+                            '"schema": "http://schema.org/",' +
+                            '"sh": "http://www.w3.org/ns/shacl#",' +
+                            '"xsd": "http://www.w3.org/2001/XMLSchema#",' +
+                            '"ex": "http://example.ex/",' +
+                            '"odrl": "http://www.w3.org/ns/odrl/2/"' +
+                        '},' +
+                        '"@id": "https://eu-upcast.github.io/shapes/mint#4policy17446325067569091",' +
+                        '"@type": "odrl:Policy",' +
+                        '"odrl:permission": {' +
+                            '"odrl:target": {' +
+                                '"@type": "odrl:AssetCollection",' +
+                                '"rdf:value": {' +
+                                    '"@id": "http://example.org/datasets/covid19Stats"' +
+                                '}' +
+                            '},' +
+                            '"odrl:action": {' +
+                                '"rdf:value": {' +
+                                    '"@id": "odrl:modify"' +
+                                '}' +
+                            '},' +
+                            '"odrl:assignee": {' +
+                                '"@type": "odrl:PartyCollection",' +
+                                '"rdf:value": {' +
+                                    '"@id": "https://w3id.org/dpv/owl#AcademicScientificOrganisation"' +
+                                '}' +
+                            '}' +
+                        '}' +
+                    '}'
+	    }
+		
+		return policy_odrl;
+    }
+	
+    // Get ODRL for policy name
+    function fnMakeComparison(Policy1,P1Role, Policy2, P2Role) {
+	
+	    request="{" +
+		        "\"p_one\":" + Policy1 + "," +
+				"\"p_two\":" + Policy2 + "," +
+				"\"p_one_role\":" + "\"" + P1Role + "\"" + ","  +
+				"\"p_two_role\":" + "\"" + P2Role + "\"" +
+				"}"
+				
+	    console.log("THE REQUEST IS <<" + request)
+				
+	    $.ajax({
+                type: 'POST',			
+                url: '/policy-editor/callComparisonAPI',  // Comparison Endpoint 
+				// https://stackoverflow.com/questions/20035101/why-does-my-javascript-code-receive-a-no-access-control-allow-origin-header-i
+				headers: {
+                   'X-CSRFToken': '{{ csrf_token }}'  // Include CSRF token
+                },
+				// https://stackoverflow.com/questions/47523265/jquery-ajax-no-access-control-allow-origin-header-is-present-on-the-requested
+				//crossDomain: true,
+                //dataType: 'json',
+				//jsonpCallback: 'processJSONPResponse', // add this property
+				contentType: 'application/json',
+				data: JSON.stringify(request),
+				//data: request,
+                success: function (response) {
+				    console.log("the response is " + response);
+                    document.getElementById('comp_results').value=response;			
+		
+                                   
+                },
+                error: function (error) {
+                    console.error('Error performing comparison', error);
+                }
+            });
+		
+	    
+	}
+	
+	
+	function getPolicyPair(PolicyID_1, PolicyID_2) {
+	  // https://forum.freecodecamp.org/t/how-to-log-values-from-promise-all/577095/2
+	  const fetchData = async (PolicyID_1, PolicyID_2) => {
+	    console.log("Into fetchData for " + PolicyID_1 + " and " + + PolicyID_2);
+	    //getPolicyData(PolicyID_1).then(getPolicyData(PolicyID_2));
+		data = await Promise.all([
+		    // https://stackoverflow.com/questions/59037553/fetch-multiple-urls-at-the-same-time
+            fetch("organization/get_rule/" + PolicyID_1 + "/" , { method: "GET",
+					     contentType: 'application/json',
+					     signal: AbortSignal.timeout(5000),
+					     headers: {
+                                   'X-CSRFToken': '{{ csrf_token }}' // CSRF token for secure requests
+                                  }
+					    }).then(resp => resp.json()),
+            fetch("organization/get_rule/" + PolicyID_2 + "/" , { method: "GET",
+					     contentType: 'application/json',
+					     signal: AbortSignal.timeout(5000),
+					     headers: {
+                                   'X-CSRFToken': '{{ csrf_token }}' // CSRF token for secure requests
+                                  }
+					    }).then( resp => resp.json()),
+        ]).then(console.log())
+								
+		//console.log('fetchData response:', data)
+        return data
+      }
+	  
+	  const compareData = async (Policy1, Policy2, P1Role, P2Role) => {
+	    console.log("Into compareData for " + PolicyID_1 + " and " + + PolicyID_2);
+		console.log("Policy 1 is  " + Policy1);
+		
+		request="{" +
+		        "\"p_one\":" + Policy1 + "," +
+				"\"p_two\":" + Policy2 + "," +
+				"\"p_one_role\":" + "\"" + P1Role + "\"" + ","  +
+				"\"p_two_role\":" + "\"" + P2Role + "\"" +
+				"}"
+				
+	    //getPolicyData(PolicyID_1).then(getPolicyData(PolicyID_2));
+		data = await Promise.all([
+		    // https://stackoverflow.com/questions/59037553/fetch-multiple-urls-at-the-same-time
+            fetch("/policy-editor/callComparisonAPI" , { method: "POST",
+					     contentType: 'application/json',
+					     signal: AbortSignal.timeout(5000),
+						 body: JSON.stringify(request),
+					     headers: {
+                                   'X-CSRFToken': '{{ csrf_token }}' // CSRF token for secure requests
+                                  }
+					    }).then(resp => resp.json()),
+            
+        ]).then(console.log())
+								
+		//console.log('fetchData response:', data)
+        return data
+      }
+	  
+	  
+	  /* START doTheThing */
+	  const doTheThing = async () => {
+          console.log("<<<<< Fetching data ");
+		  
+		  const response = await fetchData(PolicyID_1, PolicyID_2)
+		  
+		  console.log("<<<<< Data fetched ");
+		  
+		  //response[0].content.odrl.permission.foreach(myFunction);
+		  
+		  //function myFunction(value) {
+		  //    console.log('Permssion in [0] ' + JSON.stringify(value))
+		  //}
+		  
+          /* console.log('doTheThing response 1 ODRL' + JSON.stringify(response[0].content.odrl) + 
+		  '\n \n \n doTheThing response 2 FULL' + JSON.stringify(response[1]))
+		  
+		  console.log('doTheThing response data version ' + JSON.stringify(response[0].content.data)) */
+		  
+		  
+		  console.log("<<<<<< A DISPLAY OF THE ODRL RETURNED >>>>>>>");
+		  console.log("+++++++++++++++++ FIRST ODRL FOR " + PolicyID_1 + " +++++++++++++++++");
+		  console.log(JSON.stringify(response[0].content.odrl));
+		  console.log("+++++++++++++++++ END ODRL FOR " + PolicyID_1 + " +++++++++++++++++");
+		  console.log("+++++++++++++++++ SECOND ODRL FOR " + PolicyID_2 + " +++++++++++++++++");
+		  console.log(JSON.stringify(response[1].content.odrl));
+		  console.log("+++++++++++++++++ END ODRL FOR " + PolicyID_2 + " +++++++++++++++++");
+		  
+		  P1Role="requester";
+		  P2Role="provider";
+		  
+		  console.log("<<<<< Comparinging data ");
+		   
+		  const response_2 = await compareData(JSON.stringify(response[0].content.odrl), JSON.stringify(response[1].content.odrl, P1Role, P2Role));
+		  
+		  console.log("<<<<< Data compared ");
+		  
+		  console.log("<<<<<< A DISPLAY OF THE DATA RETURNED >>>>>>>");
+		  console.log(JSON.stringify(response_2[0]));
+		  console.log("+++++++++++++++++ END DISPLAY OF THE DATA FOR COMAPARISON " + " +++++++++++++++++");
+		  
+		  
+		  jsonObj=JSON.parse(JSON.stringify(response[0]))
+		  
+		  CONTEXT_HEADER='"@context": {' +
+                            '"dash": "http://datashapes.org/dash#",' +
+                            '"rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",' +
+                            '"rdfs": "http://www.w3.org/2000/01/rdf-schema#",' +
+                            '"schema": "http://schema.org/",' +
+                            '"sh": "http://www.w3.org/ns/shacl#",' +
+                            '"xsd": "http://www.w3.org/2001/XMLSchema#",' +
+                            '"ex": "http://example.ex/",' +
+                            '"odrl": "http://www.w3.org/ns/odrl/2/"' +
+                        '},'
+						
+		  JSONkeys=JSON.parse(JSON.stringify(response[0].content.odrl));
+		  
+		  PERMISSIONS_PRESENT_1=false;
+		  PROHIBITIONS_PRESENT_1=false;
+		  OBLIGATIIONS_PRESENT_1=false;
+		  
+		  for (const x in JSONkeys) {
+               if ( x == "permission") {
+		           PERMISSIONS_PRESENT_1=true;
+		  	   }
+			   
+			   if ( x == "prohibition") {
+		           PROHIBITIONS_PRESENT_1=true;
+		  	   }
+			   
+			   if ( x == "obligation") {
+		           OBLIGATIONS_PRESENT_1=true;
+		  	   }
+          }
+		  
+		  // Store the full paths of refinement types for future use.
+		  ACTOR_REFINEMENTS_1={}
+		  JSON.parse(JSON.stringify(response[0].content.data)).forEach((data_item) => {
+		      JSON.parse(JSON.stringify(data_item.actorrefinements)).forEach((item) => {
+		          key_name = item["type"].split("#")[1];
+			      console.log("The key name is " + key_name);
+		          ACTOR_REFINEMENTS_1[key_name]=item["type"];
+			      console.log("The key value is " + item["type"]);
+		      });
+		  });
+		  
+		  ACTION_REFINEMENTS_1={}
+		  JSON.parse(JSON.stringify(response[0].content.data)).forEach((data_item) => {
+		      JSON.parse(JSON.stringify(data_item.actionrefinements)).forEach((item) => {
+		          key_name = item["type"].split("#")[1];
+			      console.log("The key name is " + key_name);
+		          ACTION_REFINEMENTS_1[key_name]=item["type"];
+			      console.log("The key value is " + item["type"]);
+		      });
+		  });
+		  
+		  PURPOSE_REFINEMENTS_1={}
+		  JSON.parse(JSON.stringify(response[0].content.data)).forEach((data_item) => {
+		      JSON.parse(JSON.stringify(data_item.purposerefinements)).forEach((item) => {
+		          key_name = item["type"].split("#")[1];
+			      console.log("The key name is " + key_name);
+		          PURPOSE_REFINEMENTS_1[key_name]=item["type"];
+			      console.log("The key value is " + item["type"]);
+		      });
+		  });
+		  
+		  TARGET_REFINEMENTS_1={}
+		  JSON.parse(JSON.stringify(response[0].content.data)).forEach((data_item) => {
+		      JSON.parse(JSON.stringify(data_item.targetrefinements)).forEach((item) => {
+		          key_name = item["type"].split("#")[1];
+			      console.log("The key name is " + key_name);
+		          TARGET_REFINEMENTS_1[key_name]=item["type"];
+			      console.log("The key value is " + item["type"]);
+		      });
+		  });
+		   
+		  JSONkeys=JSON.parse(JSON.stringify(response[1].content.odrl));
+		  
+		  PERMISSIONS_PRESENT_2=false;
+		  PROHIBITIONS_PRESENT_2=false;
+		  OBLIGATIIONS_PRESENT_2=false;
+		  
+		  for (const x in JSONkeys) {
+               if ( x == "permission") {
+		           PERMISSIONS_PRESENT_2=true;
+		  	   }
+			   
+			   if ( x == "prohibition") {
+		           PROHIBITIONS_PRESENT_2=true;
+		  	   }
+			   
+			   if ( x == "obligation") {
+		           OBLIGATIONS_PRESENT_2=true;
+		  	   }
+           }
+		   
+		  function renameKey ( obj, oldKey, newKey ) {
+              obj[newKey] = obj[oldKey];
+              delete obj[oldKey];
+          }
+		  
+		  const arr = JSON.parse(JSON.stringify(response[0].content.odrl));
+		  
 		 
-	 });
+		  
+		  JSONkeys=JSON.parse(JSON.stringify(arr));
+		  
+		  const level_char=" "
+		  const level_offset=4;
+		  level=0
+			  
+          // Step through all the highest level keys	
+          console.log("START POLICY");
+		  console.log("{");
+		  level++;
+		  
+		  for (const x in JSONkeys) {
+		      //console.log("Parsing rule type " + x);
+		      if ( (x == "permission") || (x == "prohibition") || (x == "obligation")  ) {
+			      console.log(level_char.repeat(level) + "odrl:" + x + ":");
+				  renameKey(arr, x, "odrl:" + x);
+				  
+				  // These are supplied as an array of rule items so step through the array
+				  rule_count=0
+				  
+				  level++;
+				  console.log(level_char.repeat(level) + "[");
+				  level++;
+				  JSON.parse(JSON.stringify(arr["odrl:" + x])).forEach((rule) => {
+				      //console.log("Parsing rule number " + rule_count);
+				  
+				      // We can assume that within these rules we will always find keys
+				      // action, assignee, target, constraint
+					  
+					  level++;
+					  console.log(level_char.repeat(level) + "{");
+					  level++;
+				      JSONRulekeys=JSON.parse(JSON.stringify(rule));
+				      for (const y in JSONRulekeys) {
+					      //console.log("Parsing rule key " + y);
+				          renameKey(arr["odrl:" + x][rule_count], y, "odrl:" + y);
+						  
+						  
+						  
+						  
+						  if ( y != "constraint"){
+						      
+							  // action, assignee and target have the same high level structures
+						      // source, refinement, (optional) @type
+						      //    or a direct value
+						  
+						      if (rule[y].hasOwnProperty("source")) {
+                                  console.log(level_char.repeat(level) +"odrl:" + y);
+								  level++
+						          console.log(level_char.repeat(level) + "{");	
+                                  level++;								  
+								  
+							      JSONRuleKEYkeys=JSON.parse(JSON.stringify(rule[y]));
+							  
+						          for (const z in JSONRuleKEYkeys) {
+						              //console.log("Parsing rule key key " + z);
+						              if ( z != "@type" ) {
+							               if ( z != "source" ) {
+										       renameKey(arr["odrl:" + x][rule_count]["odrl:" + y], z, "odrl:" + z);
+											   if (z != "refinement") {
+											       console.log(level_char.repeat(level) + "odrl:" + z + ":" + arr["odrl:" + x][rule_count]["odrl:" + y]["odrl:" + z]);
+											   }
+											   else {
+											       console.log(level_char.repeat(level) + "odrl:" + z + ":");
+											   }
+											  
+										   }
+										   else {
+										       renameKey(arr["odrl:" + x][rule_count]["odrl:" + y], z, "rdf:value");
+											   console.log(level_char.repeat(level) + "rdf:value :" + arr["odrl:" + x][rule_count]["odrl:" + y]["rdf:value"]);
+										   }
+										       
+									   
+									       // if this is a refinement we will find an array of refinements
+									       // So walk this array
+									       if ( z == "refinement"){
+										      
+											  refinement_count=0
+											  
+											  level++;
+											  console.log(level_char.repeat(level) + "[" );
+											  level++;
+											  
+									          JSON.parse(JSON.stringify(arr["odrl:" + x][rule_count]["odrl:" + y]["odrl:" + z])).forEach((refinement) => {
+											      // For each item in the array get the keys out (we expect left op, operator, right op
+										          JSONRuleRefkeys=JSON.parse(JSON.stringify(arr["odrl:" + x][rule_count]["odrl:" + y]["odrl:" + z][refinement_count]));
+												  
+												  level++;
+												  console.log(level_char.repeat(level) + "{" );
+												  level++;
+												  
+												  for (const z1 in JSONRuleRefkeys) {
+												      //console.log("The refinement key is " + z1)
+												      renameKey(arr["odrl:" + x][rule_count]["odrl:" + y]["odrl:" + z][refinement_count], z1, "odrl:" + z1);
+													  
+													  // Recover the qualifying path for the left operands
+													  if ( z1 == "leftOperand") {
+													      //console.log("The left op value is  " + arr["odrl:" + x][rule_count]["odrl:" + y]["odrl:" + z][refinement_count]["odrl:" + z1])
+														  
+												          if (y == "action") {
+														      leftopval=ACTION_REFINEMENTS_1[arr["odrl:" + x][rule_count]["odrl:" + y]["odrl:" + z][refinement_count]["odrl:" + z1]];
+														  }
+														  
+														  if (y == "assignee") {
+														      leftopval=ACTOR_REFINEMENTS_1[arr["odrl:" + x][rule_count]["odrl:" + y]["odrl:" + z][refinement_count]["odrl:" + z1]];
+														  }
+														  
+														  if (y == "target") {
+														      if (arr["odrl:" + x][rule_count]["odrl:" + y]["odrl:" + z][refinement_count]["odrl:" + z1] != "QUERY") {
+															      leftopval=TARGET_REFINEMENTS_1[arr["odrl:" + x][rule_count]["odrl:" + y]["odrl:" + z][refinement_count]["odrl:" + z1]];
+															  }
+															  else {
+															      leftopval=arr["odrl:" + x][rule_count]["odrl:" + y]["odrl:" + z][refinement_count]["odrl:" + z1];
+															  }
+														  }
+														  
+												          //onsole.log("Left op val is " + leftopval);
+														  arr["odrl:" + x][rule_count]["odrl:" + y]["odrl:" + z][refinement_count]["odrl:" + z1] = leftopval
+								                          
+								                      }
+													  
+													  console.log(level_char.repeat(level) + "odrl:" + z1 + ":" + arr["odrl:" + x][rule_count]["odrl:" + y]["odrl:" + z][refinement_count]["odrl:" + z1]);
+											  
+												  } // END -- for (const z1 in JSONRuleRefkeys)
+												  
+												  level--;
+												  console.log(level_char.repeat(level) + "}" );
+												  level--;
+												  
+												  refinement_count=refinement_count+1;
+										      });;  // END -- JSON.parse(JSON.stringify(arr["odrl:" + x][rule_count]["odrl:" + y]["odrl:" + z])).forEach((refinement) i.e. parse array of refinments
+											  
+											  level--;
+											  console.log(level_char.repeat(level) + "]" );
+											  level--;
+									       }
+							          }
+									  else {
+								          // Qualify @type values
+								          arr["odrl:" + x][rule_count]["odrl:" + y]["@type"] = "odrl:" + arr["odrl:" + x][rule_count]["odrl:" + y]["@type"]
+										  console.log(level_char.repeat(level) + "@type : " + arr["odrl:" + x][rule_count]["odrl:" + y]["@type"]);
+								      }
+						          } // END -- for (const z in JSONRuleKEYkeys) i.e. walking high level keys within a rule
+								  
+								  level--;
+								  console.log(level_char.repeat(level) + "}");
+                                  level--;								  
+								  
+						      } // END -- if (rule[y].hasOwnProperty("source")) i.e. this is not a straight literal
+							  else{
+							      console.log(level_char.repeat(level) + "odrl:" + y + ":" + arr["odrl:" + x][rule_count]["odrl:" + y]);
+							  }
+							  
+						  }  // END -- if ( y != "constraint")
+						  else {
+						      // A constraint is always presented as an array.
+							  // An arrey element is either an 'and' item which is itself an array of refinements
+							  //   or it is directly a refinement.
+							  
+							  // First walk the array of constraints
+							  
+							  console.log(level_char.repeat(level) + "odrl:" + y);
+							  
+							  level++;
+						      console.log(level_char.repeat(level) + "[");	
+							  level++;
+							  
+							  constraint_count=0;
+							  JSON.parse(JSON.stringify(arr["odrl:" + x][rule_count]["odrl:" + y])).forEach((constraint) => {
+							     // Does this have the "and" key in the item?
+								 if (constraint.hasOwnProperty("and")) {
+
+                                     console.log(level_char.repeat(level) + "and:");								 
+								     
+									 // For each item in the array get the keys out (we expect left op, operator, right op
+									 and_constraint_count=0;
+									 
+									 level++;
+									 console.log(level_char.repeat(level) + "[");
+                                     level++;									 
+									 
+									 JSON.parse(JSON.stringify(arr["odrl:" + x][rule_count]["odrl:" + y][constraint_count]["and"])).forEach((and_constraint) => {									     
+										 JSONRuleConstraintkeys=JSON.parse(JSON.stringify(arr["odrl:" + x][rule_count]["odrl:" + y][constraint_count]["and"][and_constraint_count]));
+										 
+										 level++;
+										 console.log(level_char.repeat(level) + "{");
+										 level++;
+										 
+									     for (const z in JSONRuleConstraintkeys) {
+										     //console.log("The refinement key is " + z)
+										     renameKey(arr["odrl:" + x][rule_count]["odrl:" + y][constraint_count]["and"][and_constraint_count], z, "odrl:" + z);
+											 
+											 
+											 if ( z == "leftOperand") {
+											    //console.log("The left op value is  " + arr["odrl:" + x][rule_count]["odrl:" + y][constraint_count]["and"][and_constraint_count]["odrl:" + z])
+														  
+												// Check if there is a purpose constraint here (for this arm of the if it should be in and_constraint_count = 0
+										        // if so convert to odrl:purpose
+										        if (arr["odrl:" + x][rule_count]["odrl:" + y][constraint_count]["and"][and_constraint_count]["odrl:" + z] == "purpose") {
+												    leftopval="odrl:purpose";
+												}
+												else {
+												    // Otherwise add path qualification from data back in
+												    leftopval=PURPOSE_REFINEMENTS_1[arr["odrl:" + x][rule_count]["odrl:" + y][constraint_count]["and"][and_constraint_count]["odrl:" + z]];
+												}
+														  
+												//console.log("Left op val is " + leftopval);
+									            arr["odrl:" + x][rule_count]["odrl:" + y][constraint_count]["and"][and_constraint_count]["odrl:" + z] = leftopval
+								                
+                                                												
+								            }
+											
+											console.log(level_char.repeat(level) + "odrl:" + z + ":" + arr["odrl:" + x][rule_count]["odrl:" + y][constraint_count]["and"][and_constraint_count]["odrl:" + z]);
+											
+									     } // END -- for (const z in JSONRuleConstraintkeys)
+										 level--;
+										 console.log(level_char.repeat(level) + "}");
+										 level--;
+										 
+										 and_constraint_count=and_constraint_count + 1;
+									 }); // END -- JSON.parse(JSON.stringify(arr["odrl:" + x][rule_count]["odrl:" + y][constraint_count]["and"])).forEach
+									 
+									 level--;
+									 console.log(level_char.repeat(level) + "]");
+                                     level--;									 
+									 
+								 }
+								 else {
+								     // For each item in the array get the keys out (we expect left op, operator, right op
+								     JSONRuleConstraintkeys=JSON.parse(JSON.stringify(arr["odrl:" + x][rule_count]["odrl:" + y][constraint_count]));
+									 
+									 level++;
+									 console.log(level_char.repeat(level) + "{");
+									 level++;
+									 
+									 for (const z in JSONRuleConstraintkeys) {
+										 //console.log("The refinement key is " + z)
+										 renameKey(arr["odrl:" + x][rule_count]["odrl:" + y][constraint_count], z, "odrl:" + z);
+										 
+										 // Check if there is a purpose constraint here (for this arm of the if it should be in constraint count = 0
+										 // if so convert to odrl:purpose
+										 if (arr["odrl:" + x][rule_count]["odrl:" + y][constraint_count]["odrl:" + z] == "purpose") {
+											leftopval="odrl:purpose";
+										 }
+										 else {
+										    // for straight constraints the path qualification is already there
+										    leftopval=arr["odrl:" + x][rule_count]["odrl:" + y][constraint_count]["odrl:" + z];
+										 }
+										 arr["odrl:" + x][rule_count]["odrl:" + y][constraint_count]["odrl:" + z] = leftopval
+										 
+										 console.log(level_char.repeat(level) + "odrl:" + z + ":" + arr["odrl:" + x][rule_count]["odrl:" + y][constraint_count]["odrl:" + z]);
+										 
+									 } // END -- for (const z in JSONRuleConstraintkeys)
+									 
+									  level--;
+									  console.log(level_char.repeat(level) + "}");
+									  level--;
+								 }
+								 
+								 constraint_count=constraint_count + 1;
+							  }); // END -- JSON.parse(JSON.stringify(arr["odrl:" + x][rule_count]["odrl:" + y])).forEach
+							  
+							  level--;
+							  console.log(level_char.repeat(level) + "]");
+                              level--;							  
+							  
+						  } // END -- else (i.e. = comnstraint)
+						  
+						  
+				      }
+
+                      				  
+					  
+					  rule_count=rule_count+1;
+					  level--;
+					  console.log(level_char.repeat(level) + "}");
+					  level--;
+					  
+				  }); // END -- JSON.parse(JSON.stringify(arr["odrl:" + x])).forEach i.e. walking the array of all rules.
+				  level--;
+				  console.log(level_char.repeat(level) + "]");
+				  level--;
+				  
+			  } // END -- if ( (x == "permission") || (x == "prohibition") || (x == "obligation") i.e. choosing logic block based on rule type
+		  }  // END -- for (const x in JSONkeys) (i.e. walking all the the policy keys)
+		  console.log(level_char.repeat(level) +"}");
+		  level--;
+		  console.log("END POLICY")
+			  
+		  const updatedJson = JSON.stringify( arr )
+		      
+			  //JSON.parse(JSON.stringify(response[0].content.odrl["permission"])).forEach((item) => {
+			  //    // Get the keys in this permission
+              //    JSONkeys=JSON.parse(JSON.stringify(item));
+			  //  
+				//  for (const x in JSONkeys) {
+				//      if ( x == "action") {
+				//	  }
+
+			  //});
+		  //});
+		
+
+          console.log( "NEW JSON IS : " +  updatedJson );
+		  
+		  return
+		  
+		  ID_1='"@id":' + JSON.stringify(response[0].content.odrl["uid"]);
+		  ID_2='"@id":' + JSON.stringify(response[1].content.odrl["uid"]);
+		  
+		  TYPE_1='"@type": "odrl:Policy",';
+		  TYPE_2='"@type": "odrl:Policy",';
+		  
+		  PERMISSION_SET_1 = '"odrl:permission":[{';
+		  
+		  //PERMISSIONS_PRESENT_1=false;
+		  
+		  //console.log("PERMISSION data " + JSON.stringify(response[0].content.odrl["permission"]));
+		  
+		  if (PERMISSIONS_PRESENT_1) {
+		  
+		      // Step through all the permissions
+		      JSON.parse(JSON.stringify(response[0].content.odrl["permission"])).forEach((item) => {
+			      
+				  // Get the keys in this permission
+                  JSONkeys=JSON.parse(JSON.stringify(item));
+				  
+				  for (const x in JSONkeys) {
+                      if ( x == "action") {
+		                  //PERMISSION_SET_1=PERMISSION_SET_1+'"odrl:action"'+JSON.stringify(item[x]);
+						  
+						  
+						  // Start the action block
+						  PERMISSION_SET_1=PERMISSION_SET_1+'"odrl:action":{'
+						  
+						  try {
+                              JSONActionkeys=JSON.parse(JSON.stringify(item[x]));
+							  for (const y in JSONActionkeys) {
+							      //console.log("In action key is " + y);
+								  if ( y == "source") {
+								      PERMISSION_SET_1=PERMISSION_SET_1+'"rdf:value":' + JSON.stringify(item[x][y]);
+								  }
+								  
+								  if ( y == "refinement") {
+								      //PERMISSION_SET_1=PERMISSION_SET_1+',"odrl:refinement":' + JSON.stringify(item[x][y]);
+									  
+									  // Start the refinement array
+									  PERMISSION_SET_1=PERMISSION_SET_1+',"odrl:refinement":[';
+									  
+									  first_ref_item=true
+									  JSON.parse(JSON.stringify(item[x][y])).forEach((ref_item) => {
+									      
+										  //Start next refinement
+										  if (first_ref_item){ 
+										      PERMISSION_SET_1=PERMISSION_SET_1+'{';
+											  first_ref_item=false;
+										  }
+										  else{
+										      PERMISSION_SET_1=PERMISSION_SET_1+',{';
+										  }
+										  
+										  // Check for and act on the keys in this refinement
+									      JSONRefkeys=JSON.parse(JSON.stringify(ref_item));
+										  for (const z in JSONRefkeys) {
+										      if ( z == "leftOperand") {
+											      //console.log("We have got the left");
+												  leftopval=ACTION_REFINEMENTS_1[ref_item[z]];
+												  console.log("Left op val is " + leftopval);
+								                  PERMISSION_SET_1=PERMISSION_SET_1+'"odrl:leftOperand":' + JSON.stringify(leftopval) + ",";
+								              }
+											  if ( z == "rightOperand") {
+											      //console.log("We have got the right");
+								                  PERMISSION_SET_1=PERMISSION_SET_1+'"odrl:rightOperand":' + JSON.stringify(ref_item[z]);
+								              }
+											  if ( z == "operator") {
+											      //console.log("We have got the operator");
+								                  PERMISSION_SET_1=PERMISSION_SET_1+'"odrl:operator":' + JSON.stringify(ref_item[z]) + ",";
+								              }
+										  }
+										  
+										  //End next refinement
+										  PERMISSION_SET_1=PERMISSION_SET_1+'}';
+										  
+									  });
+									  
+									  //End the refinement array
+									  PERMISSION_SET_1=PERMISSION_SET_1+']';
+								  }
+							  }
+                              isValid = true;
+                          } catch (e) {
+                              console.log('[isValidJSON], invalid JSON text', JSON.stringify(item[x]));
+                          }
+						  
+						  // End the action block
+						  PERMISSION_SET_1=PERMISSION_SET_1+'},'
+		  	          }
+			   
+			          if ( x == "assignee") {
+						  
+						  // Start the assignee block
+						  PERMISSION_SET_1=PERMISSION_SET_1+'"odrl:assignee":{'
+						  
+						  try {
+                              JSONActionkeys=JSON.parse(JSON.stringify(item[x]));
+							  for (const y in JSONActionkeys) {
+							      //console.log("In assignee key is " + y);
+								  if ( y == "source") {
+								      PERMISSION_SET_1=PERMISSION_SET_1+'"rdf:value":' + JSON.stringify(item[x][y]);
+								  }
+								  
+								  if ( y == "@type") {
+								      PERMISSION_SET_1=PERMISSION_SET_1+'"@type":' + JSON.stringify(item[x][y]) +",";
+								  }
+								  
+								  if ( y == "refinement") {
+									  
+									  // Start the refinement array
+									  PERMISSION_SET_1=PERMISSION_SET_1+',"odrl:refinement":[';
+									  
+									  first_ref_item=true
+									  JSON.parse(JSON.stringify(item[x][y])).forEach((ref_item) => {
+									      
+										  //Start next refinement
+										  if (first_ref_item){ 
+										      PERMISSION_SET_1=PERMISSION_SET_1+'{';
+											  first_ref_item=false;
+										  }
+										  else{
+										      PERMISSION_SET_1=PERMISSION_SET_1+',{';
+										  }
+										  
+										  // Check for and act on the keys in this refinement
+									      JSONRefkeys=JSON.parse(JSON.stringify(ref_item));
+										  for (const z in JSONRefkeys) {
+										      if ( z == "leftOperand") {
+											      //console.log("We have got the left");
+												  leftopval=ACTOR_REFINEMENTS_1[ref_item[z]];
+												  console.log("Left op val is " + leftopval);
+								                  PERMISSION_SET_1=PERMISSION_SET_1+'"odrl:leftOperand":' + JSON.stringify(leftopval) + ",";
+								              }
+											  if ( z == "rightOperand") {
+											      //console.log("We have got the right");
+								                  PERMISSION_SET_1=PERMISSION_SET_1+'"odrl:rightOperand":' + JSON.stringify(ref_item[z]);
+								              }
+											  if ( z == "operator") {
+											      //console.log("We have got the operator");
+								                  PERMISSION_SET_1=PERMISSION_SET_1+'"odrl:operator":' + JSON.stringify(ref_item[z]) + ",";
+								              }
+										  }
+										  
+										  //End next refinement
+										  PERMISSION_SET_1=PERMISSION_SET_1+'}';
+										  
+									  });
+									  
+									  //End the refinement array
+									  PERMISSION_SET_1=PERMISSION_SET_1+']';
+								  }
+							  }
+                              isValid = true;
+                          } catch (e) {
+                              console.log('[isValidJSON], invalid JSON text', JSON.stringify(item[x]));
+                          }
+						  
+						  // End the assignee block
+						  PERMISSION_SET_1=PERMISSION_SET_1+'},'
+		  	          }
+			   
+			          if ( x == "target") {
+		                  // Start the target block
+						  PERMISSION_SET_1=PERMISSION_SET_1+'"odrl:target":{'
+						  
+						  try {
+                              JSONTargetkeys=JSON.parse(JSON.stringify(item[x]));
+							  for (const y in JSONTargetkeys) {
+							      //console.log("In assignee key is " + y);
+								  if ( y == "source") {
+								      PERMISSION_SET_1=PERMISSION_SET_1+'"rdf:value":' + JSON.stringify(item[x][y]);
+								  }
+								  
+								  if ( y == "@type") {
+								      PERMISSION_SET_1=PERMISSION_SET_1+'"@type":' + JSON.stringify(item[x][y]) +",";
+								  }
+								  
+								  if ( y == "refinement") {
+									  
+									  // Start the refinement array
+									  PERMISSION_SET_1=PERMISSION_SET_1+',"odrl:refinement":[';
+									  
+									  first_ref_item=true
+									  JSON.parse(JSON.stringify(item[x][y])).forEach((ref_item) => {
+									      
+										  //Start next refinement
+										  if (first_ref_item){ 
+										      PERMISSION_SET_1=PERMISSION_SET_1+'{';
+											  first_ref_item=false;
+										  }
+										  else{
+										      PERMISSION_SET_1=PERMISSION_SET_1+',{';
+										  }
+										  
+										  // Check for and act on the keys in this refinement
+									      JSONRefkeys=JSON.parse(JSON.stringify(ref_item));
+										  for (const z in JSONRefkeys) {
+										      if ( z == "leftOperand") {
+											      //console.log("We have got the left");
+												  if (ref_item[z] != "QUERY") {
+												      leftopval=TARGET_REFINEMENTS_1[ref_item[z]];
+												  }
+												  else
+												  {
+												      leftopval=ref_item[z];
+												  }
+												  console.log("Left op val is " + leftopval);
+								                  PERMISSION_SET_1=PERMISSION_SET_1+'"odrl:leftOperand":' + JSON.stringify(leftopval) + ",";
+								              }
+											  if ( z == "rightOperand") {
+											      //console.log("We have got the right");
+								                  PERMISSION_SET_1=PERMISSION_SET_1+'"odrl:rightOperand":' + JSON.stringify(ref_item[z]);
+								              }
+											  if ( z == "operator") {
+											      //console.log("We have got the operator");
+								                  PERMISSION_SET_1=PERMISSION_SET_1+'"odrl:operator":' + JSON.stringify(ref_item[z]) + ",";
+								              }
+										  }
+										  
+										  //End next refinement
+										  PERMISSION_SET_1=PERMISSION_SET_1+'}';
+										  
+									  });
+									  
+									  //End the refinement array
+									  PERMISSION_SET_1=PERMISSION_SET_1+']';
+								  }
+							  }
+                              isValid = true;
+                          } catch (e) {
+                              console.log('[isValidJSON], invalid JSON text', JSON.stringify(item[x]));
+                          }
+						  
+						  // End the target block
+						  PERMISSION_SET_1=PERMISSION_SET_1+'},'
+		  	          }
+					  
+					  if ( x == "constraint") {
+		                  // Start the constraint block
+						  PERMISSION_SET_1=PERMISSION_SET_1+'"odrl:constraint":{'
+						  
+						  JSON.parse(JSON.stringify(item[x])).forEach((constraint_item) => {
+						      JSONConstraintkeys=JSON.parse(JSON.stringify(constraint_item));
+							  
+							  for (const y in JSONConstraintkeys) {
+							      //if this is true we will have a pair of 'refinements in 
+								  if ( y == "and") {
+								      console.log("We are constraint and block");
+								      // Start the refinement and array
+									  PERMISSION_SET_1=PERMISSION_SET_1+'"odrl:and":[';
+									  
+									  first_ref_item=true
+								      JSON.parse(JSON.stringify(constraint_item[y])).forEach((cons_ref_purposeitem) => {
+									      
+										  //Start next refinement
+										  if (first_ref_item){ 
+										      PERMISSION_SET_1=PERMISSION_SET_1+'{';
+											  first_ref_item=false;
+										  }
+										  else{
+										      PERMISSION_SET_1=PERMISSION_SET_1+',{';
+										  }// Check for and act on the keys in this refinement
+									      
+										  JSONRefkeys=JSON.parse(JSON.stringify(cons_ref_purposeitem));
+										  for (const z in JSONRefkeys) {
+										      if ( z == "leftOperand") {
+											      //console.log("We have got the left");
+												  
+												  if ( cons_ref_purposeitem[z] == "purpose" ){
+										     	      leftopval="odrl:purpose";
+												  }
+												  else {
+												      leftopval=PURPOSE_REFINEMENTS_1[cons_ref_purposeitem[z]];
+												  }
+												  
+												  console.log("Left op val is " + leftopval);
+								                  PERMISSION_SET_1=PERMISSION_SET_1+'"odrl:leftOperand":' + JSON.stringify(leftopval) + ",";
+								              }
+											  if ( z == "rightOperand") {
+											      //console.log("We have got the right");
+								                  PERMISSION_SET_1=PERMISSION_SET_1+'"odrl:rightOperand":' + JSON.stringify(cons_ref_purposeitem[z]);
+								              }
+											  if ( z == "operator") {
+											      //console.log("We have got the operator");
+								                  PERMISSION_SET_1=PERMISSION_SET_1+'"odrl:operator":' + JSON.stringify(cons_ref_purposeitem[z]) + ",";
+								              }
+										  }
+										  
+										  //End next refinement
+										  PERMISSION_SET_1=PERMISSION_SET_1+'}';
+									  });
+									  
+									  //End the refinement array
+									  PERMISSION_SET_1=PERMISSION_SET_1+']';
+								  }
+								  
+								  if ( y == "leftOperand") {
+								      //console.log("We have got the left");
+												  
+								      if ( constraint_item[y] == "purpose" ){
+									      leftopval="odrl:purpose";
+									  }
+									  else {
+									      leftopval=constraint_item[y];
+									  }
+												  
+									  console.log("Left op val is " + leftopval);
+								      PERMISSION_SET_1=PERMISSION_SET_1+'"odrl:leftOperand":' + JSON.stringify(leftopval) + ",";
+								  }
+								  
+								  if ( y == "rightOperand") {
+								      //console.log("We have got the right");
+								      PERMISSION_SET_1=PERMISSION_SET_1+'"odrl:rightOperand":' + JSON.stringify(constraint_item[y]);
+								  }
+								  
+								  if ( y == "operator") {
+								      //console.log("We have got the operator");
+								      PERMISSION_SET_1=PERMISSION_SET_1+'"odrl:operator":' + JSON.stringify(constraint_item[y]) + ",";
+								  }
+							  }
+						  
+						  });
+						  
+						      						  
+						  // End the constraint block
+						  PERMISSION_SET_1=PERMISSION_SET_1+'},'
+		  	          }
+                  }
+				  
+			      
+			  });
+		  } 
+		  
+		  PERMISSION_SET_1 = PERMISSION_SET_1 + "}]";
+		  
+		  console.log("Standard header " + CONTEXT_HEADER);
+		  console.log("ID 1 is " + ID_1);
+		  console.log("ID 2 is " + ID_2);
+		  console.log("TYPE 1 is " + TYPE_1);
+		  console.log("TYPE 2 is " + TYPE_2);
+		  console.log("PERMISSION_SET_1 is " + PERMISSION_SET_1);
+		  
+		  
+		  
+      } /* END doTheThing */
+
+      console.log("We are in getPolicyPair for " + PolicyID_1 + " and " + PolicyID_2);
+      doTheThing(PolicyID_1, PolicyID_2);
+	  console.log("We are coming out of getPolicyPair for " + PolicyID_1 + " and " + PolicyID_2);
+	
+	} /* END getPolicyPair(PolicyID_1, PolicyID_2) { */
+	 
+	$(document).ready(function () {
+	 
+		$(document).find('#ignorePolicyType').html("<i class='fa fa-times' style='font-size:16px'></i>");     
+
+        console.log("Change text  check text <" + $('#PPolicyHead span').text());	
+
+        // CMADD Adding a complete modal to cater for upload mode
+	    const FileUploadModal = document.getElementById('fileuploadModal');
+	    const closeFileUploadModalButton = document.getElementById('closefileuploadModalButton');
+	
+	    // Close modal when clicking on the close button
+        closeFileUploadModalButton.addEventListener('click', () => {	    
+            FileUploadModal.style.display = 'none';
+        });
+
+        // Close modal when clicking outside the modal content
+        window.addEventListener('click', (event) => {
+            if (event.target === FileUploadModal) {
+                FileUploadModal.style.display = 'none';
+            }
+        });		
+						        
+		 
+	});
 	
  </script>
  

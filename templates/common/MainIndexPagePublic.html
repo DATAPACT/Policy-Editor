@@ -1,0 +1,927 @@
+    {% extends 'base.html' %}
+    {%load static %}
+
+    {% block inpagecss %}
+/* Base styles */
+/* https://www.color-hex.com/color-palette/1057703 */
+
+:root {
+  /* --primary-color: #1976d2;
+  --secondary-color: #2196f3;
+  --tertiary-color: #64b5f6; 
+  --primary-color: #aaaaaa;
+  --secondary-color: #bbbbbb;
+  --tertiary-color: #cccccc;
+  --primary-color: #72bcd4;
+  --secondary-color: #86c5da;
+  --tertiary-color: #99cfe0;*/
+  --primary-color: #111184;
+  --secondary-color: #3C3CE8;
+  --tertiary-color: #99cfe0;
+  --header-primary-color: #111184;
+  --header-secondary-color: #070738;
+  --light-gray: #f5f7fa;
+  --hover-color: #e3f2fd;
+  --public-color: #66bb6a;
+  --private-color: #5c6bc0;
+  --shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+  --font-family: 'Segoe UI', Arial, sans-serif;
+  --border-radius: 6px;
+  --transition: all 0.25s ease;
+  
+  /*--primary-color_ontol: #d27519;
+  --secondary-color_ontol: #f37e21;
+  --tertiary-color_ontol: #f6a564;
+  --primary-color_ontol: #aaaaaa;
+  --secondary-color_ontol: #bbbbbb;
+  --tertiary-color_ontol: #cccccc;
+  --primary-color_ontol: #72bcd4;
+  --secondary-color_ontol: #86c5da;
+  --tertiary-color_ontol: #99cfe0;*/
+  --primary-color_ontol: #111184;
+  --secondary-color_ontol: #3C3CE8;
+  --tertiary-color_ontol: #99cfe0;
+}
+ 
+/* Navigation list styles */
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+ 
+ul li a {
+  display: block;
+  width: 100%;
+  text-decoration: none;
+  padding: 10px;
+  transition: background-color 0.2s ease;
+  border-radius: 4px;
+}
+ 
+ul li a:hover {
+  background-color: var(--hover-color);
+}
+
+/* Main control wrapper for index */
+.control_main_index_wrapper {
+    width: 70%;
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+ 
+/* Form elements */
+.form-select {
+  color: black;
+  background-color: white;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+ 
+/* Public and private styles */
+.public a {
+  background: linear-gradient(to bottom right, var(--public-color), #4caf50);
+  color: white;
+  font-weight: 500;
+  border-radius: var(--border-radius);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+  transition: var(--transition);
+}
+ 
+.public a:hover {
+  background: linear-gradient(to bottom right, #4caf50, var(--public-color));
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+}
+ 
+.private a {
+  background: linear-gradient(to bottom right, var(--private-color), #3f51b5);
+  color: white;
+  font-weight: 500;
+  border-radius: var(--border-radius);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+  transition: var(--transition);
+}
+ 
+.private a:hover {
+  background: linear-gradient(to bottom right, #3f51b5, var(--private-color));
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+}
+ 
+/* Grid container styles */
+.container2 {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  background-color: var(--primary-color);
+  #padding: 18px;
+  padding: 9px;
+  border-radius: var(--border-radius);
+  #margin-bottom: 25px;
+  margin-bottom: 0px;
+  box-shadow: var(--shadow);
+  gap: 10px;
+}
+ 
+.container2 > div {
+  background-color: var(--light-gray);
+  border: none;
+  padding: 12px;
+  font-size: 15px;
+  text-align: center;
+  border-radius: calc(var(--border-radius) - 2px);
+  transition: var(--transition);
+}
+
+.container2_ontol {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  background-color: var(--primary-color_ontol);
+  #padding: 18px;
+  padding: 9px;
+  border-radius: var(--border-radius);
+  #margin-bottom: 25px;
+  margin-bottom: 0px;
+  box-shadow: var(--shadow);
+  gap: 10px;
+}
+ 
+.container2_ontol > div {
+  background-color: var(--light-gray);
+  border: none;
+  padding: 12px;
+  font-size: 15px;
+  text-align: center;
+  border-radius: calc(var(--border-radius) - 2px);
+  transition: var(--transition);
+}
+ 
+/* Grid header styles */
+.grid-head-wrapper {
+  display: contents;
+}
+ 
+.grid-head-wrapper > .grid-head-item {
+  #background: linear-gradient(to bottom, var(--secondary-color), var(--tertiary-color));
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  #padding: 14px 10px;
+  padding: 7px 5px;
+  border-bottom: 2px solid var(--primary-color);
+  text-shadow: 0 1px 1px rgba(0,0,0,0.1);
+  letter-spacing: 0.5px;
+  border-radius: calc(var(--border-radius) - 2px);
+}
+
+.grid-head-wrapper_ontol {
+  display: contents;
+}
+ 
+.grid-head-wrapper_ontol > .grid-head-item_ontol {
+  #background: linear-gradient(to bottom, var(--secondary-color_ontol), var(--tertiary-color_ontol));
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  #padding: 14px 10px;
+  padding: 7px 5px;
+  border-bottom: 2px solid var(--primary-color_ontol);
+  text-shadow: 0 1px 1px rgba(0,0,0,0.1);
+  letter-spacing: 0.5px;
+  border-radius: calc(var(--border-radius) - 2px);
+}
+
+/* Grid container styles */
+.container3 {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  background-color: var(--primary-color);
+  padding: 18px;
+  
+  border-radius: var(--border-radius);
+  margin-bottom: 25px;
+  box-shadow: var(--shadow);
+  #gap: 10px;
+}
+ 
+.container3 > div {
+  background-color: var(--light-gray);
+  border: none;
+  padding: 12px;
+  font-size: 15px;
+  text-align: center;
+  border-radius: calc(var(--border-radius) - 2px);
+  transition: var(--transition);
+}
+
+.container3_ontol {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  background-color: var(--primary-color);
+  padding: 18px;
+  
+  border-radius: var(--border-radius);
+  margin-bottom: 25px;
+  box-shadow: var(--shadow);
+  #gap: 10px;
+}
+ 
+.container3_ontol > div {
+  background-color: var(--light-gray);
+  border: none;
+  padding: 12px;
+  font-size: 15px;
+  text-align: center;
+  border-radius: calc(var(--border-radius) - 2px);
+  transition: var(--transition);
+}
+ 
+/* Grid row styles */
+.grid-row-wrapper {
+  display: contents;
+}
+ 
+.grid-row-wrapper > .grid-item {
+  background: white;
+  font-size: 20px;
+  padding: 12px 10px;
+  border-bottom: 1px solid #e0e0e0;
+  transition: var(--transition);
+}
+ 
+.grid-row-wrapper:hover > .grid-item {
+  background-color: var(--hover-color);
+  transform: translateY(-2px);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.grid-row-wrapper_ontol {
+  display: contents;
+}
+ 
+.grid-row-wrapper_ontol > .grid-item {
+  background: white;
+  font-size: 20px;
+  padding: 12px 10px;
+  border-bottom: 1px solid #e0e0e0;
+  transition: var(--transition);
+}
+ 
+.grid-row-wrapper_ontol:hover > .grid-item {
+  background-color: var(--hover-color);
+  transform: translateY(-2px);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+ 
+/* Menu Bar Styling */
+.menu-bar {
+  display: flex;
+  #background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  #padding: 14px 20px;
+  padding: 7px 10px;
+  font-family: var(--font-family);
+  box-shadow: var(--shadow);
+  border-radius: var(--border-radius);
+  align-items: center;
+  justify-content: space-between;
+  #margin-bottom: 20px;
+  margin-bottom: 10px;
+}
+
+.menu-bar_ontol {
+  display: flex;
+  #background: linear-gradient(135deg, var(--primary-color_ontol), var(--secondary-color_ontol));
+  #padding: 14px 20px;
+  padding: 7px 10px;
+  font-family: var(--font-family);
+  box-shadow: var(--shadow);
+  border-radius: var(--border-radius);
+  align-items: center;
+  justify-content: space-between;
+  #margin-bottom: 20px;
+  margin-bottom: 10px;
+}
+ 
+.menu-text-bar {
+  background: linear-gradient(135deg, var(--header-secondary-color),var(--header-primary-color));
+  #padding: 12px 20px;
+  padding: 6px 10px;
+  font-family: var(--font-family);
+  box-shadow: var(--shadow);
+  font-size: 25px;
+  text-align: center;
+  color: white;
+  border-radius: var(--border-radius);
+  #margin-bottom: 20px;
+  margin-bottom: 10px;
+  letter-spacing: 0.5px;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.15);
+}
+
+.menu-text-bar_free {
+  #background: linear-gradient(135deg, var(--secondary-color),var(--tertiary-color));
+  #padding: 12px 20px;
+  padding: 6px 10px;
+  font-family: var(--font-family);
+  #box-shadow: var(--shadow);
+  font-size: 25px;
+  text-align: right;
+  color: white;
+  border-radius: var(--border-radius);
+  #margin-bottom: 20px;
+  margin-bottom: 10px;
+  letter-spacing: 0.5px;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.15);
+ }
+
+.menu-text-bar_ontol {
+  #background: linear-gradient(135deg, var(--secondary-color_ontol), var(--tertiary-color_ontol));
+  background: linear-gradient(135deg, var(--header-secondary-color), var(--header-primary-color));
+  #padding: 12px 20px;
+  padding: 6px 10px;
+  font-family: var(--font-family);
+  box-shadow: var(--shadow);
+  font-size: 25px;
+  text-align: center;
+  color: white;
+  border-radius: var(--border-radius);
+  #margin-bottom: 20px;
+  margin-bottom: 10px;
+  letter-spacing: 0.5px;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.15);
+}
+ 
+.menu-item {
+  position: relative;
+  margin: 0 20px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  user-select: none;
+  #padding: 8px 12px;
+  padding: 4px 6px;
+  border-radius: var(--border-radius);
+  transition: var(--transition);
+}
+
+.menu-item_ontol {
+  position: relative;
+  margin: 0 20px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  user-select: none;
+  #padding: 8px 12px;
+  padding: 4px 6px;
+  border-radius: var(--border-radius);
+  transition: var(--transition);
+}
+ 
+.menu-item:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+ 
+.menu-item span {
+  transition: var(--transition);
+  position: relative;
+}
+ 
+.menu-item span:hover {
+  text-decoration: none;
+}
+ 
+.menu-item span:after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: white;
+  transition: var(--transition);
+}
+ 
+.menu-item:hover span:after {
+  width: 100%;
+}
+ 
+/* Button styles */
+.menubar-button {
+  background: linear-gradient(to bottom, var(--secondary-color), var(--primary-color));
+  font-family: var(--font-family);
+  font-size: 18px;
+  box-shadow: var(--shadow);
+  color: white;
+  border: none;
+  #padding: 10px 20px;
+  padding: 5px 10px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+/*.menubar-button#compareTwoPolicies {
+  background: linear-gradient(to bottom, var(--secondary-color), var(--primary-color));
+  font-family: var(--font-family);
+  font-size: 18px;
+  box-shadow: var(--shadow);
+  color: white;
+  border: none;
+  #padding: 10px 20px;
+  padding: 5px 10px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  
+  left : 200px;
+} */
+
+.menubar-button#logout {
+  background: linear-gradient(to bottom, var(--secondary-color), var(--primary-color));
+  font-family: var(--font-family);
+  font-size: 18px;
+  box-shadow: var(--shadow);
+  color: white;
+  border: none;
+  #padding: 10px 20px;
+  padding: 5px 10px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  
+  #left :550px;
+  
+}
+ 
+.menubar-button:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(255,255,255,0.1), transparent);
+  transition: var(--transition);
+  z-index: -1;
+}
+ 
+.menubar-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+ 
+.menubar-button:hover:before {
+  left: 100%;
+}
+ 
+.menubar-button:active {
+  transform: translateY(1px);
+}
+
+.menubar-button_ontol {
+  background: linear-gradient(to bottom, var(--secondary-color_ontol), var(--primary-color_ontol));
+  font-family: var(--font-family);
+  font-size: 18px;
+  box-shadow: var(--shadow);
+  color: white;
+  border: none;
+  #padding: 10px 20px;
+  padding: 5px 10px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+ 
+.menubar-button_ontol:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(255,255,255,0.1), transparent);
+  transition: var(--transition);
+  z-index: -1;
+}
+ 
+.menubar-button_ontol:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+ 
+.menubar-button_ontol:hover:before {
+  left: 100%;
+}
+ 
+.menubar-button_ontol:active {
+  transform: translateY(1px);
+}
+ 
+.grid-button {
+  background: linear-gradient(to bottom, var(--secondary-color), var(--primary-color));
+  font-family: var(--font-family);
+  font-size: 13px;
+  box-shadow: var(--shadow);
+  width: 110px;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: var(--transition);
+  letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
+}
+ 
+.grid-button:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(255,255,255,0.1), transparent);
+  transition: var(--transition);
+}
+ 
+.grid-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+ 
+.grid-button:hover:before {
+  left: 100%;
+}
+ 
+.grid-button:active {
+  transform: translateY(1px);
+}
+{% endblock %}
+    {% block title %} Data Controller/Processor Home {% endblock %}
+    {% block content %}
+        <main id="main">
+		    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+            
+			
+			<section id="faq" class="faq">
+                    <header class="section-header">
+                        <p>Welcome {{ user.username}} this is the Policy Editor</p>
+                    </header>
+					
+					
+					
+					<body class="text-center">
+					    <!-- <form>
+                        
+                            <label for="data"> You are currently logged into:</label><br>
+						    <input id="data" type="text" name="data" value={{ request.get_host }}><br> -->
+							<!-- <input id="data" type="text" name="data" value={{ request.get_host }}><br> -->
+							
+                            <!-- <input id="submit" type="submit" value="Submit"> -->
+                        <!-- </form> -->
+						<div class="container">
+						    <p>Ver: Alpha - 0.2</p>
+						</div>
+						
+						<div class="control_main_index_wrapper", id="control_main_index_wrapper">
+						
+						<div class="menu-text-bar_free">
+						    <a  class="menubar-button" id="settings"> Settings</a>
+							<a href="{% url 'logout' %}" class="menubar-button" style="display:none" id="logout"> Logout</a>
+						</div>
+						
+						<div class="menu-text-bar">
+						    Publicly Available Policies
+						</div>
+						
+						
+						
+					    <!-- START Menu Bar -->
+                        <div class="menu-bar">
+                       					
+					        <!-- START new rule button -->
+					        <!-- CMADD - These are left here to allow old code to reference -->
+					        <!--         Should be removed in a fuller tidy up -->
+                            <div class="menu-item">
+                                                    
+                                <!-- <button id="createNewPolicy" class="menubar-button" style="background-color:#34ebd8">Create New Policy</button>
+								<button id="createNewPolicyFromUpload" class="menubar-button" style="background-color:#34ebd8">Create New Policy From Upload</button> -->
+								<button id="createNewPolicy" class="menubar-button" style="display:none">Create New Policy</button>
+								<button id="createNewPolicyFromUpload" class="menubar-button" style="display:none" >Upload New Policy</button>
+								<button id="compareTwoPolicies" class="menubar-button" >Compare Two Policies</button>
+								<button id="reviewPublicRepository" class="menubar-button" style="display:none" >Review Public Repository</button>
+                                
+								<script type='text/javascript'>	
+							       								   
+								   $('#createNewPolicy').off('click').click(function() {
+                                        var mode="create"
+										
+										selectedValues="... Create new policy ...."
+										console.log("The selected value is " + selectedValues);
+									
+										var targetURL = "/policy-editor/update?policy=" + selectedValues + "&mode=" + mode;	
+										window.open(targetURL,"_blank", "popup")
+                                   });
+								   
+								   $('#createNewPolicyFromUpload').off('click').click(function() {
+                                        var mode="create"
+										
+										selectedValues="... Create new policy via upload ...."
+										console.log("The selected value is " + selectedValues);
+									
+										var targetURL = "/policy-editor/update?policy=" + selectedValues + "&mode=" + mode;	
+										window.open(targetURL,"_blank", "popup")
+                                   });
+								   
+								   $('#compareTwoPolicies').off('click').click(function() {
+                                        
+									
+										var targetURL = "/policy-editor/compare" ;	
+										window.open(targetURL,"_blank", "popup")
+                                   });
+								   
+								   $('#reviewPublicRepository').off('click').click(function() {
+                                        
+									
+										var targetURL = "/policy-editor/review_public" ;	
+										window.open(targetURL,"_blank", "popup")
+                                   });
+
+								   
+                                						   
+						        </script>
+                            </div>
+					        <!-- END Edit Menu -->
+                        </div>
+				        <!-- END Menu Bar -->
+						 
+						<!-- CM2403 -->
+						<div class="container2", id="policy_grid_head">
+                            
+                                <div class="grid-head-wrapper">
+								    <div class="grid-head-item">Policy Name</div>
+									<div class="grid-head-item">User ID</div>
+                                    <!-- <div class="grid-head-item">Policy Visibility</div> -->
+								    <div class="grid-head-item">View this policy</div>
+								    <div class="grid-head-item">Upload this policy</div>
+									<div class="grid-head-item">Download this policy</div>
+								</div>
+						</div>
+						
+						
+						<div class="container3", id="policy_grid">		
+								<div class="grid-row-wrapper" style="display: none">
+								    <div class="grid-item" id="policyName">
+									    <span id="policyNameSpan">ExamplePolicy_1</span>
+									</div>
+									<div class="grid-item" id="UserId">
+									    <span id="UserIdSpan">UserId_1</span>
+									</div>
+                                    <!-- <div class="grid-item" id="policyVisibility">
+									    <span id="policyVisibilitySpan">Private</span>
+									</div> -->
+                                    <div class="grid-item">
+								        <button id="editPolicy" class="grid-button" style="background-color:#34ebd8">View Policy</button>
+								    </div>
+                                    <div class="grid-item">
+								        <button id="deletePolicy" class="grid-button" style="background-color:#34ebd8">Upload Policy</button>
+								    </div>
+									<div class="grid-item">
+								        <button id="downloadPolicy" class="grid-button" style="background-color:#34ebd8">Download Policy</button>
+								    </div>
+								</div>
+                                				
+																	
+								<!-- <div class="grid-row-wrapper">
+								    <div class="grid-item">Dummy_1</div>
+                                    <div class="grid-item">Private</div>
+								    <div class="grid-item">
+								        <button id="togglePolicy" class="grid-button" style="background-color:#34ebd8">Set Public</button>
+								    </div>
+                                    <div class="grid-item">
+								        <button id="editPolicy" class="grid-button" style="background-color:#34ebd8">Edit Policy</button>
+								    </div>
+                                    <div class="grid-item">
+								        <button id="deletePolicy" class="grid-button" style="background-color:#34ebd8">Delete Policy</button>
+								    </div>
+								</div>
+								
+                                <div class="grid-row-wrapper">
+								    <div class="grid-item">Dummy_2</div>
+                                    <div class="grid-item">Public</div>
+								    <div class="grid-item">
+								        <button id="togglePolicy" class="grid-button" style="background-color:#34ebd8">Set Private</button>
+								    </div>
+                                    <div class="grid-item">
+								        <button id="editPolicy" class="grid-button" style="background-color:#34ebd8">Edit Policy</button>
+								    </div>
+                                    <div class="grid-item">
+								        <button id="deletePolicy" class="grid-button" style="background-color:#34ebd8">Delete Policy</button>
+								    </div>
+								</div> -->
+								
+							<script type='text/javascript'>	
+							    {% for SavedPol in SavedPols %}			       
+							   
+							        var $originalRow = $('.grid-row-wrapper').first();
+                                    var $newRow = $originalRow.clone();
+							        $newRow.css("display", "contents");
+								   
+								    $newRow.find('#policyName span').text("{{ SavedPol.name }}");
+									$newRow.find('#UserId span').text("{{ SavedPol.edit_uid }}");
+								    ProtectionText="Unknown"
+								    
+									
+									$newRow.find('#editPolicy').html("<i class='fa fa-eye' style='font-size:16px'></i>");
+									$newRow.find('#deletePolicy').html("<i class='fa fa-upload' style='font-size:16px,color:#ffffff'></i>");
+									$newRow.find('#downloadPolicy').html("<i class='fa fa-download' style='font-size:16px'></i>");
+								   
+							        $newRow.appendTo('.container3'); 
+								   
+								   
+								    $newRow.find('#editPolicy').off('click').click(function() {
+                                         var mode="read"
+										
+										 selectedValues="{{ SavedPol.name }}"
+										 selectedId="{{ SavedPol.id }}"
+										 console.log("The selected value is " + selectedValues);
+									
+										 var targetURL = "/policy-editor/update?policy=" + selectedValues + "&mode=" + mode + "&id=" + selectedId;	
+										 window.open(targetURL,"_blank", "popup")
+                                    });
+									
+									$newRow.find('#deletePolicy').off('click').click(function() {
+                                        var mode="create"
+										
+										selectedValues="... Create new policy via upload ...."
+										selectedId="{{ SavedPol.id }}"
+										console.log("The selected value is " + selectedValues);
+									
+										var targetURL = "/policy-editor/update?policy=" + selectedValues + "&mode=" + mode + "&id=" + selectedId;;	
+										window.open(targetURL,"_blank", "popup")
+                                    });
+									
+									$newRow.find('#downloadPolicy').off('click').click(function() {
+                                         var mode="read"
+										
+										 selectedValues="{{ SavedPol.name }}"
+										 selectedId="{{ SavedPol.id }}"
+										 console.log("The selected value is " + selectedValues);
+									
+										 var targetURL = "/policy-editor/update?policy=" + selectedValues + "&mode=" + mode + "&id=" + selectedId;	
+										 window.open(targetURL,"_blank", "popup")
+                                    });			
+								   
+								   
+                                    						
+
+								   
+                                {% endfor %}								   
+						    </script>
+                            
+                        </div>
+
+                        <div class="menu-text-bar_free">
+						    <p>
+						</div>
+						
+						<div class="menu-text-bar_ontol">
+						    Publicly Available Ontologies
+						</div>
+						
+					    <!-- START Menu Bar -->
+                        <div class="menu-bar_ontol">
+                       					
+					        <!-- START new rule button -->
+					        <!-- CMADD - These are left here to allow old code to reference -->
+					        <!--         Should be removed in a fuller tidy up -->
+                            <div class="menu-item_ontol">
+                                                    
+                                <!-- <button id="createNewPolicy" class="menubar-button" style="background-color:#34ebd8">Create New Policy</button>
+								<button id="createNewPolicyFromUpload" class="menubar-button" style="background-color:#34ebd8">Create New Policy From Upload</button> -->
+								<!-- <button id="createNewOntology" class="menubar-button_ontol" >Upload New Ontology</button> -->
+								
+                               
+								<script type='text/javascript'>	
+							       								   
+								   $('#createNewOntology').off('click').click(function() {
+                                        var mode="create"
+										
+										selectedValues="... Add new ontology ...."
+										console.log("The selected value is " + selectedValues);
+									
+										var targetURL = "/policy-editor/update_ontol?ontology=" + selectedValues + "&mode=" + mode;	
+										window.open(targetURL,"_blank", "popup")
+                                   });
+								   
+                                						   
+						        </script>
+                            </div>
+					        <!-- END Edit Menu -->
+                        </div>
+				        <!-- END Menu Bar -->
+
+
+						<!-- CM2403 -->
+						<div class="container2_ontol", id="ontology_grid_head">
+                            
+                                <div class="grid-head-wrapper_ontol">
+								    <div class="grid-head-item_ontol">Ontology Name</div>
+                                    <!-- <div class="grid-head-item">Policy Visibility</div> -->
+									<div class="grid-head-item_ontol">User ID</div>
+								    <div class="grid-head-item_ontol">View this ontology</div>
+								    <div class="grid-head-item_ontol">Upload this ontology</div>
+								</div>
+						</div>
+						
+						
+						<div class="container3_ontol", id="ontology_grid">		
+								<div class="grid-row-wrapper_ontol" style="display: none">
+								    <div class="grid-item" id="ontologyName">
+									    <span id="policyNameSpan">ExampleOntology_1</span>
+									</div>
+                                    <!-- <div class="grid-item" id="policyVisibility">
+									    <span id="policyVisibilitySpan">Private</span>
+									</div> -->
+								    <div class="grid-item" id="UserId">
+									    <span id="UserIdSpan">UserId_1</span>
+									</div>
+                                    <div class="grid-item">
+								        <button id="editOntology" class="grid-button" style="background-color:#34ebd8">View this Ontology</button>
+								    </div>
+                                    <div class="grid-item">
+								        <button id="createNewOntology" class="grid-button" style="background-color:#34ebd8">Upload this ontology</button>
+								    </div>
+								</div>
+                                				
+								
+								
+							<script type='text/javascript'>	
+							    {% for CustOnt in CustOntList %}			       
+							   
+							        var $originalRow_ontol = $('.grid-row-wrapper_ontol').first();
+                                    var $newRow_ontol = $originalRow_ontol.clone();
+							        $newRow_ontol.css("display", "contents");
+								   
+								    $newRow_ontol.find('#ontologyName span').text("{{ CustOnt.name }}");
+									$newRow_ontol.find('#UserId span').text("{{ CustOnt.edit_uid }}");
+								    
+									
+									$newRow_ontol.find('#editOntology').html("<i class='fa fa-edit' style='font-size:16px'></i>");
+									$newRow_ontol.find('#createNewOntology').html("<i class='fa fa-upload' style='font-size:16px,color:#ffffff'></i>");
+								   
+							        $newRow_ontol.appendTo('.container3_ontol'); 
+								   
+								   
+								    $newRow_ontol.find('#editOntology').off('click').click(function() {
+                                         var mode="update"
+										
+										 selectedValues="{{ CustOnt.name }}"
+										 console.log("The selected value is " + selectedValues);
+									
+										 var targetURL = "/policy-editor/update_ontol?ontology=" + selectedValues + "&mode=" + mode;	
+										 window.open(targetURL,"_blank", "popup")
+                                    });
+																   
+							       								   
+								    $('#createNewOntology').off('click').click(function() {
+                                        var mode="create"
+										
+										selectedValues="... Add new ontology ...."
+										console.log("The selected value is " + selectedValues);
+									
+										var targetURL = "/policy-editor/update_ontol?ontology=" + selectedValues + "&mode=" + mode;	
+										window.open(targetURL,"_blank", "popup")
+                                    });
+	
+								   
+                                {% endfor %}								   
+						    </script>
+                            
+                        </div>
+						
+						</div>
+	
+
+	
+					
+
+	
+ </script>
+ 
+ {% endblock %}

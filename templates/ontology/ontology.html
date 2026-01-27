@@ -107,6 +107,7 @@
     min-width: 200px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     z-index: 1000;
+	font: navy;
 }
 
 /* Ensure visibility when hovering over the menu item or dropdown */
@@ -240,18 +241,31 @@ h2 {
 
                     <div class="row">
                         <div class="menu-bar">
-                            <!-- File Menu -->
+                            
                             <div class="menu-item">
-                                <span>File Management</span>
+                                <!-- <span>File Management</span>
                                 <div class="dropdown-content">
                                     <button id="deleteNameButton" class="dropdown-button" style="background-color:#90EE90">Delete Ontology</button>
 									<!-- CM0311 -->
-									<button id="namePublicButton" class="dropdown-button" style="background-color:#90EE90">Toggle API Visibility</button>
-			                    </div>
+									<!--<button id="namePublicButton" class="dropdown-button" style="background-color:#90EE90">Toggle API Visibility</button>
+			                    </div> -->
 								
-                            </div>
-
+                            
+							
+							    <button id="deleteNameButton" class="dropdown-button" style="background-color:#72bcd4;display:none">Delete Ontology</button>
+                            </div> 
+							
+							<div class="menu-item">        
+									
+							    <button id="namePublicButton" class="dropdown-button" style="background-color:#72bcd4;display:none">Toggle API Visibility</button>
+			                   
+						    </div> 
 						</div>
+						
+						
+                                
+                        		
+                       
                     </div>
 				
 				    <!-- START Modal Window for file upload prompting -->
@@ -381,6 +395,9 @@ $(document).ready(function () {
 	if ( query.mode == "update"){
 			
         document.getElementById("entry-header").innerHTML += ` viewing ontology : ` + query.ontology;
+	}
+	else if ( query.mode == "delete"){
+	    document.getElementById("entry-header").innerHTML += ` deleting policy : ` + query.ontology;
 	}
 	else
 	{
@@ -550,7 +567,15 @@ $(document).ready(function () {
         
     });
 	    
-
+    // Mimic click event on Delete option button
+	if ( query.mode == "delete"){
+	
+	    //deleteButton=document.getElementById("deleteNameButton");
+		clickEvent = new Event("click", {"bubbles":true, "cancelable":false});
+		deleteNameButton.dispatchEvent(clickEvent);
+			
+	}
+	
     const ontologyModal = document.getElementById('ontologyModal');
     const closeModalButton = document.getElementById('closeNameModalButton');
     
@@ -563,7 +588,7 @@ $(document).ready(function () {
     // Delete an ontology
     function deleteOntology(id) {
 	    
-        fetch(`/organization/delete_ontology/${id}/`, { method: 'DELETE', headers: {
+        fetch(`/policy-editor/organization/delete_ontology/${id}/`, { method: 'DELETE', headers: {
                             'X-CSRFToken': '{{ csrf_token }}', // Include CSRF token
                         } }) // Update with your delete endpoint
             .then(response => {

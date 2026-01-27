@@ -11,10 +11,20 @@
   --tertiary-color: #64b5f6; 
   --primary-color: #aaaaaa;
   --secondary-color: #bbbbbb;
-  --tertiary-color: #cccccc;*/
+  --tertiary-color: #cccccc;
   --primary-color: #72bcd4;
   --secondary-color: #86c5da;
   --tertiary-color: #99cfe0;
+  --primary-color: #111184;
+  --secondary-color: #3C3CE8;
+  --tertiary-color: #99cfe0; */
+  --primary-color: #819A91;
+  --secondary-color: #A7C1A8;
+  --tertiary-color: #D1D8BE;
+  /* --header-primary-color: #111184;
+  --header-secondary-color: #070738; */
+  --header-primary-color: #819A91;
+  --header-secondary-color: #A7C1A8;
   --light-gray: #f5f7fa;
   --hover-color: #e3f2fd;
   --public-color: #66bb6a;
@@ -29,10 +39,18 @@
   --tertiary-color_ontol: #f6a564;
   --primary-color_ontol: #aaaaaa;
   --secondary-color_ontol: #bbbbbb;
-  --tertiary-color_ontol: #cccccc;*/
+  --tertiary-color_ontol: #cccccc;
   --primary-color_ontol: #72bcd4;
   --secondary-color_ontol: #86c5da;
   --tertiary-color_ontol: #99cfe0;
+  --primary-color_ontol: #111184;
+  --secondary-color_ontol: #3C3CE8;
+  --tertiary-color_ontol: #99cfe0; */
+  --primary-color_ontol: #819A91;
+  --secondary-color_ontol: #A7C1A8;
+  --tertiary-color_ontol: #D1D8BE;
+  
+  --grid-button-width: 100px;
 }
  
 /* Navigation list styles */
@@ -105,16 +123,20 @@ ul li a:hover {
  
 /* Grid container styles */
 .container2 {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  background-color: var(--primary-color);
+
+  display: none;
+  min-width: 0;
+  /* grid-template-columns: repeat(5, 1fr); */
+  grid-template-columns: 1fr 120px 120px 120px;
+  /* background-color: var(--primary-color); */
   #padding: 18px;
-  padding: 9px;
+  padding: 2px;
   border-radius: var(--border-radius);
   #margin-bottom: 25px;
   margin-bottom: 0px;
   box-shadow: var(--shadow);
-  gap: 10px;
+  gap: 0px;
+  
 }
  
 .container2 > div {
@@ -128,7 +150,7 @@ ul li a:hover {
 }
 
 .container2_ontol {
-  display: grid;
+  display: none;
   grid-template-columns: repeat(4, 1fr);
   background-color: var(--primary-color_ontol);
   #padding: 18px;
@@ -156,16 +178,20 @@ ul li a:hover {
 }
  
 .grid-head-wrapper > .grid-head-item {
-  background: linear-gradient(to bottom, var(--secondary-color), var(--tertiary-color));
-  color: white;
-  font-size: 18px;
+  /* background: linear-gradient(to bottom, var(--secondary-color), var(--tertiary-color)); */
+  color: black;
+  /* font-family: "Times New Roman", Times, serif; */
+  font-size: 16px;
   font-weight: 600;
-  #padding: 14px 10px;
+  /* padding: 14px 10px; */
   padding: 7px 5px;
   border-bottom: 2px solid var(--primary-color);
   text-shadow: 0 1px 1px rgba(0,0,0,0.1);
   letter-spacing: 0.5px;
-  border-radius: calc(var(--border-radius) - 2px);
+  /* border-radius: calc(var(--border-radius) - 2px); */
+  /* position: centre; */
+  /* place-items: center; */
+  /* display: grid ; */
 }
 
 .grid-head-wrapper_ontol {
@@ -173,30 +199,46 @@ ul li a:hover {
 }
  
 .grid-head-wrapper_ontol > .grid-head-item_ontol {
-  background: linear-gradient(to bottom, var(--secondary-color_ontol), var(--tertiary-color_ontol));
-  color: white;
-  font-size: 18px;
+  /* #background: linear-gradient(to bottom, var(--secondary-color_ontol), var(--tertiary-color_ontol)); */
+  color: black;
+  font-size: 16px;
   font-weight: 600;
-  #padding: 14px 10px;
+  /* #padding: 14px 10px; */
   padding: 7px 5px;
   border-bottom: 2px solid var(--primary-color_ontol);
   text-shadow: 0 1px 1px rgba(0,0,0,0.1);
   letter-spacing: 0.5px;
-  border-radius: calc(var(--border-radius) - 2px);
+  /* border-radius: calc(var(--border-radius) - 2px); */
 }
 
 /* Grid container styles */
 .container3 {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  background-color: var(--primary-color);
-  padding: 18px;
+  /* grid-template-columns: repeat(5, 1fr); */
+  grid-template-columns: 1fr 120px 120px 120px;
+  /* background-color: var(--primary-color); */
+  padding: 2px;
   
   border-radius: var(--border-radius);
-  margin-bottom: 25px;
+  margin-bottom: 2px;
   box-shadow: var(--shadow);
   #gap: 10px;
 }
+
+/* https://stackoverflow.com/questions/58251569/coloring-every-other-row-using-css-grid 
+.container3 .table-row {
+  display: contents;
+}
+.container3 .table-row:nth-child(odd) * {
+  background-color: #f3f4f9;
+} */
+
+.container3 .grid-row-wrapper:nth-child(odd) .grid-item
+{
+  background: #fBfBfB;;
+} 
+
+
  
 .container3 > div {
   background-color: var(--light-gray);
@@ -210,15 +252,29 @@ ul li a:hover {
 
 .container3_ontol {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  background-color: var(--primary-color);
-  padding: 18px;
+  /* grid-template-columns: repeat(4, 1fr); */
+  grid-template-columns: 1fr 120px 120px;
+  /* background-color: var(--primary-color); */
+  padding: 2px;
   
   border-radius: var(--border-radius);
   margin-bottom: 25px;
   box-shadow: var(--shadow);
   #gap: 10px;
 }
+
+/* https://stackoverflow.com/questions/58251569/coloring-every-other-row-using-css-grid 
+.container3_ontol .table-row {
+  display: contents;
+}
+.container3_ontol .table-row:nth-child(odd) * {
+  background-color: #f3f4f9;
+} */
+
+.container3_ontol .grid-row-wrapper_ontol:nth-child(odd) .grid-item
+{
+  background: #fBfBfB;;
+} 
  
 .container3_ontol > div {
   background-color: var(--light-gray);
@@ -234,6 +290,7 @@ ul li a:hover {
 .grid-row-wrapper {
   display: contents;
 }
+
  
 .grid-row-wrapper > .grid-item {
   background: white;
@@ -241,6 +298,8 @@ ul li a:hover {
   padding: 12px 10px;
   border-bottom: 1px solid #e0e0e0;
   transition: var(--transition);
+  /* display: grid ; */
+  /* text-align: left; */
 }
  
 .grid-row-wrapper:hover > .grid-item {
@@ -270,7 +329,7 @@ ul li a:hover {
 /* Menu Bar Styling */
 .menu-bar {
   display: flex;
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  #background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
   #padding: 14px 20px;
   padding: 7px 10px;
   font-family: var(--font-family);
@@ -284,7 +343,7 @@ ul li a:hover {
 
 .menu-bar_ontol {
   display: flex;
-  background: linear-gradient(135deg, var(--primary-color_ontol), var(--secondary-color_ontol));
+  #background: linear-gradient(135deg, var(--primary-color_ontol), var(--secondary-color_ontol));
   #padding: 14px 20px;
   padding: 7px 10px;
   font-family: var(--font-family);
@@ -297,14 +356,14 @@ ul li a:hover {
 }
  
 .menu-text-bar {
-  background: linear-gradient(135deg, var(--secondary-color),var(--tertiary-color));
+  /* background: linear-gradient(135deg, var(--header-secondary-color),var(--header-primary-color)); */
   #padding: 12px 20px;
   padding: 6px 10px;
   font-family: var(--font-family);
   box-shadow: var(--shadow);
   font-size: 25px;
   text-align: center;
-  color: white;
+  color: black;
   border-radius: var(--border-radius);
   #margin-bottom: 20px;
   margin-bottom: 10px;
@@ -312,15 +371,32 @@ ul li a:hover {
   text-shadow: 0 1px 2px rgba(0,0,0,0.15);
 }
 
+.menu-text-bar_free {
+  #background: linear-gradient(135deg, var(--secondary-color),var(--tertiary-color));
+  #padding: 12px 20px;
+  padding: 6px 10px;
+  font-family: var(--font-family);
+  #box-shadow: var(--shadow);
+  font-size: 25px;
+  text-align: right;
+  color: white;
+  border-radius: var(--border-radius);
+  #margin-bottom: 20px;
+  margin-bottom: 10px;
+  letter-spacing: 0.5px;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.15);
+ }
+
 .menu-text-bar_ontol {
-  background: linear-gradient(135deg, var(--secondary-color_ontol), var(--tertiary-color_ontol));
+  #background: linear-gradient(135deg, var(--secondary-color_ontol), var(--tertiary-color_ontol));
+  /* background: linear-gradient(135deg, var(--header-secondary-color), var(--header-primary-color)); */
   #padding: 12px 20px;
   padding: 6px 10px;
   font-family: var(--font-family);
   box-shadow: var(--shadow);
   font-size: 25px;
   text-align: center;
-  color: white;
+  color: black;
   border-radius: var(--border-radius);
   #margin-bottom: 20px;
   margin-bottom: 10px;
@@ -384,11 +460,11 @@ ul li a:hover {
  
 /* Button styles */
 .menubar-button {
-  background: linear-gradient(to bottom, var(--secondary-color), var(--primary-color));
+  /* background: linear-gradient(to bottom, var(--secondary-color), var(--primary-color)); */
   font-family: var(--font-family);
-  font-size: 18px;
+  font-size: 14px;
   box-shadow: var(--shadow);
-  color: white;
+  color: black;
   border: none;
   #padding: 10px 20px;
   padding: 5px 10px;
@@ -400,7 +476,7 @@ ul li a:hover {
   z-index: 1;
 }
 
-.menubar-button#compareTwoPolicies {
+/*.menubar-button#compareTwoPolicies {
   background: linear-gradient(to bottom, var(--secondary-color), var(--primary-color));
   font-family: var(--font-family);
   font-size: 18px;
@@ -417,14 +493,14 @@ ul li a:hover {
   z-index: 1;
   
   left : 200px;
-}
+} */
 
 .menubar-button#logout {
-  background: linear-gradient(to bottom, var(--secondary-color), var(--primary-color));
+  /* background: linear-gradient(to bottom, var(--secondary-color), var(--primary-color)); */
   font-family: var(--font-family);
-  font-size: 18px;
+  font-size: 14px;
   box-shadow: var(--shadow);
-  color: white;
+  color: black;
   border: none;
   #padding: 10px 20px;
   padding: 5px 10px;
@@ -435,7 +511,7 @@ ul li a:hover {
   overflow: hidden;
   z-index: 1;
   
-  left :300px;
+  #left :550px;
   
 }
  
@@ -465,11 +541,11 @@ ul li a:hover {
 }
 
 .menubar-button_ontol {
-  background: linear-gradient(to bottom, var(--secondary-color_ontol), var(--primary-color_ontol));
+  /* background: linear-gradient(to bottom, var(--secondary-color_ontol), var(--primary-color_ontol)); */
   font-family: var(--font-family);
-  font-size: 18px;
+  font-size: 14px;
   box-shadow: var(--shadow);
-  color: white;
+  color: black;
   border: none;
   #padding: 10px 20px;
   padding: 5px 10px;
@@ -511,8 +587,8 @@ ul li a:hover {
   font-family: var(--font-family);
   font-size: 13px;
   box-shadow: var(--shadow);
-  width: 110px;
-  color: white;
+  /* width: 110px; */
+  color: navy;
   border: none;
   padding: 8px 12px;
   border-radius: var(--border-radius);
@@ -521,6 +597,7 @@ ul li a:hover {
   letter-spacing: 0.5px;
   position: relative;
   overflow: hidden;
+  width: calc(var(--grid-button-width) - 0px)
 }
  
 .grid-button:before {
@@ -546,17 +623,233 @@ ul li a:hover {
 .grid-button:active {
   transform: translateY(1px);
 }
+
+
+/* TAB SET UP START */
+* {
+  box-sizing: border-box;
+}
+
+section_tab {
+  position: relative;
+  width: 606px;
+  margin: 0 auto;
+  z-index: 0;
+  color: white;
+}
+
+/ * section:after {
+  content: 'Click on a tab above!';
+  position: absolute;
+  left: 0;
+  top: 38px;
+  width: 100%;
+  font-size: 1.8em;
+  text-align: center;
+  background-color: #5E6B7F;
+  padding: 40px 0;
+} */
+
+button_tab {
+  cursor: pointer;
+  width: 199px;
+  display: inline-block;
+  background-color: #5E6B7F;
+  color: white;
+  text-align: center;
+  transition: .25s ease;
+  border: none;
+  padding: 10px;
+  border-radius: 12px 12px 0 0;
+}
+
+div_tab:focus button, button:focus {
+  background-color: #8DA1BF;
+  outline: none;
+}
+
+button_tab:focus + p, div:focus P {
+  display: block;
+  position: absolute;
+  background-color: #8DA1BF;
+  height: 120px;
+  width: 100%;
+  left: 0;
+  z-index: 2;
+  outline: none;
+  top: 0px;
+  text-align: center;
+  padding-top: 48px;
+}
+
+p_tab {
+  display: none;
+  font-size: 2em;
+}
+
+div_tab {
+  display: inline-block;
+}
+
+div_tab:focus {
+  outline: none;
+}
+
+body_tab {
+  padding: 3em;
+}
+
+.p_tab {
+  margin-top: 300px;
+  text-align: center;
+  display: block;
+  font-size: 1em;
+}
+/* TAB SET UP END */
+
+.nav-tabs li a {
+  font-size: 18px !important;
+  /* font-weight: bold !important; */
+  color: black !important;
+  // etc.
+}
+
+.nav-tabs  li a.active {
+  font-size: 18px !important;
+  font-weight: bold !important;
+  color: black !important;
+  // etc.
+}
+
+/* Modal container */
+.modal2 {
+    display: none; /* Initially hidden */
+	position: fixed; /* Fix position relative to the viewport */
+	top: 50%; /* Position from the top */
+    left: 50%; /* Position from the left */
+	transform: translate(-50%, -50%); /* Offset the modal by half of its own width and height to truly center it */
+	z-index: 9999; /* Ensure the modal is above other content */
+	width: 80%; /* Adjust the width of the modal */
+    max-width: 700px; /* Max width */
+    max-height: 80%; /* Max height */
+	border-radius: 12px; /* Rounded corners */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Shadow for visual effect */
+	/* padding: 20px;  Padding inside the modal */
+    z-index: 9999; /* Ensure the modal is above other content */
+    overflow-y: auto; /* Allow scrolling if content overflows */
+    transition: opacity 0.3s ease-in-out; /* Smooth transition when showing/hiding */
+	
+}
+
+/* Modal container */
+.modal {
+    display: none; /* Initially hidden */
+    position: fixed; /* Fix position relative to the viewport */
+    top: 50%; /* Position from the top */
+    left: 50%; /* Position from the left */
+    transform: translate(-50%, -50%); /* Offset the modal by half of its own width and height to truly center it */
+    width: 80%; /* Adjust the width of the modal */
+    max-width: 700px; /* Max width */
+    max-height: 80%; /* Max height */
+    background-color: white; /* Modal background color */
+    border-radius: 12px; /* Rounded corners */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Shadow for visual effect */
+    padding: 20px; /* Padding inside the modal */
+    z-index: 9999; /* Ensure the modal is above other content */
+    overflow-y: auto; /* Allow scrolling if content overflows */
+    transition: opacity 0.3s ease-in-out; /* Smooth transition when showing/hiding */
+	
+}
+
+/* Modal content */
+.modal-content {
+    padding: 20px;
+    text-align: center;
+	
+}
+
+/* Close button */
+.close-button {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 30px;
+    color: #333; /* Darker close button for visibility */
+    cursor: pointer;
+    transition: color 0.2s; /* Smooth transition for button hover */
+}
+
+.close-button:hover {
+    color: #e74c3c; /* Red color on hover */
+}
+
+.h2_modal {
+    font-size: 18px;
+}
+
+
+/* demo 127.0.0.1:8000/policy-editor demo */
+/* https://dips.soton.ac.uk/ */
+/* upcast_consumer@example.com https://dips.soton.ac.uk/negotiation/organization/negotiation */
 {% endblock %}
     {% block title %} Data Controller/Processor Home {% endblock %}
     {% block content %}
+<!--<head>
+   <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+  <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body> -->
         <main id="main">
 		    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+			<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
             
 			
+			<div id="deletenameModal" class="modal2">
+                <div class="modal-content">
+                    <span class="close-button" id="closedeleteNameModalButton">&times;</span>
+					<p hidden id="deletePolicyID">Dummy</p>
+					<p hidden id="deletePolicyName">Dummy</p>
+                    <h2 class="h2_modal" id="DeleteNameText" > <span> Delete Policy </span> </h2>
+                    
+                    <button id="deleteRuleButton">Submit</button>
+                </div>
+					
+            </div>
+			
+			<div id="deletenameModalOntology" class="modal2">
+                <div class="modal-content">
+                    <span class="close-button" id="closedeleteNameModalButtonOntology">&times;</span>
+					<p hidden id="deleteOntologyID">Dummy</p>
+					<p hidden id="deleteOntologyName">Dummy</p>
+                    <h2 class="h2_modal" id="DeleteNameTextOntology" > <span> Delete Ontology </span> </h2>
+                    
+                    <button id="deleteOntologyButton">Submit</button>
+                </div>
+					
+            </div>
+			
+            <div id="ontoluploadModal" class="modal2">
+                <div class="modal-content">
+                    <span class="close-button" id="closeontoluploadModalButton">&times;</span>
+                    <label for="ontolFileInput" class="dropdown-label">
+                        Click to upload Ontology File
+                        <input type="file" id="ontolFileInput" hidden>
+                    </label>
+                </div>
+            </div>
+
+			
+			
 			<section id="faq" class="faq">
-                    <header class="section-header">
+                    <!-- <header class="section-header">
                         <p>Welcome {{ user.username}} this is the Policy Editor</p>
-                    </header>
+                    </header> -->
 					
 					
 					
@@ -569,16 +862,52 @@ ul li a:hover {
 							
                             <!-- <input id="submit" type="submit" value="Submit"> -->
                         <!-- </form> -->
-						<div class="container">
-						    <p>Ver: Alpha - 0.2</p>
-						</div>
+						
 						
 						<div class="control_main_index_wrapper", id="control_main_index_wrapper">
 						
-						<div class="menu-text-bar">
-						    Your Current Policies
-							<a href="{% url 'logout' %}" class="menubar-button" id="logout"> Logout</a>
+						
+						<!-- <div class="container">
+							    <p>Ver: Alpha - 0.2</p>
+						</div> -->
+						
+						<div class="container">
+							  <p>&nbsp</p>
 						</div>
+						
+						
+						
+						<div class="menu-text-bar_free">
+						        <a  class="menubar-button" id="settings"> Settings</a>
+							    <a  class="menubar-button" href="{% url 'logout' %}" id="logout"> Logout</a>
+						    </div>
+							
+						<div class="container">
+							    <p>Ver: Alpha - 0.2</p>
+						</div>	
+												
+						<header class="section-header">
+                            <p>Welcome {{ user.username}} this is the Policy Editor</p>
+                        </header>
+						
+						
+						
+
+<div class="TabContainer">
+  <!-- https://getbootstrap.com/docs/5.0/components/navs-tabs/
+  https://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_ref_js_tab_events2&stacked=h -->
+  <ul class="nav nav-tabs">
+    <li class="nav-item"><a class="nav-link active" href="#home">Your Policies</a></li>
+    <li class="nav-item"><a class="nav-link" href="#menu1">Your Ontologies</a></li>
+    
+  </ul>
+
+  <div class="tab-content">
+  <div id="home" class="tab-pane fade in active">
+					
+						<!-- <div class="menu-text-bar">
+						    Your Current Policies
+						</div> -->
 						
 						
 						
@@ -593,8 +922,9 @@ ul li a:hover {
                                 <!-- <button id="createNewPolicy" class="menubar-button" style="background-color:#34ebd8">Create New Policy</button>
 								<button id="createNewPolicyFromUpload" class="menubar-button" style="background-color:#34ebd8">Create New Policy From Upload</button> -->
 								<button id="createNewPolicy" class="menubar-button" >Create New Policy</button>
-								<button id="createNewPolicyFromUpload" class="menubar-button" >Create New Policy From Upload</button>
+								<button id="createNewPolicyFromUpload" class="menubar-button" >Upload New Policy</button>
 								<button id="compareTwoPolicies" class="menubar-button" >Compare Two Policies</button>
+								<button id="reviewPublicRepository" class="menubar-button" style="display: none">Review Public Repository </button>
                                 
 								<script type='text/javascript'>	
 							       								   
@@ -604,8 +934,9 @@ ul li a:hover {
 										selectedValues="... Create new policy ...."
 										console.log("The selected value is " + selectedValues);
 									
-										var targetURL = "/update?policy=" + selectedValues + "&mode=" + mode;	
-										window.open(targetURL,"_blank", "popup")
+										var targetURL = "/policy-editor/update?policy=" + selectedValues + "&mode=" + mode;	
+										/* window.open(targetURL,"_blank", "popup") */
+										window.open(targetURL,"_blank")
                                    });
 								   
 								   $('#createNewPolicyFromUpload').off('click').click(function() {
@@ -614,14 +945,22 @@ ul li a:hover {
 										selectedValues="... Create new policy via upload ...."
 										console.log("The selected value is " + selectedValues);
 									
-										var targetURL = "/update?policy=" + selectedValues + "&mode=" + mode;	
-										window.open(targetURL,"_blank", "popup")
+										var targetURL = "/policy-editor/update?policy=" + selectedValues + "&mode=" + mode;	
+										/* window.open(targetURL,"_blank", "popup") */
+										window.open(targetURL,"_blank")
                                    });
 								   
 								   $('#compareTwoPolicies').off('click').click(function() {
                                         
 									
-										var targetURL = "/compare" ;	
+										var targetURL = "/policy-editor/compare" ;	
+										window.open(targetURL,"_blank")
+                                   });
+								   
+								   $('#reviewPublicRepository').off('click').click(function() {
+                                        
+									
+										var targetURL = "/policy-editor/review_public" ;	
 										window.open(targetURL,"_blank", "popup")
                                    });
 
@@ -639,9 +978,10 @@ ul li a:hover {
                                 <div class="grid-head-wrapper">
 								    <div class="grid-head-item">Policy Name</div>
                                     <!-- <div class="grid-head-item">Policy Visibility</div> -->
-									<div class="grid-head-item">Toggle Visibility</div>
-								    <div class="grid-head-item">Edit this policy</div>
-								    <div class="grid-head-item">Delete this policy</div>
+									<div class="grid-head-item">Actions</div>
+								    <div class="grid-head-item"></div>
+								    <div class="grid-head-item"></div>
+									<div class="grid-head-item"></div>
 								</div>
 						</div>
 						
@@ -654,14 +994,21 @@ ul li a:hover {
                                     <!-- <div class="grid-item" id="policyVisibility">
 									    <span id="policyVisibilitySpan">Private</span>
 									</div> -->
-								    <div class="grid-item">
-								        <button id="togglePolicy" class="grid-button" style="background-color:#34ebd8">Set Public</button>
+								    
+                                    <!-- <div class="grid-item">
+								        <button id="editPolicy" class="grid-button" style="background-color:#34ebd8">Edit</button>
+								    </div> -->
+                                   
+									<div class="grid-item">
+								        <button id="downloadPolicy" class="grid-button" style="background-color:#34ebd8">Download</button>
 								    </div>
-                                    <div class="grid-item">
-								        <button id="editPolicy" class="grid-button" style="background-color:#34ebd8">Edit Policy</button>
+									
+									<div class="grid-item">
+								        <button id="togglePolicy" class="grid-button" style="background-color:#34ebd8">Publish</button>
 								    </div>
-                                    <div class="grid-item">
-								        <button id="deletePolicy" class="grid-button" style="background-color:#34ebd8">Delete Policy</button>
+									
+									 <div class="grid-item">
+								        <button id="deletePolicy" class="grid-button" style="background-color:#34ebd8">Delete  </button>
 								    </div>
 								</div>
                                 				
@@ -704,6 +1051,7 @@ ul li a:hover {
 								    $newRow.find('#policyName span').text("{{ SavedPol.name }}");
 								    ProtectionText="Unknown"
 								    ToggleText="Unknown"
+									/* 0 public 1 private */
 								    if ( {{ SavedPol.protection }} == 0 ){
 								        ProtectionText='Public'
 									    ToggleText='Private'
@@ -724,44 +1072,89 @@ ul li a:hover {
 								    $newRow.find('#togglePolicy').text("Set " + ToggleText);
 									
 									if (ProtectionText == "Public"){
-									    $newRow.find('#togglePolicy').html("<i class='fa fa-eye' style='font-size:16px'></i>");
+									    $newRow.find('#togglePolicy').html("<span>Publish&nbsp&nbsp<\span> <i class='fa fa-eye' style='font-size:16px;background-color:white'></i>");
 									} else {
-									    $newRow.find('#togglePolicy').html("<i class='fa fa-eye-slash' style='font-size:16px'></i>");
+									    $newRow.find('#togglePolicy').html("<span>Publish&nbsp&nbsp<\span> <i class='fa fa-eye-slash' style='font-size:16px;background-color:white'></i>");
 									}
 									
-									$newRow.find('#editPolicy').html("<i class='fa fa-edit' style='font-size:16px'></i>");
+									if (ProtectionText == "Public"){
+									    $newRow.find('#togglePolicy').text("Protect");
+									} else {
+									    $newRow.find('#togglePolicy').text("Publish");
+									} 
+									
+									/* $newRow.find('#editPolicy').html("<i class='fa fa-edit' style='font-size:16px'></i>"); 
 									$newRow.find('#deletePolicy').html("<i class='fa fa-trash' style='font-size:16px'></i>");
+									$newRow.find('#downloadPolicy').html("<i class='fa fa-download' style='font-size:16px'></i>");*/
+									$newRow.find('#deletePolicy').css("background","#f0b1b1");
+									$newRow.find('#editPolicy').css("background","#f0d795");
+									$newRow.find('#togglePolicy').css("background","#99d7f2");
+									
 								   
 							        $newRow.appendTo('.container3'); 
 								   
 								   
-								    $newRow.find('#editPolicy').off('click').click(function() {
+								    /*$newRow.find('#editPolicy').off('click').click(function() { */
+									$newRow.find('#policyName').off('click').click(function() {
                                          var mode="update"
 										
 										 selectedValues="{{ SavedPol.name }}"
 										 console.log("The selected value is " + selectedValues);
 									
-										 var targetURL = "/update?policy=" + selectedValues + "&mode=" + mode;	
-										 window.open(targetURL,"_blank", "popup")
+										 var targetURL = "/policy-editor/update?policy=" + selectedValues + "&mode=" + mode;	
+										 /* window.open(targetURL,"_blank", "popup") */
+										 window.open(targetURL,"_blank")
                                     });
 									
 									$newRow.find('#deletePolicy').off('click').click(function() {
-                                         var mode="delete"
+                                         /* var mode="delete"
 										
 										 selectedValues="{{ SavedPol.name }}"
 										 console.log("The selected value is " + selectedValues);
 									
-										 var targetURL = "/update?policy=" + selectedValues + "&mode=" + mode;	
-										 window.open(targetURL,"_blank", "popup")
+										 var targetURL = "/policy-editor/update?policy=" + selectedValues + "&mode=" + mode;	
+										 window.open(targetURL,"_blank", "popup")*/
+										 
+										 $('#deletenameModal').find('h2').text("Delete Policy - {{ SavedPol.name }}"); 
+										 $('#deletenameModal').find('#deletePolicyID').text("{{ SavedPol.id }}");
+                                         $('#deletenameModal').find('#deletePolicyName').text("{{ SavedPol.name }}");										 
+										 
+										 deletenameModal.style.display = 'block';
+										 
+										 
                                     });
+									
+									$newRow.find('#downloadPolicy').off('click').click(function() {
+                                         var mode="read"
+										
+										 selectedValues="{{ SavedPol.name }}"
+										 console.log("The selected value is " + selectedValues);
+									
+										 var targetURL = "/policy-editor/update?policy=" + selectedValues + "&mode=" + mode;	
+										 window.open(targetURL,"_blank", "popup")
+                                    });			
 								   
 								   
 								   
 								    
 									$newRow.find('#togglePolicy').off('click').click(function() {
 	   
-	                                    selectedValues="{{ SavedPol.name }}"
+	                                    this_toggle_button=$(this);
+										
+										toggle_text=this_toggle_button.text();
+										
+										if (toggle_text == "Protect"){
+									        ProtectionText = "Public";
+									    } else {
+									        ProtectionText = "Private";
+									    } 
+										
+										
+										selectedValues="{{ SavedPol.name }}"
+										selectedId="{{ SavedPol.id }}"
                                         console.log("The ontology to make public is  " + selectedValues);
+										console.log("The ontology id to make public is  " + selectedId);
+										console.log("The current status is " + ProtectionText);
 	                                    	 
 	                                    let check_rules=[];
 	
@@ -771,7 +1164,7 @@ ul li a:hover {
 				
 				
 			
-                                            url: '/organization/get_uploaded_rules/',  // Endpoint to fetch uploaded rules 
+                                            url: '/policy-editor/organization/get_uploaded_rules/',  // Endpoint to fetch uploaded rules 
                                             success: function (response) {
                                                 console.log("make public get uploaded AJAX call successful" );
                                                 // Check if any rules exist
@@ -804,6 +1197,7 @@ ul li a:hover {
 		
 	                                    function usemakepublicCheckPols(){
 	                                        console.log("AFTER AJAX in delete. The length of the array is " + check_rules.length);	
+											
 		                                    let policy_name_id = check_rules.find(policy_name_id => policy_name_id.name === selectedValues);
 	                                        console.log("The policy id to toggle is " + policy_name_id.id);
 	
@@ -820,14 +1214,40 @@ ul li a:hover {
                                     function makepublicPolicy(id) {
 	      
 	    
-                                        fetch(`/organization/toggle_policy_api_visiblity/${id}/`, { method: 'POST', headers: {
+                                        fetch(`/policy-editor/organization/toggle_policy_api_visibility/${id}/`, { method: 'POST', headers: {
                                                                    'X-CSRFToken': '{{ csrf_token }}', // Include CSRF token
                                                   } }) 
                                         .then(response => {
                                             if (response.ok) {
                                                 console.log(response.statusText);
 					                            /* alert(response.statusText); */
-					                            window.location.href = (window.location.href.split('?')[0])
+					                            /*window.location.href = (window.location.href.split('?')[0])*/
+												
+												if ( ProtectionText=='Private' ){
+								                    ProtectionText='Public';
+								                }
+								                else{
+								                    ProtectionText='Private';
+								                }
+												
+												console.log("The protection text has been changed to " + ProtectionText);
+												
+												/*if (ProtectionText == "Public"){
+												    
+									                this_toggle_button.html("<span>Publish&nbsp&nbsp<\span> <i class='fa fa-eye' style='font-size:16px;background-color:white'></i>");
+													
+									            } else {
+									                
+													this_toggle_button.html("<span>Publish&nbsp&nbsp<\span> <i class='fa fa-eye-slash' style='font-size:16px;background-color:white'></i>");
+													
+									            } */
+												
+												if (ProtectionText == "Public"){
+									                this_toggle_button.text("Protect");
+									            } else {
+									                this_toggle_button.text("Publish");
+									            }
+												
                                             } else { 
                                                 console.error("Error toggling policy API visibility: ", response.statusText);
                                             }
@@ -835,7 +1255,9 @@ ul li a:hover {
                                         .catch(error => {
                                             console.error("Error toggling policy API visibility: ", error);
                                         });
-                                    }	
+                                    }
+
+                                    						
 
 								   
                                 {% endfor %}								   
@@ -843,10 +1265,15 @@ ul li a:hover {
                             
                         </div>
 
-
-						<div class="menu-text-bar_ontol">
-						    Your Current Ontologies
+                        <div class="menu-text-bar_free">
+						    <p>
 						</div>
+  </div>
+  
+  <div id="menu1" class="tab-pane fade in">					
+						<!-- <div class="menu-text-bar_ontol">
+						    Your Current Ontologies
+						</div> -->
 						
 					    <!-- START Menu Bar -->
                         <div class="menu-bar_ontol">
@@ -858,19 +1285,22 @@ ul li a:hover {
                                                     
                                 <!-- <button id="createNewPolicy" class="menubar-button" style="background-color:#34ebd8">Create New Policy</button>
 								<button id="createNewPolicyFromUpload" class="menubar-button" style="background-color:#34ebd8">Create New Policy From Upload</button> -->
-								<button id="createNewOntology" class="menubar-button_ontol" >Create New Ontology</button>
+								<button id="createNewOntology" class="menubar-button_ontol" >Upload New Ontology</button>
 								
                                 
 								<script type='text/javascript'>	
 							       								   
 								   $('#createNewOntology').off('click').click(function() {
-                                        var mode="create"
+                                        /* var mode="create"
 										
 										selectedValues="... Add new ontology ...."
 										console.log("The selected value is " + selectedValues);
 									
-										var targetURL = "/update_ontol?ontology=" + selectedValues + "&mode=" + mode;	
-										window.open(targetURL,"_blank", "popup")
+										var targetURL = "/policy-editor/update_ontol?ontology=" + selectedValues + "&mode=" + mode;	
+										window.open(targetURL,"_blank", "popup")*/
+										
+										const OntolUploadModal = document.getElementById('ontoluploadModal');
+										OntolUploadModal.style.display = 'block';
                                    });
 								   
                                 						   
@@ -887,7 +1317,7 @@ ul li a:hover {
                                 <div class="grid-head-wrapper_ontol">
 								    <div class="grid-head-item_ontol">Ontology Name</div>
                                     <!-- <div class="grid-head-item">Policy Visibility</div> -->
-									<div class="grid-head-item_ontol">Toggle Visibility</div>
+									<div class="grid-head-item_ontol">Toggle API Visibility</div>
 								    <div class="grid-head-item_ontol">Edit this ontology</div>
 								    <div class="grid-head-item_ontol">Delete this ontology</div>
 								</div>
@@ -902,14 +1332,17 @@ ul li a:hover {
                                     <!-- <div class="grid-item" id="policyVisibility">
 									    <span id="policyVisibilitySpan">Private</span>
 									</div> -->
-								    <div class="grid-item">
-								        <button id="toggleOntology" class="grid-button" style="background-color:#34ebd8">Set Public</button>
+								   
+                                    <!-- <div class="grid-item">
+								        <button id="editOntology" class="grid-button" style="background-color:#34ebd8">Edit</button>
+								    </div> -->
+                                    
+									 <div class="grid-item">
+								        <button id="toggleOntology" class="grid-button" style="background-color:#34ebd8">Publish</button>
 								    </div>
-                                    <div class="grid-item">
-								        <button id="editOntology" class="grid-button" style="background-color:#34ebd8">Edit Ontology</button>
-								    </div>
-                                    <div class="grid-item">
-								        <button id="deleteOntology" class="grid-button" style="background-color:#34ebd8">Delete Ontology</button>
+									
+									<div class="grid-item">
+								        <button id="deleteOntology" class="grid-button" style="background-color:#34ebd8">Delete</button>
 								    </div>
 								</div>
                                 				
@@ -972,35 +1405,69 @@ ul li a:hover {
 								    $newRow_ontol.find('#toggleOntology').text("Set " + ToggleText);
 									
 									if (ProtectionText == "Public"){
-									    $newRow_ontol.find('#toggleOntology').html("<i class='fa fa-eye' style='font-size:16px'></i>");
+									    $newRow_ontol.find('#toggleOntology').html("<span>Publish&nbsp&nbsp<\span> <i class='fa fa-eye' style='font-size:16px'></i>");
 									} else {
-									    $newRow_ontol.find('#toggleOntology').html("<i class='fa fa-eye-slash' style='font-size:16px'></i>");
+									    $newRow_ontol.find('#toggleOntology').html("<span>Publish&nbsp&nbsp<\span>  <i class='fa fa-eye-slash' style='font-size:16px'></i>");
 									}
 									
-									$newRow_ontol.find('#editOntology').html("<i class='fa fa-edit' style='font-size:16px'></i>");
-									$newRow_ontol.find('#deleteOntology').html("<i class='fa fa-trash' style='font-size:16px'></i>");
+									if (ProtectionText == "Public"){
+									    $newRow_ontol.find('#toggleOntology').text("Protect");
+									} else {
+									    $newRow_ontol.find('#toggleOntology').text("Publish");
+									}
+									
+									/* $newRow_ontol.find('#editOntology').html("<i class='fa fa-edit' style='font-size:16px'></i>");
+									$newRow_ontol.find('#deleteOntology').html("<i class='fa fa-trash' style='font-size:16px'></i>"); */
+	
+									
+									$newRow_ontol.find('#deleteOntology').css("background","#f0b1b1");
+									$newRow_ontol.find('#editOntology').css("background","#f0d795");
+									$newRow_ontol.find('#toggleOntology').css("background","#99d7f2");
+									
+									$newRow_ontol.appendTo('.container3_ontol'); 
 								   
-							        $newRow_ontol.appendTo('.container3_ontol'); 
 								   
-								   
-								    $newRow_ontol.find('#editOntology').off('click').click(function() {
+								    /* $newRow_ontol.find('#editOntology').off('click').click(function() { */
+									$newRow_ontol.find('OntologyName').off('click').click(function() {
                                          var mode="update"
 										
 										 selectedValues="{{ CustOnt.name }}"
 										 console.log("The selected value is " + selectedValues);
 									
-										 var targetURL = "/update_ontol?ontology=" + selectedValues + "&mode=" + mode;	
-										 window.open(targetURL,"_blank", "popup")
+										 var targetURL = "/policy-editor/update_ontol?ontology=" + selectedValues + "&mode=" + mode;	
+										 /* window.open(targetURL,"_blank")*/
                                     });
 									
-									$newRow_ontol.find('#deleteOntology').off('click').click(function() {
+									/* $newRow_ontol.find('#deleteOntology').off('click').click(function() {
                                          var mode="delete"
 										
 										 selectedValues="{{ CustOnt.name }}"
 										 console.log("The selected value is " + selectedValues);
 									
-										 var targetURL = "/update_ontol?ontology=" + selectedValues + "&mode=" + mode;	
+										 var targetURL = "/policy-editor/update_ontol?ontology=" + selectedValues + "&mode=" + mode;	
 										 window.open(targetURL,"_blank", "popup")
+                                    }); */
+									
+									$newRow_ontol.find('#deleteOntology').off('click').click(function() {
+                                         /* var mode="delete"
+										
+										 selectedValues="{{ SavedPol.name }}"
+										 console.log("The selected value is " + selectedValues);
+									
+										 var targetURL = "/policy-editor/update?policy=" + selectedValues + "&mode=" + mode;	
+										 window.open(targetURL,"_blank", "popup")*/
+										 
+										 console.log("The delete button has been pressed")
+										 
+										 $('#deletenameModalOntology').find('h2').text("Delete Ontology - {{ CustOnt.name }}"); 
+										 $('#deletenameModalOntology').find('#deleteOntologyID').text("{{ CustOnt.id }}"); 
+										 $('#deletenameModalOntology').find('#deleteOntologyName').text("{{ CustOnt.name }}");
+										 
+										 
+										 
+										 deletenameModalOntology.style.display = 'block';
+										 
+										 
                                     });
 								   
 								   
@@ -1010,6 +1477,17 @@ ul li a:hover {
 	   
 	                                    selectedValues="{{ CustOnt.name }}"
                                         console.log("The ontology to make public is  " + selectedValues);
+										
+										this_toggle_button=$(this);
+										
+										toggle_text=this_toggle_button.text();
+										
+										if (toggle_text == "Protect"){
+									        ProtectionText = "Public";
+									    } else {
+									        ProtectionText = "Private";
+									    } 
+										
 	                                    	 
 	                                    let check_ontols=[];
 	
@@ -1019,7 +1497,7 @@ ul li a:hover {
 				
 				
 			
-                                            url: '/organization/get_uploaded_ontologies/',  // Endpoint to fetch uploaded rules 
+                                            url: '/policy-editor/organization/get_uploaded_ontologies/',  // Endpoint to fetch uploaded rules 
                                             success: function (response) {
                                                 console.log("make public get uploaded AJAX call successful" );
                                                 // Check if any rules exist
@@ -1068,14 +1546,40 @@ ul li a:hover {
                                     function makepublicOntology(id) {
 	      
 	    
-                                        fetch(`/organization/toggle_ontology_api_visiblity/${id}/`, { method: 'POST', headers: {
+                                        fetch(`/policy-editor/organization/toggle_ontology_api_visibility/${id}/`, { method: 'POST', headers: {
                                                                    'X-CSRFToken': '{{ csrf_token }}', // Include CSRF token
                                                   } }) 
                                         .then(response => {
                                             if (response.ok) {
                                                 console.log(response.statusText);
-					                            /* alert(response.statusText); */
-					                            window.location.href = (window.location.href.split('?')[0])
+					                            /* alert(response.statusText); 
+					                            window.location.href = (window.location.href.split('?')[0]) */
+												
+												if ( ProtectionText=='Private' ){
+								                    ProtectionText='Public';
+								                }
+								                else{
+								                    ProtectionText='Private';
+								                }
+												
+												console.log("The protecttion text has been changed to " + ProtectionText);
+												
+												/* if (ProtectionText == "Public"){
+												    
+									                this_toggle_button.html("<span>Publish&nbsp&nbsp<\span> <i class='fa fa-eye' style='font-size:16px;background-color:white'></i>");
+													
+									            } else {
+									                
+													this_toggle_button.html("<span>Publish&nbsp&nbsp<\span> <i class='fa fa-eye-slash' style='font-size:16px;background-color:white'></i>");
+													
+									            } */
+												
+												if (ProtectionText == "Public"){
+									                this_toggle_button.text("Protect");
+									            } else {
+									                this_toggle_button.text("Publish");
+									            }
+												
                                             } else { 
                                                 console.error("Error toggling ontology API visibility: ", response.statusText);
                                             }
@@ -1090,419 +1594,221 @@ ul li a:hover {
 						    </script>
                             
                         </div>
-						
+	</div> 
+    </div>
+    <!-- <hr>
+    <p class="act"><b>Active Tab</b>: <span></span></p>
+    <p class="prev"><b>Previous Tab</b>: <span></span></p> -->
+</div>	
 						</div>
-	
 
 
 
-
-
-
-
-						
-						
-					
-					    <br>
-                        <div class="container">
-                            
-							<p>Your current policies</p>
-							<!-- CM0311 -->
-							<p>(Green = Public, Blue = Private)</p>
-							
-                            <div class="container pt-3" style="width:700px;", onclick="ReadSelected()">
-                                <select class="form-select" name="policy" id="policy" size="5" >					    
-						            <option value="IGNORE" selected="selected">
-                                        Select Policy
-                                    </option>
-									<option value="... Create new policy ....">
-                                        ... Create new policy ....
-                                    </option>
-									<option value="... Create new policy via upload ....">
-                                        ... Create new policy via upload ....
-                                    </option>
-							        {% for SavedPol in SavedPols %}
-						                <!-- <option value= "{{ SavedPol }}"> </option> -->
-							            <!-- <option value= "{% url 'update' %}">{{ SavedPol }} </option> -->
-										<option value= "{{ SavedPol.name }}">{{ SavedPol.name }} </option>
-						            {% endfor %}
-							        
-						        </select>
-						        <br>
-								
-								<script type='text/javascript'>	
-                                    var policyMenu=document.getElementById("policy");
-	 
-	                                policyMenu.onchange=function(){
-									    console.log("On change fired ");
-	                                    var userOption = this.options[this.selectedIndex];
-		                                // window.alert("CLICK FOUND VIA ON CHANGE");
-		                                if ( userOption.value != "IGNORE" ){
-		                                    /* For future use if required
-											   Not used currently as this will not detect click on same value twice in a row */
-		                                }
-		 
-	                                } 
-	
-                                </script>
-								
-								{% csrf_token %}
-								
-								<script>
-								    function ReadSelected(){
-									   
-                                       var selectedValues = $("#policy").val();
-									   
-									   console.log("On click fired ");
-									   
-                                       if ( selectedValues != "IGNORE" ){
-									       
-										   // window.alert("Selected values ReadSelected are " + selectedValues);
-										   
-										   /* SEND DATA PACKET TO THE SERVER WITH REQUIRED POLICY NAME */
-										   
-										   var targetURL = "/testview";	
-										   const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-										   // https://stackoverflow.com/questions/43606056/proper-django-csrf-validation-using-fetch-post-request
-										   // https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
-										   // https://www.geeksforgeeks.org/how-to-make-ajax-call-from-javascript/
-										   
-										   /* $.ajax({
-
-                                               // Our sample url to make request 
-                                               url:
-                                                  targetURL,
-
-                                               // Type of Request
-                                               type: "PUT",
-											   contentType: 'application/json',
-                                               headers: {
-                                                   'X-CSRFToken': '{{csrf_token}}'  // Include CSRF token
-                                               },
-											   data: JSON.stringify({
-                                                   Policy: selectedValues
-                                               }),
-
-                                               // Function to call when to
-                                               // request is ok 
-                                               success: function (data) {
-                                                   let x = JSON.stringify(data);
-                                                   window.alert("WE are back from Ajax");
-												   //window.alert("The data is " + JSON.stringify(data));
-												   //window.open(data, '_blank');
-                                               },
-
-                                               // Error handling 
-                                               error: function (error) {
-                                                   console.log(`Error ${error}`);
-                                               }
-                                            }); */
-										   
-										   var mode="update"
-										   console.log("The selected value is " + selectedValues);
-										   if ( selectedValues == "... Create new policy ...." ){
-										       mode="create";
-										   }
-										   
-										   if ( selectedValues == "... Create new policy via upload ...." ){
-										       mode="create";
-										   }
-									
-										   var targetURL = "/update?policy=" + selectedValues + "&mode=" + mode;	
-										   window.open(targetURL,"_blank", "popup")
-										   
-										   // https://stackoverflow.com/questions/43606056/proper-django-csrf-validation-using-fetch-post-request
-										   // https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
-										   // https://www.geeksforgeeks.org/how-to-make-ajax-call-from-javascript/
-										   
-										   return
-										   
-										   $.ajax({
-
-                                               // Our sample url to make request 
-                                               url:
-                                                  targetURL,
-
-                                               // Type of Request
-                                               type: "GET",
-											   contentType: 'application/json',
-                                               headers: {
-                                                   'X-CSRFToken': '{{csrf_token}}'  // Include CSRF token
-                                               },
-											   data: JSON.stringify({
-                                                   None: ""
-                                               }),
-
-                                               // Function to call when to
-                                               // request is ok 
-                                               success: function (data) {
-                                                   let x = JSON.stringify(data);
-                                                   window.alert("WE are back from Ajax");
-												   //window.alert("The data is " + JSON.stringify(data));
-												   //window.open(data, '_blank');
-												   // https://stackoverflow.com/questions/62021506/how-to-open-web-page-returned-by-ajax-call
-												    //var tab = window.open($("#data").val() + targetURL, $("#data").val() +targetURL);
-												   
-                                                    //tab.document.write(data); 
-                                                    //tab.document.close();
-													
-													//window.open(targetURL,"_blank", "popup")
-													window.open(targetURL, targetURL, "popup")
-													
-													
-												   // const winURL = URL.createObjectURL(new Blob([data], {type:"text/html"}));
-												   
-												   // const win=window.open(
-												   //                      winURL,
-													//					 "win",
-													//					 'width=800, height=400,screenX=200, screenY=200'
-													//					 );
-                                               },
-
-                                               // Error handling 
-                                               error: function (error) {
-                                                   console.log(`Error ${error}`);
-                                               }
-                                            });
-										   
-										    
-										   
-									   }
-                                    }
-								</script>
-								
-                                <!-- <p>Disabled Select</p>
-                                <select class="form-select" disabled>
-                                    <option selected>
-                                        Select Profile
-                                    </option>
-							        {% for SavedPol in SavedPols %}
-						            
-							        <option value= "{{ SavedPol }}">{{ SavedPol }} </option>
-						            {% endfor %}
-                            
-                                </select> 
-						
-						        <br>
-						        {% for SavedPol in SavedPols %}
-						             - {{ SavedPol }}<br>
-						        {% endfor %} -->
-						    
-							</div>
-							
-						</div>
-					
-					</body>
-					
-					<body class="text-center">
-                        <div class="container">
-                            
-							<p>Your current loaded ontologies</p>
-							<!-- CM0311 -->
-							<p>ODRL_DPV is default ontology    (Green = Public, Blue = Private)</p>
-													
-                            <div class="container pt-3" style="width:700px;" onclick="ReadSelectedOntol()">
-                                <select class="form-select" id="ontology" size="5">					    
-						            <option selectedvalue="IGNORE" selected="selected">
-                                        Select Ontology
-									<option value="... Add new ontology ....">
-                                        ... Add new ontology ....
-                                    </option>
-                                    </option>
-							        {% for CustOnt in CustOntList %}
-						                <!-- <option value= "{{ SavedPol }}"> </option> -->
-							            <option value= "{{ CustOnt.name }}">{{ CustOnt.name }} </option>
-						            {% endfor %}
-							        
-						        </select>
-								
-								<!-- {% csrf_token %} -->
-								
-								<script>
-								    function ReadSelectedOntol(){
-									   
-                                       var selectedValues = $("#ontology").val();
-									   
-                                       if ( selectedValues != "IGNORE" ){
-									       
-										   const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-										   										   
-										   var mode="update"
-										   if ( selectedValues == "... Add new ontology ...." ){
-										       mode="create"
-										   }
-									
-										   var targetURL = "/update_ontol?ontology=" + selectedValues + "&mode=" + mode;	
-										   window.open(targetURL,"_blank", "popup")
-										   										   
-										   
-									   }
-                                    }
-								</script>
-						        						    
-							</div>
-							
-						</div>
-					
-					</body>
-					
-					<br>
-					
-					
-					<br>
-					
-                    <!-- CM2102 No longer required as default ontologies kept in the database -->
-					<!-- <body class="text-center">   -->
-                    <!--     <div class="container">   -->
-                    <!--         -->
-					<!-- 		<p>Additional standard ontologies</p>  -->
-					<!-- 		   -->
-                    <!--         {% for StdOnt in StdOnts %} -->
-					<!-- 	        - {{ StdOnt }}<br>   -->
-					<!-- 	    {% endfor %}   -->
-					<!-- 		-->
-					<!-- 	</div>   -->
-					
-					<!-- </body>	 -->				
-																	
-					<!-- <div class="text-center text-lg-start">
-                        <a href="{% url 'update' %}" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
-                        <span>Policy Editor</span>
-                        <i class="bi bi-arrow-right"></i>
-                        </a>
-                    </div>
-					
-					
-					<div class="text-center text-lg-start">
-                        <a href="{% url 'logout' %}" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
-                        <span>Logout</span>
-                        <i class="bi bi-arrow-right"></i>
-                        </a>
-                    </div> -->
 					
 
-
-               
-
-            </section>
-			
-			
-			<!-- ======= Hero Section ======= -->
-            <section id="hero" class="hero d-flex align-items-center">
-
-                <!-- <div class="col-lg-6 hero-img" data-aos="zoom-out" data-aos-delay="200"> -->
-                    <!-- <img src="{% static 'img/team-shape.svg' %}" class="img-fluid" alt=""> -->
-                <!-- </div> -->
-				<!-- <div class="container">
-                    <div class="row">
-                        <div class="col-lg-6 d-flex flex-column justify-content-center">
-                            <div data-aos="fade-up" data-aos-delay="600">
-                                <div class="text-center text-lg-start">
-                                    <a href="{% url 'update' %}" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
-                                    <span>Policy Editor</span>
-                                    <i class="bi bi-arrow-right"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-				</div> -->
-				
-				<div class="container">
-                    <div class="row">
-                        <div class="col-lg-6 d-flex flex-column justify-content-center">
-                            <div data-aos="fade-up" data-aos-delay="600">
-                                <div class="text-center text-lg-start">
-                                    <a href="{% url 'logout' %}" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
-                                    <span>Logout</span>
-                                    <i class="bi bi-arrow-right"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-				</div>
-        
-            </section><!-- End Hero -->
-        </main><!-- End #main -->
-		
-	
-	
-  <script type='text/javascript'>
-/*  
-     var policyMenu=document.getElementById("policy");
-	 
-	 policyMenu.onchange=function(){
-	     var userOption = this.options[this.selectedIndex];
-		 window.alert("CLICK FOUND");
-		 if ( userOption.value != "IGNORE" ){
-		     /* userOption.value 
-			 window.alert("CLICK FOUND 2");
-			 window.open({% url 'update' %},"UPDATE","");
-		 }
-		 
-	 } */
-	 
-	 // CM0311 
-	 $(document).ready(function () {
-	     
-		 OntologyList = document.getElementById("ontology").options;
-		          
-		 // Walk through all the ontologies listed and check public/private
-		 for (var j = 0, m = {{CustOntList|safe}}.length;  j < m; j++) { 
-		 
-			 display_name = {{CustOntList|safe}}[j].name 
-			 console.log("Next in ontology list is" + JSON.stringify(display_name))
-		     
-		     //for (var i = 0, l = OntologyList.childNodes.length; i < l; i++) {
-			 for (var i = 0, l = OntologyList.length; i < l; i++) {
-			     //console.log("The child node name is " + OntologyList.childNodes[i].nodeName)
-				 console.log("The next name is " + OntologyList[i].value)
-                 if (OntologyList[i].value === {{CustOntList|safe}}[j].name){
-				     if ({{CustOntList|safe}}[j].protection == 0){
-					     console.log("Detected a public ontology " + {{CustOntList|safe}}[j].name)
-					     //OntologyList[i].className = "active";
-						 OntologyList[i].style.backgroundColor = '#90EE90'
-				     }
-					 else
-					 {
-					     console.log("Detected a private ontology " + {{CustOntList|safe}}[j].name)
-					     //OntologyList[i].className = "private";
-						 OntologyList[i].style.backgroundColor = '#6495ED'
-					 }
-				 }
-			 }
-		 }
-		 
-		 PolicyList = document.getElementById("policy").options;
-		 
-		 // Walk through all the policies listed and check public/private
-		 for (var j = 0, m = {{SavedPols|safe}}.length;  j < m; j++) { 
-		 
-			 display_name = {{SavedPols|safe}}[j].name 
-			 console.log("Next in policy list is" + JSON.stringify(display_name))
-		     
-		     //for (var i = 0, l = OntologyList.childNodes.length; i < l; i++) {
-			 for (var i = 0, l = PolicyList.length; i < l; i++) {
-			     //console.log("The child node name is " + PolicyList.childNodes[i].nodeName)
-				 console.log("The next name is " + PolicyList[i].value)
-                 if (PolicyList[i].value === {{SavedPols|safe}}[j].name){
-				     if ({{SavedPols|safe}}[j].protection == 0){
-					     console.log("Detected a public ontology " + {{SavedPols|safe}}[j].name)
-					     //PolicyList[i].className = "active";
-						 PolicyList[i].style.backgroundColor = '#90EE90'
-				     }
-					 else
-					 {
-					     console.log("Detected a private ontology " + {{SavedPols|safe}}[j].name)
-					     //OntologyList[i].className = "private";
-						 PolicyList[i].style.backgroundColor = '#6495ED'
-					 }
-				 }
-			 }
-		 }
-	 });
 	
  </script>
+ 
+ <script>
+$(document).ready(function(){
+  $(".nav-tabs a").click(function(){
+    $(this).tab('show');
+  });
+  /* $('.nav-tabs a').on('shown.bs.tab', function(event){
+    var x = $(event.target).text();         // active tab
+    var y = $(event.relatedTarget).text();  // previous tab
+    $(".act span").text(x);
+    $(".prev span").text(y);
+  }); */
+  
+  const closedeleteNameModalButton = document.getElementById('closedeleteNameModalButton');
+  
+  // Close delete modal when clicking on the close button
+  closedeleteNameModalButton.addEventListener('click', () => {
+      deletenameModal.style.display = 'none';
+  });
+
+  // Close delete modal when clicking outside the modal content
+  window.addEventListener('click', (event) => {
+        if (event.target === deletenameModal) {
+            deletenameModal.style.display = 'none';
+        }
+  });
+  
+  
+  const deletePolicyButton = document.getElementById('deleteRuleButton');
+	
+  deletePolicyButton.addEventListener('click', (e) => {
+  	   
+     	  
+	  ResID=$('#deletenameModal').find('#deletePolicyID').text(); 
+	  ResName=$('#deletenameModal').find('#deletePolicyName').text(); 
+	  
+	  delete_rule(ResID, ResName);
+	  
+	  // Function to fetch and display rule details
+     function delete_rule(ruleId, ruleName) {
+        $.ajax({
+            type: 'DELETE', // HTTP DELETE method
+            url: `/policy-editor/organization/delete_rule/${ruleId}/`, // Endpoint to delete the rule by ID
+            headers: {
+                'X-CSRFToken': '{{ csrf_token }}' // CSRF token for secure requests
+            },
+            success: function (response) {
+                //populate_rules();
+				// window.close();
+				// alert('Successfully deleted rule.'); //
+				
+				// Find the row associated with this policy Name and ID //
+				$('.grid-row-wrapper').each(function(index){
+				    // Skip the template entry //
+				    if ( index > 0 ){
+					    name=$(this).find('#policyName span').text()
+					
+					    console.log("The name extracted is " + name + " the rile name is " + ruleName);
+					
+					    if ( name == ruleName){
+					        $(this).remove();
+					    }
+					}
+				});
+				deletenameModal.style.display = 'none';
+			
+            },
+            error: function (error) {
+                console.error('Error deleting the rule:', error);
+                alert('Failed to delete the rule. Please try again.');
+            }
+        });
+      } 
+	   
+        
+  });
+  
+  
+  const closedeleteNameModalButtonOntology = document.getElementById('closedeleteNameModalButtonOntology');
+  
+  // Close delete modal when clicking on the close button
+  closedeleteNameModalButtonOntology.addEventListener('click', () => {
+      deletenameModalOntology.style.display = 'none';
+  });
+
+  // Close delete modal when clicking outside the modal content
+  window.addEventListener('click', (event) => {
+        if (event.target === deletenameModalOntology) {
+            deletenameModalOntology.style.display = 'none';
+        }
+  });
+  
+  
+  const deleteOntologyButton = document.getElementById('deleteOntologyButton');
+	
+  deleteOntologyButton.addEventListener('click', (e) => {
+  	   
+     	  
+	  Res=$('#deletenameModalOntology').find('#deleteOntologyID').text(); 
+	  ResName=$('#deletenameModalOntology').find('#deleteOntologyName').text(); 
+	  
+	  delete_ontology(Res, ResName);
+	  
+	  // Function to fetch and display rule details
+     function delete_ontology(ruleId, ruleName) {
+        $.ajax({
+            type: 'DELETE', // HTTP DELETE method
+            url: `/policy-editor/organization/delete_ontology/${ruleId}/`, // Endpoint to delete the ontology by ID
+            headers: {
+                'X-CSRFToken': '{{ csrf_token }}' // CSRF token for secure requests
+            },
+            success: function (response) {
+                //populate_rules();
+				// window.close();
+				// alert('Successfully deleted ontology.'); //
+				
+				// Find the row associated with this policy Name and ID //
+				$('.grid-row-wrapper_ontol').each(function(index){
+				    // Skip the template entry //
+				    if ( index > 0 ){
+					    name=$(this).find('#ontologyName span').text()
+					
+					    console.log("The name extracted is " + name + " the rile name is " + ruleName);
+					
+					    if ( name == ruleName){
+					        $(this).remove();
+					    }
+					}
+				});
+				
+				deletenameModalOntology.style.display = 'none';
+			
+            },
+            error: function (error) {
+                console.error('Error deleting the ontology:', error);
+                alert('Failed to delete the rule. Please try again.');
+            }
+        });
+      } 
+	   
+        
+  });
+  
+  
+  // Adding a complete modal to cater for upload mode
+	const OntolUploadModal = document.getElementById('ontoluploadModal');
+	const closeontolUploadModalButton = document.getElementById('closeontoluploadModalButton');
+	
+	// Close modal when clicking on the close button
+    closeontolUploadModalButton.addEventListener('click', () => {	    
+        OntolUploadModal.style.display = 'none';
+    });
+
+    // Close modal when clicking outside the modal content
+    window.addEventListener('click', (event) => {
+        if (event.target === OntolUploadModal) {
+            ontolUploadModal.style.display = 'none';
+        }
+    });
+	
+	
+	document.getElementById('ontolFileInput').addEventListener('change', async (event) => {
+        const file = event.target.files[0];
+
+        if (file) {
+            try {
+                const formData = new FormData();
+                formData.append('ontologyFile', file); // Append the file to FormData
+
+                // Send the file to the backend
+				
+                const response = await fetch('/policy-editor/organization/custom-ontology-upload', {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRFToken': '{{ csrf_token }}', // Include CSRF token
+                        },
+                        body: formData, // Send FormData with the file
+                    });
+
+                if (response.ok) {
+                    alert('Ontology file uploaded and saved successfully!');
+				    /* window.location.href = (window.location.href.split('?')[0]) + "?ontology="+$('#ontolFileInput').val().replace(/^.*[\\/]/, '') +"&mode=update"; */
+                } else {
+                    alert('Failed to upload ontology file.');
+                }
+				
+			    ontolUploadModal=document.getElementById('ontoluploadModal');
+	            ontolUploadModal.style.display = 'none';
+					
+            } catch (error) {
+                console.error('Error reading or uploading the file:', error);
+                alert('An error occurred. Please try again.');
+            }
+        } else {
+            alert('No file selected.');
+        }
+    });
+});
+
+ </script>
+
+<!-- </body> -->
  
  {% endblock %}

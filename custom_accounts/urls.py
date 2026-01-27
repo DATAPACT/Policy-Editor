@@ -79,7 +79,7 @@ urlpatterns = [
     # Changed the path rule here to begin at a 'splash' page
     #path("", views.create_rule_dataset_no_user, name="index"),
     path("update", views.create_rule_dataset_no_user, name="update"),
-    path("update*", views.create_rule_dataset_no_user, name="update"),
+    #path("update*", views.create_rule_dataset_no_user, name="update"),
 
         
     #CMADD
@@ -90,6 +90,10 @@ urlpatterns = [
     path("compare", views.compare_policies, name="compare_policies"),
     
     path("testview", views.testview, name="testview"),
+    path("callComparisonAPI", views.callComparisonAPI, name="testview"),
+    
+    path("review_public", views.review_public, name="review_public"),
+    path('organization/get_public_rule/<int:odrl_id>/', views.get_public_rule, name='get_public_rule'),
     
     # CM0311
     path("organization/toggle_ontology_api_visibility/<int:ontology_id>/", views.toggle_ontology_api_visibility, name="toggle_ontology_api_visibility"),

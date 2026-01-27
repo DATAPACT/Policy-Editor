@@ -2,6 +2,47 @@
     {%load static %}
 
     {% block inpagecss %}
+	:root {
+        /* --primary-color: #1976d2;
+        --secondary-color: #2196f3;
+        --tertiary-color: #64b5f6; 
+        --primary-color: #aaaaaa;
+        --secondary-color: #bbbbbb;
+        --tertiary-color: #cccccc;
+        --primary-color: #72bcd4;
+        --secondary-color: #86c5da;
+        --tertiary-color: #99cfe0;*/
+        --primary-color: #111184;
+        --secondary-color: #3C3CE8;
+        --tertiary-color: #99cfe0;
+        --header-primary-color: #111184;
+        --header-secondary-color: #070738;
+        --light-gray: #f5f7fa;
+		--light-blue: #c4e6f5;
+		--original-blue: #4154f1;
+		
+        --hover-color: #e3f2fd;
+        --public-color: #66bb6a;
+        --private-color: #5c6bc0;
+        --shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+        --font-family: 'Segoe UI', Arial, sans-serif;
+        --border-radius: 6px;
+        --transition: all 0.25s ease;
+  
+        /*--primary-color_ontol: #d27519;
+        --secondary-color_ontol: #f37e21;
+        --tertiary-color_ontol: #f6a564;
+        --primary-color_ontol: #aaaaaa;
+        --secondary-color_ontol: #bbbbbb;
+        --tertiary-color_ontol: #cccccc;
+        --primary-color_ontol: #72bcd4;
+        --secondary-color_ontol: #86c5da;
+        --tertiary-color_ontol: #99cfe0;*/
+        --primary-color_ontol: #111184;
+        --secondary-color_ontol: #3C3CE8;
+        --tertiary-color_ontol: #99cfe0;
+    }
+	
         body {
         font-family: Arial, sans-serif;
         margin: 20px;
@@ -43,8 +84,9 @@
         }
 
         #constraintsContainer .removeRow {
-        background-color: #4154f1;
-        color: white;
+        /* background-color: #4154f1; */
+		background-color: var(--light-blue);
+        color: black;
         border: none;
         padding: 10px 20px;
         text-align: center;
@@ -57,8 +99,9 @@
         }
 
         #addConstraintRow, #saveButton, #clearButton {
-        background-color: #4154f1;
-        color: white;
+        /* background-color: #4154f1; */
+		background-color: var(--light-blue);
+        color: black;
         border: none;
         padding: 10px 20px;
         text-align: center;
@@ -74,7 +117,8 @@
         .common-button {
         width: 200px;
         background-color: #4154f1;
-        color: white;
+		/* background-color:var(--light-blue); */
+        color: black;
         border: none;
         padding: 10px 20px;
         text-align: center;
@@ -120,8 +164,9 @@
         }
 
         #refinementTargetContainer .removeRefinementTargetRow {
-        background-color: #4154f1;
-        color: white;
+        /* background-color: #4154f1; */
+		background-color: var(--light-blue);
+        color: black;
         border: none;
         padding: 10px 20px;
         text-align: center;
@@ -151,8 +196,9 @@
         }
 
         #refinementTarget2Container .removeRefinementTarget2Row {
-        background-color: #4154f1;
-        color: white;
+        /* background-color: #4154f1; */
+		background-color: var(--light-blue);
+        color: black;
         border: none;
         padding: 10px 20px;
         text-align: center;
@@ -177,8 +223,9 @@
 		
 
         #addRefinementTargetRow, #saveButton , #clearButton {
-        background-color: #4154f1;
-        color: white;
+        /* background-color: #4154f1; */
+		background-color: var(--light-blue);
+        color: black;
         border: none;
         padding: 10px 20px;
         text-align: center;
@@ -192,8 +239,9 @@
 		
 		/* CMADD - Mimic of above but removed additional class references */
 		#addRefinementTarget2Row {
-        background-color: #4154f1;
-        color: white;
+        /* background-color: #4154f1; */
+		background-color: var(--light-blue);
+        color: black;
         border: none;
         padding: 10px 20px;
         text-align: center;
@@ -214,8 +262,9 @@
         }
 
         #refinementActorContainer .removeRefinementActorRow {
-        background-color: #4154f1;
-        color: white;
+        /* background-color: #4154f1; */
+		background-color: var(--light-blue);
+        color: black;
         border: none;
         padding: 10px 20px;
         text-align: center;
@@ -237,8 +286,9 @@
         }
 
         #addRefinementActorRow, #saveButton , #clearButton {
-        background-color: #4154f1;
-        color: white;
+        /* background-color: #4154f1; */
+		background-color: var(--light-blue);
+        color: black;
         border: none;
         padding: 10px 20px;
         text-align: center;
@@ -259,8 +309,9 @@
         }
 
         #refinementActionContainer .removeRefinementActionRow {
-        background-color: #4154f1;
-        color: white;
+        /* background-color: #4154f1; */
+		background-color: var(--light-blue);
+        color: black;
         border: none;
         padding: 10px 20px;
         text-align: center;
@@ -282,8 +333,9 @@
         }
 
         #addRefinementActionRow, #saveButton {
-        background-color: #4154f1;
-        color: white;
+        /* background-color: #4154f1; */
+		background-color: var(--light-blue);
+        color: black;
         border: none;
         padding: 10px 20px;
         text-align: center;
@@ -348,8 +400,9 @@
         }
 
         #refinementPurposeContainer .removeRefinementPurposeRow {
-        background-color: #4154f1;
-        color: white;
+        /* background-color: #4154f1; */
+		background-color: var(--light-blue);
+        color: black;
         border: none;
         padding: 10px 20px;
         text-align: center;
@@ -371,8 +424,9 @@
         }
 
         #addRefinementPurposeRow, #saveButton, #uploadButton {
-        background-color: #4154f1;
-        color: white;
+        /* background-color: #4154f1; */
+		background-color: var(--light-blue);
+        color: black;
         border: none;
         padding: 10px 20px;
         text-align: center;
@@ -482,12 +536,26 @@
 
 /* Menu Bar Styling */
 .menu-bar {
+  display: flex;
+  #background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  #padding: 14px 20px;
+  padding: 7px 10px;
+  font-family: var(--font-family);
+  box-shadow: var(--shadow);
+  border-radius: var(--border-radius);
+  align-items: center;
+  justify-content: space-between;
+  #margin-bottom: 20px;
+  margin-bottom: 10px;
+}
+/* Menu Bar Styling 
+.menu-bar {
     display: flex;
     background-color: #007bff;
     padding: 10px;
     font-family: Arial, sans-serif;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
+} */
 
 .menu-item {
     position: relative; /* Ensure dropdown aligns relative to this */
@@ -540,20 +608,25 @@
 
 /* CMADD - To support request for button to add new rule */
 /* Menu bar Button Styles */
-.menubar-button,
+/*.menubar-button,*/
 .menubar-label {
     /* display: block; */
     /* width: 100%; */
     padding: 5px;
     /* background-color: white; */
 	background-color:white;
-    color: #007bff;
+    background-color:#b6e9fa;
+	#color: #007bff;
+	color: navy;
     text-align: left;
     border: none;
     font-size: 16px;
     cursor: pointer;
     text-decoration: none;
     transition: background-color 0.3s ease;
+	border-radius: var(--border-radius);
+	box-shadow: var(--shadow);
+	
 }
 
 .menubar-button:hover,
@@ -561,6 +634,51 @@
     background-color: #f0f0f0;
 	text-decoration: underline;
 }
+
+/* Button styles */
+.menubar-button {
+  /* background: linear-gradient(to bottom, var(--secondary-color), var(--primary-color)); */
+  font-family: var(--font-family);
+  font-size: 16px;
+  font-weight: bold;
+  box-shadow: var(--shadow);
+  color: DimGray;
+  border: none;
+  #padding: 10px 20px;
+  padding: 5px 10px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.menubar-button:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(255,255,255,0.1), transparent);
+  transition: var(--transition);
+  z-index: -1;
+}
+ 
+.menubar-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+ 
+.menubar-button:hover:before {
+  left: 100%;
+}
+ 
+.menubar-button:active {
+  transform: translateY(1px);
+}
+
 
 
 
@@ -746,16 +864,16 @@ h2 {
 				<!-- START Menu Bar -->
                 <div class="menu-bar">
                     <!-- START File Menu -->
-                    <div class="menu-item">
+                    <!--<div class="menu-item">
                         <span>File Management</span>
-                        <div class="dropdown-content">
+                        <div class="dropdown-content"> -->
                             <!-- <button id="newRuleButton" class="dropdown-button" style="background-color:#90EE90">New Rule</button> -->
-                            <button id="saveNameButton" class="dropdown-button" style="background-color:#90EE90">Save Policy</button>
+                            <!-- <button id="saveNameButton" class="dropdown-button" style="background-color:#90EE90">Save Policy</button>
 							<button id="saveasNameButton" class="dropdown-button" style="background-color:#90EE90">Save Policy As</button>
-							<button id="deleteNameButton" class="dropdown-button" style="background-color:#90EE90">Delete Policy</button>
-							<button id="downloadRuleButton" class="dropdown-button" style="background-color:#90EE90">Download Policy</button>
+							<button id="deleteNameButton" class="dropdown-button" style="background-color:#90EE90;display:none">Delete Policy</button>
+							<button id="downloadRuleButton" class="dropdown-button" style="background-color:#90EE90">Download Policy</button> -->
 							<!-- CM0311 -->
-						    <button id="namePublicButton" class="dropdown-button" style="background-color:#90EE90">Toggle API Visibility</button>
+						    <!-- <button id="namePublicButton" class="dropdown-button" style="background-color:#90EE90;display:none">Toggle API Visibility</button> -->
                             
                             
 							
@@ -772,9 +890,9 @@ h2 {
 							
 							<button id="saveProfileButton" class="dropdown-button">Save Profile</button>
 							<button id="saveProfileAsButton" class="dropdown-button">Save Profile As</button>
-							<button id="deleteButton" class="dropdown-button">Delete Profile</button> -->
+							<button id="deleteButton" class="dropdown-button">Delete Profile</button> 
                         </div>
-                    </div>
+                    </div>-->
 					<!-- END File Menu -->
 					
 
@@ -797,7 +915,14 @@ h2 {
 					<!--         Should be removed in a fuller tidy up -->
                     <div class="menu-item">
                                                  
-                        <button id="newRuleButton" class="menubar-button" style="background-color:#34ebd8">New Rule</button>
+                        <button id="newRuleButton" class="menubar-button" style="">New Rule</button>
+						
+						<button id="saveNameButton" class="menubar-button" style="">Save Policy</button>
+						<button id="saveasNameButton" class="menubar-button" style="">Save Policy As</button>
+						<button id="deleteNameButton" class="menubar-button" style="display:none">Delete Policy</button>
+						<button id="downloadRuleButton" class="menubar-button" style="">Download Policy</button>							
+						<button id="namePublicButton" class="menubar-button" style="display:none">Toggle API Visibility</button>
+						
                         
                     </div>
 					<!-- END Edit Menu -->
@@ -879,9 +1004,9 @@ h2 {
 				<div id="publicNameModal" class="modal">
                     <div class="modal-content">
                         <span class="close-button" id="closepublicNameModalButton">&times;</span>
-                        <h2>Toggle Ontology API Visibility?</h2>
+                        <h2>Toggle Policy API Visibility?</h2>
                         <div>
-                            <label for="nameInput">Ontology Name:</label>
+                            <label for="nameInput">Policy Name:</label>
 							
                             <input type="text" id="publicFileName" value="" >  <!-- placeholder="Enter rule name"> -->
                         </div>
@@ -1705,6 +1830,40 @@ var saveAs = false;
 					console.log("About to call _fillRefinementDropdownForm (on change)" + dropdownName + " / " + targetValue);
                     _fillRefinementDropdownForm(targetValue, dropdownName, $form);
                 });
+				
+				console.log("Setting the dropdown actions for " + dropdownName);
+				
+				    //dropdown_field=$form.find('#' + dropdownName + 'Dropdown')
+				
+				    //$(dropdown_field).on('mouseover', function(e) {
+                    //    console.log("Got the mouseover");
+					//	var $target = $(e.target);
+                    //    if($target.is('option')) {
+                    //       //alert('yeah!');
+					//       var targetValue = $(this).val();
+					//       console.log("We have moused over " + targetValue);
+                    //    };				
+                    //});
+					
+					//$('#' + dropdownName + 'Dropdown > option').each(function() {
+					//    $(this).on('mouseover' , function(e) {
+                    //        console.log("Got the mouseover");
+					//	      var $target = $(e.target);
+                    //         if($target.is('option')) {
+                    //           //alert('yeah!');
+					//           var targetValue = $(this).val();
+					//           console.log("We have moused over " + targetValue);
+                    //        };				
+                    //    });
+					//      $(this).prop('title', 'your new title');
+					      
+					//});
+				    
+					
+					//$('#' + dropdownName + 'Dropdown option').hover(function(e) {
+                    //    console.log(e.target);
+                    //});
+
 
                 $form.find('#addRefinement' + dropdownName + 'Row').off('click').click(function() {
 				    console.log("We are clickng the add refinement button for " + dropdownName);
@@ -1952,9 +2111,22 @@ var saveAs = false;
 	let check_rules=[]
 	
 	if (( query.mode == "update") || ( query.mode == "read")){
-	    console.log("We are in update mode starting to load cards");
+	    console.log("We are in update or read mode starting to load cards");
 		
-	    $.ajax({
+		// If the optional id parameter is supplied then we will try and ger the data from the public repository instead
+		// This will only be allowed in read mode.
+		queryKeys=Object.keys(query);
+		PublicId=-1;
+		if ( queryKeys.includes("id") ) {
+			    PublicId=query.id; 
+		}
+		
+		if ( (query.mode == "read") && (PublicId != -1) ) {
+		    get_rule(PublicId);			
+		}
+		else{
+		
+	        $.ajax({
                 type: 'GET',
 			
                 url: 'organization/get_uploaded_rules',  // Endpoint to fetch uploaded rules 
@@ -1988,15 +2160,16 @@ var saveAs = false;
                 }
             });
 		
-	    function useCheckRules(){
-	        console.log("AFTER AJAX The length of the array is " + check_rules.length);	
-		    let rule_name_id = check_rules.find(rule_name_id => rule_name_id.name === query.policy);
-	        console.log("The policy id is " + rule_name_id.id);
+	        function useCheckRules(){
+	            console.log("AFTER AJAX The length of the array is " + check_rules.length);	
+		        let rule_name_id = check_rules.find(rule_name_id => rule_name_id.name === query.policy);
+	            console.log("The policy id is " + rule_name_id.id);
 	
-	        get_rule(rule_name_id.id);
+	            get_rule(rule_name_id.id);
 			
 			
-	    }
+	        }
+		} //End if / else on read
 	} // End if update
 	
 	// This page may now be called via URL (with query params).
@@ -2011,18 +2184,29 @@ var saveAs = false;
 	}
 	
     if (query.policy == "... Create new policy via upload ...."){
-	   //document.getElementById('fileInput').click();
-	   FileUploadModal=document.getElementById('fileuploadModal');
-	   FileUploadModal.style.display = 'block';
+	    queryKeys=Object.keys(query);
+	    PublicId=-1;
+		if ( queryKeys.includes("id") ) {
+			    PublicId=query.id; 
+		}
+		
+		if ( (query.mode == "create") && (PublicId != -1) ) {
+		    get_rule(PublicId);			
+		}
+	    else{
+	       //document.getElementById('fileInput').click();
+	       FileUploadModal=document.getElementById('fileuploadModal');
+	       FileUploadModal.style.display = 'block';
 	   
-	   //console.log("We are trying to mimic the click");
-	   //const ToMimicSelect = document.getElementById("fileInput")
-       // pass in event type, options
-       // const clickEvent = new Event("change", {"bubbles":true, "cancelable":false});
-	   //const clickEvent = new Event("change");
+	       //console.log("We are trying to mimic the click");
+	       //const ToMimicSelect = document.getElementById("fileInput")
+           // pass in event type, options
+           // const clickEvent = new Event("change", {"bubbles":true, "cancelable":false});
+	       //const clickEvent = new Event("change");
 
-       //call event on element
-       //ToMimicSelect.dispatchEvent(clickEvent);
+           //call event on element
+           //ToMimicSelect.dispatchEvent(clickEvent);
+		}
 	}
 
     //=> "Button click mimiced!"	
@@ -2033,72 +2217,152 @@ var saveAs = false;
 	// START ################### get_rule(ruleId) {
 	
     function get_rule(ruleId) {
-    $.ajax({
-        type: 'GET', // HTTP GET method
-        url: `organization/get_rule/${ruleId}/`, // Endpoint to fetch the rule by ID
-        headers: {
-            'X-CSRFToken': '{{ csrf_token }}' // CSRF token for secure requests
-        },
-        success: function (response) {
-            try {
-			    console.log("GET RULE PROCESS")
-                // Ensure the response content is properly formatted
-                if (typeof response.content === 'string') {
-                    response.content = JSON.parse(response.content);
-                }
+	
+	    // If the optional id parameter is supplied then we will try and ger the data from the public repository instead
+		// This will only be allowed in read mode.
+		queryKeys=Object.keys(query);
+		PublicId=-1;
+		if ( queryKeys.includes("id") ) {
+			    PublicId=query.Id; 
+		}
+		
+		if (query.mode == "read" && PublicId != -1) {
+		    $.ajax({
+            type: 'GET', // HTTP GET method
+            url: `organization/get_public_rule/${ruleId}/`, // Endpoint to fetch the rule by ID
+            headers: {
+                'X-CSRFToken': '{{ csrf_token }}' // CSRF token for secure requests
+            },
+            success: function (response) {
+                try {
+			        console.log("GET PUBLIC RULE PROCESS")
+                    // Ensure the response content is properly formatted
+                    if (typeof response.content === 'string') {
+                        response.content = JSON.parse(response.content);
+                    }
 				
-				console.log("GET RULE PROCESS ARRAY CHECK")
+				    console.log("GET RULE PROCESS ARRAY CHECK")
 
-                if (Array.isArray(response.content.data)) {
-                    // Clear previous content
-                    $('#jsonOutput').empty();
-					 console.log("GET RULE PROCESS ARRAY OUTPUT EMPTY")
-                     $("body").find('.form-card:gt(0)').remove(); // Remove existing cards if any
+                    if (Array.isArray(response.content.data)) {
+                         // Clear previous content
+                         $('#jsonOutput').empty();
+					     console.log("GET RULE PROCESS ARRAY OUTPUT EMPTY")
+                         $("body").find('.form-card:gt(0)').remove(); // Remove existing cards if any
                    
-                    response.content.data.forEach(function (item, index) {
-					    console.log("FOR EACH IN ARRAY")
-						// CMADD Adjusted timeout function .
-						// The timeout function forces asynchronous execution of jsonload
-						//    so we must make sure that header update happens after at least
-						//    one card has been loaded.
+                        response.content.data.forEach(function (item, index) {
+					        console.log("FOR EACH IN ARRAY")
+						    // CMADD Adjusted timeout function .
+						    // The timeout function forces asynchronous execution of jsonload
+						    //    so we must make sure that header update happens after at least
+						    //    one card has been loaded.
 						
-                        setTimeout(function () {
-                            // Call loadJsonData for each item with a delay
-							console.log("LOADING NEXT ITEM")
-                            loadJsonData(item);
+                            setTimeout(function () {
+                                // Call loadJsonData for each item with a delay
+							    console.log("LOADING NEXT ITEM")
+                                loadJsonData(item);
 							
-							var elem = $("body").find('.form-card:gt(0)').get();
-							console.log("Have got the elements ");
-                            if (elem.length === 0){
-				                console.log("No cards found");
-				                $('#Target2Dropdown').val("");
-                            }else{
-				                console.log("Have found cards");
-                                exampleVal=item.target;
-				                $('#Target2Dropdown').val(exampleVal);
+							    var elem = $("body").find('.form-card:gt(0)').get();
+							    console.log("Have got the elements ");
+                                if (elem.length === 0){
+				                    console.log("No cards found");
+				                    $('#Target2Dropdown').val("");
+                                }else{
+				                    console.log("Have found cards");
+                                    exampleVal=item.target;
+				                    $('#Target2Dropdown').val(exampleVal);
 
-                            }}, index * 1000); // was 1000 1-second interval
-						//console.log("LOADING NEXT ITEM")
-                        //loadJsonData(item);
-                    });
-                } else {
-                    console.error('Response content is not an array:', response.content);
-                    alert('Data format is invalid. Expected an array.');
-                }
+                                }}, index * 1000); // was 1000 1-second interval
+						    //console.log("LOADING NEXT ITEM")
+                            //loadJsonData(item);
+                        });
+                    } else {
+                        console.error('Response content is not an array:', response.content);
+                        alert('Data format is invalid. Expected an array.');
+                    }
                         
 					
 				
-            } catch (error) {
-                console.error('Error parsing the response content:', error);
-                alert('Failed to parse the response. Please check the format.');
+                } catch (error) {
+                    console.error('Error parsing the response content:', error);
+                    alert('Failed to parse the response. Please check the format.');
+                }
+            },
+            error: function (error) {
+                console.error('Error fetching the rule:', error);
+                alert('Failed to fetch the rule. Please try again.');
             }
-        },
-        error: function (error) {
-            console.error('Error fetching the rule:', error);
-            alert('Failed to fetch the rule. Please try again.');
-        }
-    });
-}
+            });
+		    
+			
+		}
+		else{
+            $.ajax({
+            type: 'GET', // HTTP GET method
+            url: `organization/get_rule/${ruleId}/`, // Endpoint to fetch the rule by ID
+            headers: {
+                'X-CSRFToken': '{{ csrf_token }}' // CSRF token for secure requests
+            },
+            success: function (response) {
+                try {
+			        console.log("GET RULE PROCESS")
+                    // Ensure the response content is properly formatted
+                    if (typeof response.content === 'string') {
+                        response.content = JSON.parse(response.content);
+                    }
+				
+				    console.log("GET RULE PROCESS ARRAY CHECK")
+
+                    if (Array.isArray(response.content.data)) {
+                         // Clear previous content
+                         $('#jsonOutput').empty();
+					     console.log("GET RULE PROCESS ARRAY OUTPUT EMPTY")
+                         $("body").find('.form-card:gt(0)').remove(); // Remove existing cards if any
+                   
+                        response.content.data.forEach(function (item, index) {
+					        console.log("FOR EACH IN ARRAY")
+						    // CMADD Adjusted timeout function .
+						    // The timeout function forces asynchronous execution of jsonload
+						    //    so we must make sure that header update happens after at least
+						    //    one card has been loaded.
+						
+                            setTimeout(function () {
+                                // Call loadJsonData for each item with a delay
+							    console.log("LOADING NEXT ITEM")
+                                loadJsonData(item);
+							
+							    var elem = $("body").find('.form-card:gt(0)').get();
+							    console.log("Have got the elements ");
+                                if (elem.length === 0){
+				                    console.log("No cards found");
+				                    $('#Target2Dropdown').val("");
+                                }else{
+				                    console.log("Have found cards");
+                                    exampleVal=item.target;
+				                    $('#Target2Dropdown').val(exampleVal);
+
+                                }}, index * 1000); // was 1000 1-second interval
+						    //console.log("LOADING NEXT ITEM")
+                            //loadJsonData(item);
+                        });
+                    } else {
+                        console.error('Response content is not an array:', response.content);
+                        alert('Data format is invalid. Expected an array.');
+                    }
+                        
+					
+				
+                } catch (error) {
+                    console.error('Error parsing the response content:', error);
+                    alert('Failed to parse the response. Please check the format.');
+                }
+            },
+            error: function (error) {
+                console.error('Error fetching the rule:', error);
+                alert('Failed to fetch the rule. Please try again.');
+            }
+            });
+		}
+    }
     // END ################### get_rule(ruleId) {
 	
 	            // START ################### fillDropdown(dropdownId, data) {
@@ -2127,10 +2391,28 @@ var saveAs = false;
                                 txt = parent + "->" + item.label
                             }
                             //console.log("About to append dropdown option " + item.uri )
-							dropdown.append($('<option>', {
-                                value: item.uri,
-                                text: txt
-                            }));
+							// The 'if' not required here firs if always true (remove at some point)
+							// Had been used to test a slightly different way to insert 'title'
+							if ( dropdownId != "ActionDropdownIGNORE" ){
+							    dropdown.append($('<option>', {
+							    //dropdown.append($('<option title=' + item.description + '>', {
+                                    value: item.uri,
+                                    text: txt
+                                }));
+							}
+							else {
+							    //dropdown.append($('<option>', {
+							    dropdown.append($('<option title=' + item.description + '>', {
+                                    value: item.uri,
+                                    text: txt
+                                }));
+							}
+							
+							//console.log("<<<<<<<<<< The dropdown value is " + $(dropdown).find('option:last').val())
+							//console.log("<<<<<<<<<< The definition is " + item.definition)
+							
+							$(dropdown).find('option:last').prop('title', item.definition);
+							
                             // Recursively handle children if present
                             if (item.children && item.children.length > 0) {
                                 populateDropdown(item.children, txt, level + 1); // Increment level for children
@@ -2290,7 +2572,7 @@ var saveAs = false;
                         alert('Invalid JSON format.');
                     }
                 });
-                $('#newRuleButton').click(function(){ loadJsonData({})
+                $('#newRuleButton').click(function(){ loadJsonData({target:$('#Target2Dropdown').val()})
 
                 });
 
@@ -2319,7 +2601,7 @@ var saveAs = false;
                 function applyFormActions($form) {
 
                     $form.find('.removeRow').click(function () {
-					    console.log("In remove row click about to remover parent");
+					    console.log("In remove row click about to remove parent");
                         $(this).parent().remove();
                     });
                     $form.find('.remove-form-button').click(function() {
@@ -2456,7 +2738,9 @@ var saveAs = false;
 					
 					
 
-                    applyFormActions($newForm);
+                    console.log("About to call applyFormActions() for a new form");
+					
+					applyFormActions($newForm);
 
                     if (Object.keys(data).length > 0)
                     {
@@ -2465,10 +2749,10 @@ var saveAs = false;
                         // Load constraints
                         data.constraints.forEach(function (constraint) {
                             newRow = $newForm.find('#constraintsContainer .constraintRow:first').clone();
+							applyFormActions($(newRow));
                             newRow.find('input').val(constraint.value);
-
-
-                            // Debug: Log values before setting them
+							
+							// Debug: Log values before setting them
                             console.log('Setting constraintDropdown to:', constraint.operator);
                             console.log('Setting operatorDropdown to:', constraint.type);
 
@@ -2582,8 +2866,8 @@ var saveAs = false;
 						
 						$('#deleteNameButton').prop("disabled",true);
 						$('#deleteNameButton').css("display", "none");
-						$('#downloadRuleButton').prop("disabled",true);
-						$('#downloadRuleButton').css("display", "none");
+						// $('#downloadRuleButton').prop("disabled",true);
+						// $('#downloadRuleButton').css("display", "none");
 						$('#namePublicButton').prop("disabled",true);
 						$('#namePublicButton').css("display", "none");
 						
@@ -2697,6 +2981,7 @@ var saveAs = false;
 					// The above code was replaced (with below) from the original code
 					// This was causing an issue where the refinement rwo for the relevant block
 					// was being deleted and so the add refinement click function was not working
+					console.log("addRefinementRow being called with " + parent_value);
 					_clearAdditionalRefinementRowsForm(entity, newForm);
                     _clearRefinementRowsForm(entity, newForm);
 
@@ -3092,7 +3377,9 @@ var saveAs = false;
 
                     // Display saved objects (optional)
                     // $('#savedList').append('<li>' + JSON.stringify(saveddata) + '</li>');
-
+                    
+					console.log("The save data to be converted to ORDL is " + JSON.stringify(saveddata));
+					
                     // Perform AJAX request
                     $.ajax({
                         type: 'POST',
@@ -3267,7 +3554,7 @@ var saveAs = false;
                 function makepublicPolicy(id) {
 	      
 	    
-                    fetch(`/organization/toggle_policy_api_visiblity/${id}/`, { method: 'POST', headers: {
+                    fetch(`/policy-editor/organization/toggle_policy_api_visibility/${id}/`, { method: 'POST', headers: {
                                         'X-CSRFToken': '{{ csrf_token }}', // Include CSRF token
                                     } }) 
                         .then(response => {

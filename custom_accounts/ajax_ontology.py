@@ -441,11 +441,27 @@ def get_rules_from_odrl(ttl_file_path, ThisUserid):
     
     # CM2102NEWONT
     
+    # OPTIONAL ( ?subClass ( skos:definition | rdfs:comment )  ?definition . )
+    
+    #subclasses_query = query_prefix+"""
+    #SELECT DISTINCT ?subClass ?label ?definition
+    #    WHERE {
+    #      ?subClass rdfs:subClassOf odrl:Rule ;
+    #                ( rdfs:label | skos:prefLabel ) ?label ;
+    #                skos:definition  ?definition .
+    #    }
+    #"""
+    
     subclasses_query = query_prefix+"""
-    SELECT DISTINCT ?subClass ?label
+    SELECT DISTINCT ?subClass ?label ?definition
         WHERE {
-          ?subClass rdfs:subClassOf odrl:Rule ;
-                    ( rdfs:label | skos:prefLabel ) ?label .
+          bind("No definition available" as ?default_definition)
+          
+          ?subClass rdfs:subClassOf odrl:Rule .
+          ?subClass ( rdfs:label | skos:prefLabel ) ?label .                    
+          OPTIONAL { ?subClass ( skos:definition | rdfs:comment | skos:note )  ?definition_res . }
+          
+          bind(coalesce(?definition_res, ?default_definition) as ?definition)
         }
     """
 
@@ -454,7 +470,7 @@ def get_rules_from_odrl(ttl_file_path, ThisUserid):
 
     # Convert results to a list of dictionaries
     result_list = [
-        {"uri": str(row.subClass), "label": str(row.label)} for row in subclasses_result
+        {"uri": str(row.subClass), "label": str(row.label), "definition": str(row.definition)} for row in subclasses_result
     ]
     
     print("Out get_rules_from_odrl " + str(GraphName))
@@ -545,6 +561,10 @@ def get_constraints_types_from_odrl(ttl_file_path, ThisUserid):
     #X    }
     #X"""
     
+    
+    
+    
+
     #CM2102NEWONT
     query = query_prefix+"""
     SELECT DISTINCT ?leftoperand ?label
@@ -632,19 +652,63 @@ def get_action_hierarchy_from_odrl(ttl_file_path, ThisUserid):
     
     # CM2102NEWONT
     actions_query = query_prefix+"""
-    SELECT DISTINCT ?action ?label ?sub_action ?sub_label
+    SELECT DISTINCT ?action ?label ?definition ?sub_action ?sub_label ?sub_definition
 
         WHERE {
             ?sub_action (rdf:type /  rdfs:subClassOf?) odrl:Action.
             ?sub_action ( rdfs:label | skos:prefLabel ) ?sub_label.
+            ?sub_action skos:definition ?sub_definition.
             ?sub_action odrl:includedIn | rdfs:subClassOf ?action .
             ?action ( rdfs:label | skos:prefLabel ) ?label .
+            ?action skos:definition ?definition .
 
         }
     """
+    # bind(... as ?default_foo)
+
+    #optional { 
+        # try to get value ?foo
+     #}
+
+    # bind(coalesce(?foo, ?default_foo) as ?result_foo)
+    
+    actions_query = query_prefix+"""
+    SELECT DISTINCT ?action ?label ?definition ?sub_action ?sub_label ?sub_definition
+
+        WHERE {
+            bind("No definition available" as ?default_definition)
+            bind("No definition available" as ?default_sub_definition)
+            
+            ?sub_action (rdf:type /  rdfs:subClassOf?) odrl:Action .
+            ?sub_action ( rdfs:label | skos:prefLabel ) ?sub_label .
+            OPTIONAL { ?sub_action ( skos:definition | rdfs:comment | skos:note ) ?sub_definition_res . }
+            ?sub_action odrl:includedIn | rdfs:subClassOf ?action .
+            ?action ( rdfs:label | skos:prefLabel ) ?label .
+            OPTIONAL { ?action ( skos:definition | rdfs:comment | skos:note ) ?definition_res . }
+            
+            bind(coalesce(?definition_res, ?default_definition) as ?definition)
+            bind(coalesce(?sub_definition_res, ?default_sub_definition) as ?sub_definition)
+        }
+    """
+    
+    #actions_query = query_prefix+"""
+    #SELECT DISTINCT ?action ?label ?definition ?sub_action ?sub_label ?sub_definition
+
+    #    WHERE {
+            
+    #        ?sub_action (rdf:type /  rdfs:subClassOf?) odrl:Action .
+    #        ?sub_action ( rdfs:label | skos:prefLabel ) ?sub_label .
+    #        OPTIONAL { ?sub_action ( skos:definition | rdfs:comment | skos:note ) ?sub_definition . }
+    #        ?sub_action odrl:includedIn | rdfs:subClassOf ?action .
+    #        ?action ( rdfs:label | skos:prefLabel ) ?label .
+    #        OPTIONAL { ?action ( skos:definition | rdfs:comment | skos:note ) ?definition . }
+           
+    #    }
+    #"""
 
     # Dictionaries to hold actions and their labels
     uri_label_dict = {}
+    uri_definition_dict = {}
     action_hierarchy = {}
 
     # Execute the query and populate the dictionaries
@@ -652,18 +716,24 @@ def get_action_hierarchy_from_odrl(ttl_file_path, ThisUserid):
         #print("In get_action_hierarchy_from_odrl(): The next row from query is " + str(row.action) + "/" + str(row.label) + "/" + str(row.sub_action) + "/" + str(row.sub_label))
         action_uri = str(row.action)
         action_label = str(row.label)
+        action_definition = str(row.definition)
         sub_action_uri = str(row.sub_action)
         sub_action_label = str(row.sub_label)
+        sub_action_definition = str(row.sub_definition)
 
         # Store labels for each URI
         uri_label_dict[action_uri] = action_label
         uri_label_dict[sub_action_uri] = sub_action_label
+        
+        # Store definitions for each URI
+        uri_definition_dict[action_uri] = action_definition
+        uri_definition_dict[sub_action_uri] = sub_action_definition
 
         # Organise actions into a hierarchy
         if action_uri not in action_hierarchy:
-            action_hierarchy[action_uri] = {"uri": action_uri, "label": action_label, "children": []}
+            action_hierarchy[action_uri] = {"uri": action_uri, "label": action_label, "definition": action_definition, "children": []}
         if sub_action_uri not in action_hierarchy:
-            action_hierarchy[sub_action_uri] = {"uri": sub_action_uri, "label": sub_action_label, "children": []}
+            action_hierarchy[sub_action_uri] = {"uri": sub_action_uri, "label": sub_action_label, "definition": sub_action_definition, "children": []}
         action_hierarchy[action_uri]["children"].append(action_hierarchy[sub_action_uri])
 
     # Filter to include only top-level actions
@@ -706,36 +776,65 @@ def get_purpose_hierarchy_from_dpv(ttl_file_path, ThisUserid):
     #X """
     
     #CM2102NEWONT
+    #purpose_query = query_prefix+"""
+    #SELECT DISTINCT ?purpose ?label ?definition ?sub_purpose ?sub_label ?sub_definition
+    #    WHERE {
+    #        ?sub_purpose rdf:type dvpowl:Purpose .
+    #        ?sub_purpose ( rdfs:label | skos:prefLabel ) ?sub_label.
+    #        ?sub_purpose skos:definition ?sub_definition .
+    #        ?sub_purpose ( skos:broader | rdfs:subClassOf) ?purpose .
+    #        ?purpose ( rdfs:label | skos:prefLabel ) ?label .
+    #        ?purpose skos:definition ?definition .
+    #    }
+    #"""
+    
     purpose_query = query_prefix+"""
-    SELECT DISTINCT ?purpose ?label ?sub_purpose ?sub_label
+    SELECT DISTINCT ?purpose ?label ?definition ?sub_purpose ?sub_label ?sub_definition
         WHERE {
+        
+            bind("No definition available" as ?default_definition)
+            bind("No definition available" as ?default_sub_definition)
+            
             ?sub_purpose rdf:type dvpowl:Purpose .
             ?sub_purpose ( rdfs:label | skos:prefLabel ) ?sub_label.
+            OPTIONAL { ?sub_purpose ( skos:definition | rdfs:comment | skos:note ) ?sub_definition_res . }
             ?sub_purpose ( skos:broader | rdfs:subClassOf) ?purpose .
             ?purpose ( rdfs:label | skos:prefLabel ) ?label .
+            OPTIONAL { ?purpose ( skos:definition | rdfs:comment | skos:note ) ?definition_res . }
+            
+            bind(coalesce(?definition_res, ?default_definition) as ?definition)
+            bind(coalesce(?sub_definition_res, ?default_sub_definition) as ?sub_definition)
         }
     """
 
     # Dictionaries to hold actions and their labels
     uri_label_dict = {}
+    uri_definition_dict = {}
     purpose_hierarchy = {}
+    
 
     # Execute the query and populate the dictionaries
     for row in g.query(purpose_query):
         purpose_uri = str(row.purpose)
         purpose_label = str(row.label)
+        purpose_definition = str(row.definition)
         sub_purpose_uri = str(row.sub_purpose)
         sub_purpose_label = str(row.sub_label)
+        sub_purpose_definition = str(row.sub_definition)
 
         # Store labels for each URI
         uri_label_dict[purpose_uri] = purpose_label
         uri_label_dict[sub_purpose_uri] = sub_purpose_label
+        
+        # Store definitions for each URI
+        uri_definition_dict[purpose_uri] = purpose_definition
+        uri_definition_dict[purpose_uri] = sub_purpose_definition
 
         # Organise actions into a hierarchy
         if purpose_uri not in purpose_hierarchy:
-            purpose_hierarchy[purpose_uri] = {"uri": purpose_uri, "label": purpose_label, "children": []}
+            purpose_hierarchy[purpose_uri] = {"uri": purpose_uri, "label": purpose_label, "definition": purpose_definition, "children": []}
         if sub_purpose_uri not in purpose_hierarchy:
-            purpose_hierarchy[sub_purpose_uri] = {"uri": sub_purpose_uri, "label": sub_purpose_label, "children": []}
+            purpose_hierarchy[sub_purpose_uri] = {"uri": sub_purpose_uri, "label": sub_purpose_label, "definition": sub_purpose_definition, "children": []}
         purpose_hierarchy[purpose_uri]["children"].append(purpose_hierarchy[sub_purpose_uri])
 
     # Filter to include only top-level actions
@@ -778,38 +877,67 @@ def get_actor_hierarchy_from_dpv(ttl_file_path, ThisUserid):
     #X """
     
     # CM2102NEWONT
+    #actor_query = query_prefix+"""
+    #SELECT DISTINCT ?actor ?label ?definition ?sub_actor ?sub_label ?sub_definition
+
+    #    WHERE {
+    #        ?actor rdfs:subClassOf* dvpowl:Entity .
+    #        ?actor skos:prefLabel|rdfs:label ?label .
+    #        ?actor skos:definition ?definition .
+    #        ?sub_actor rdfs:subClassOf ?actor .
+    #        ?sub_actor skos:prefLabel|rdfs:label ?sub_label .
+    #        ?sub_actor skos:definition ?sub_definition
+
+    #    }
+    #"""
+    
     actor_query = query_prefix+"""
-    SELECT DISTINCT ?actor ?label ?sub_actor ?sub_label
+    SELECT DISTINCT ?actor ?label ?definition ?sub_actor ?sub_label ?sub_definition
 
         WHERE {
+            bind("No definition available" as ?default_definition)
+            bind("No definition available" as ?default_sub_definition)
+            
             ?actor rdfs:subClassOf* dvpowl:Entity .
             ?actor skos:prefLabel|rdfs:label ?label .
+            OPTIONAL { ?actor ( skos:definition | rdfs:comment | skos:note ) ?definition_res . }
             ?sub_actor rdfs:subClassOf ?actor .
-            ?sub_actor skos:prefLabel|rdfs:label ?sub_label
+            ?sub_actor skos:prefLabel|rdfs:label ?sub_label .
+            OPTIONAL { ?sub_actor ( skos:definition | rdfs:comment | skos:note ) ?sub_definition_res . }
+            
+            bind(coalesce(?definition_res, ?default_definition) as ?definition)
+            bind(coalesce(?sub_definition_res, ?default_sub_definition) as ?sub_definition)
 
         }
     """
-
+    
     # Dictionaries to hold actions and their labels
     uri_label_dict = {}
+    uri_definition_dict = {}
     actor_hierarchy = {}
 
     # Execute the query and populate the dictionaries
     for row in g.query(actor_query):
         actor_uri = str(row.actor)
         actor_label = str(row.label)
+        actor_definition = str(row.definition)
         sub_actor_uri = str(row.sub_actor)
         sub_actor_label = str(row.sub_label)
+        sub_actor_definition = str(row.sub_definition)
 
         # Store labels for each URI
         uri_label_dict[actor_uri] = actor_label
         uri_label_dict[sub_actor_uri] = sub_actor_label
+        
+        # Store definitions for each URI
+        uri_definition_dict[actor_uri] = actor_definition
+        uri_definition_dict[sub_actor_uri] = sub_actor_definition
 
         # Organise actions into a hierarchy
         if actor_uri not in actor_hierarchy:
-            actor_hierarchy[actor_uri] = {"uri": actor_uri, "label": actor_label, "children": []}
+            actor_hierarchy[actor_uri] = {"uri": actor_uri, "label": actor_label, "definition": actor_definition, "children": []}
         if sub_actor_uri not in actor_hierarchy:
-            actor_hierarchy[sub_actor_uri] = {"uri": sub_actor_uri, "label": sub_actor_label, "children": []}
+            actor_hierarchy[sub_actor_uri] = {"uri": sub_actor_uri, "label": sub_actor_label, "definition": sub_actor_definition, "children": []}
         actor_hierarchy[actor_uri]["children"].append(actor_hierarchy[sub_actor_uri])
 
     # Filter to include only top-level actions
@@ -819,6 +947,7 @@ def get_actor_hierarchy_from_dpv(ttl_file_path, ThisUserid):
     }
     
     print("Out get_actor_hierarchy_from_dpv " + str(GraphName))
+    #print("Out get_actor_hierarchy_from_dpv " + str(top_level_actors.values()))
     
     # Return the hierarchy as a list
     return list(top_level_actors.values())

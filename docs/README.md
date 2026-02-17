@@ -6,8 +6,8 @@ Powered by
 
 ## **General Description**
 
-This repository contains a django app, which displays the Policy Editor reference UI. It allows a user to create and manage ODRL Policies.
-
+This repository contains a django app, which displays the Policy Editor reference UI. 
+Allow user-friendly creation and maintenance of ODRL policies (including integration with domain specific ontologies).
 
 ## **Commercial Information**
 

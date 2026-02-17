@@ -4,67 +4,54 @@ Powered by
 
 [![UoSLOGO](./images/UniSouthampton.png)](https://dips.soton.ac.uk/#home)
 
-| Project Links |
-| ------------- | 	
-| Software GitHub Repository --> Policy Editor software <https://github.com/...> | //use to refer to external repositories
-| Progress GitHub Project [ADD URL] |
-
 ## **General Description**
 
-
-
-## **Architecture**
-
-
-## **Component Definition**
-
-
-## **Screenshots**
+This repository contains a django app, which displays the Policy Editor reference UI. It allows a user to create and manage ODRL Policies.
 
 
 ## **Commercial Information**
 
-Table with the organisation, license nature (Open Source, Commercial ... ) and the license. Replace with the values of your module.
 
 | Organisation (s) | License Nature | License |
-| ---------------  | -------------- | ------- |
-
-## **Top Features**
-
+| --- | --- | --- |
+| University of Southampton  | Open Source | MIT Licence |
 
 
 ## **How To Install**
 
-
 ### Requirements
 
-To be defined. 
+Docker
 
 ### Software
 
-To be defined. 
+Django, MongoDB
 
-### Summary of installation steps
+### Detailed Steps
+1. Install dependencies
+```bash
+pip install -r requirements.txt
+```
+2.  Run the migrations
+```bash
+python manage.py makemigrations
+python manage.py migrate
+```
+3. Create a superuser to access admin interface
+```bash
+python manage.py createsuperuser
+```
+4. Run the server
+```bash
+python manage.py runserver 
 
-To be defined. 
-
-### Detailed steps
-
-To be defined. 
-
-## **How To Use**
-
-To be defined. 
+```
 
 
-## **Other Information**
 
-To be defined. 
+### Expected KPIs
 
-## **OpenAPI Specification**
+| What | How | Values |
+| --- | --- | --- |
+| 1) Policy management expressiveness: ability to represent data processing regulations in a machine processable form. 2) Policy-based Data Access Control Accuracy | 1) analysis of an existing large (>100) corpus of data sharing/data processing agreements 2) Experiments over at least two policies, asking the pilots to express (in machine processable form, through our tool's interface) a sample (min 20 each) of( access requests (evenly distributed as requests to be permitted, and to be denied).  | 1) analysis of an existing large (>100) corpus of data sharing/data processing agreements 2) Experiments over at least two policies, asking the pilots to express (in machine processable form, through our tool's interface) a sample (min 20 each) of( access requests (evenly distributed as requests to be permitted, and to be denied).  |
 
-To be defined. 
-
-## **Additional Links**
-
-To be defined. 

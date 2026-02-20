@@ -6,8 +6,23 @@ Powered by
 
 ## **General Description**
 
-This repository contains a django app, which displays the Policy Editor reference UI. 
-Allow user-friendly creation and maintenance of ODRL policies (including integration with domain specific ontologies).
+This repository contains a django app, which displays the Policy Editor reference UI. Allow user-friendly creation and maintenance of ODRL policies (including integration with domain specific ontologies).
+
+## **How to Use**
+
+Uploading domain specific ontologies. 
+* This allows you to customise the policies you create with relevant terminology. These ontologies should link to the ODRL terms, and it is advised to use the [ODRL and DPV](https://github.com/DATAPACT/ODRL-DPV_ontology) base ontology.
+
+Creating a new policy
+* You can create a new policy by specifying which dataset (asset) the policy applies to.
+* You can then specify a number of rules. Each rule must be either a permission, a prohibition or an obligation.
+* For each rule, you can specify, among others:
+  * The Action, that is, what is the action that is being permitted/prohibited/obliged  
+  * The Actor, that is, who will have to follow this rule
+  * The Purpose, the only allowed purpose for the action
+  * Any additional constraints, such as until when the rule is valid.
+* You can then save the policy, download its ODRL representation in a machine processable file.
+* You can re-visit and edit saved policies.
 
 ## **Commercial Information**
 

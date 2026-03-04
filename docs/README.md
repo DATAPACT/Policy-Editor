@@ -66,8 +66,6 @@ python manage.py runserver
 
 ## Expected KPIs
 
-These KPI relate to the Policy Service suite of tools, which include the Policy Editor, the Policy Enginge and the Ontology Service.
-
 | What | How | Values |
 | --- | --- | --- |
 | Coverage of the ODRL 2.2 language expressable by the editor | Listing the ODRL 2.2 terms and constructs expressible by the editor, and comparing them against the whole ODRL 2.2 language and vocabulary.   | >80% (100% of the non-ambiguous part of ODRL according Jaime et al. Evaluation and Comparison Semantics for ODRL, 2025)  |

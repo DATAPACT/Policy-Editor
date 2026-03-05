@@ -923,7 +923,9 @@ body_tab {
 								<button id="createNewPolicyFromUpload" class="menubar-button" style="background-color:#34ebd8">Create New Policy From Upload</button> -->
 								<button id="createNewPolicy" class="menubar-button" >Create New Policy</button>
 								<button id="createNewPolicyFromUpload" class="menubar-button" >Upload New Policy</button>
-								<button id="compareTwoPolicies" class="menubar-button" >Compare Two Policies</button>
+								<button id="compareTwoPolicies" class="menubar-button" style="display: none">Compare Two Policies</button>
+								<!-- DATAPACTv2 -->
+								<button id="evaluatePolicy" class="menubar-button" >Evaluate Policies</button>
 								<button id="reviewPublicRepository" class="menubar-button" style="display: none">Review Public Repository </button>
                                 
 								<script type='text/javascript'>	
@@ -956,6 +958,15 @@ body_tab {
 										var targetURL = "/policy-editor/compare" ;	
 										window.open(targetURL,"_blank")
                                    });
+								   
+								   <!-- DATAPACTv2 -->
+								   $('#evaluatePolicy').off('click').click(function() {
+                                        
+									
+										var targetURL = "/policy-editor/evaluate" ;	
+										window.open(targetURL,"_blank")
+                                   });
+								   
 								   
 								   $('#reviewPublicRepository').off('click').click(function() {
                                         

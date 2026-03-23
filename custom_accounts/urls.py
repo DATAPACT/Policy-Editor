@@ -97,6 +97,7 @@ urlpatterns = [
     
     # CM0311
     path("organization/toggle_ontology_api_visibility/<int:ontology_id>/", views.toggle_ontology_api_visibility, name="toggle_ontology_api_visibility"),
-    path("organization/toggle_policy_api_visibility/<int:policy_id>/", views.toggle_policy_api_visibility, name="toggle_policy_api_visibility")
-    
+    path("organization/toggle_policy_api_visibility/<int:policy_id>/", views.toggle_policy_api_visibility, name="toggle_policy_api_visibility"),
+
+    path("sso-login", views.sso_login, name="sso_login"),
 ]

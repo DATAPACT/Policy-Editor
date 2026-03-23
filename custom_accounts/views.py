@@ -35,6 +35,21 @@ from .helper import get_all_users
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.utils.encoding import force_bytes
 from django.contrib.auth import authenticate, login, logout
+from django.views.decorators.csrf import csrf_exempt
+import jwt
+from jwt import PyJWKClient
+import threading
+
+_jwks_client: PyJWKClient | None = None
+_jwks_lock = threading.Lock()
+
+def _get_jwks_client(url: str) -> PyJWKClient:
+    global _jwks_client
+    if _jwks_client is None:
+        with _jwks_lock:
+            if _jwks_client is None:
+                _jwks_client = PyJWKClient(url, cache_keys=True)
+    return _jwks_client
 
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponseServerError
@@ -60,8 +75,11 @@ from custom_accounts.ajax_ontology import (
     get_purpose_hierarchy_from_dpv, get_constraints_for_instances,
 )
 from custom_accounts.ajax_ontology import ontology_data_to_dict_tree
+import logging
 import os
 import requests
+
+logger = logging.getLogger(__name__)
 
 # because of the custom user model
 from django.contrib.auth import get_user_model
@@ -394,7 +412,12 @@ def userhome(request):
     # SavedPols=ODRLRuleUpload.objects.all()
     
     StdOnts=["Application specific integration of ODRL and DPV"]
-    context={"CustOntList":ontol_list_default + ontol_list, "SavedPols":odrl_list, "StdOnts":StdOnts}
+    context={
+        "CustOntList": ontol_list_default + ontol_list,
+        "SavedPols": odrl_list,
+        "StdOnts": StdOnts,
+        "is_keycloak": request.user.username.startswith("kc_"),
+    }
     # CM2403 NewIndex
     #return render(request, "common/USER_TEST.html",context)
     return render(request, "common/MainIndexPage.html",context)
@@ -1245,9 +1268,13 @@ def compare_policies(request):
     # SavedPols=ODRLRuleUpload.objects.all()
     
     StdOnts=["Application specific integration of ODRL and DPV"]
-    context={"CustOntList":ontol_list_default + ontol_list, "SavedPols":odrl_list, "StdOnts":StdOnts}
-        
-    
+    context={
+        "CustOntList": ontol_list_default + ontol_list,
+        "SavedPols": odrl_list,
+        "StdOnts": StdOnts,
+        "is_keycloak": request.user.username.startswith("kc_"),
+    }
+
     return render(request, "../templates/comparison/Comparison.html", context)
 
 def extract_logic_expressions_page(request):
@@ -1468,3 +1495,65 @@ def toggle_policy_api_visibility(request, policy_id):
 
 
     return JsonResponse({"error": "Invalid request method."}, status=405)
+
+
+@csrf_exempt
+def sso_login(request):
+    if request.method != "POST":
+        return JsonResponse({"error": "Method not allowed"}, status=405)
+
+    try:
+        body = json.loads(request.body)
+        token = body.get("token")
+        if not token:
+            return JsonResponse({"error": "Missing token"}, status=400)
+    except json.JSONDecodeError:
+        return JsonResponse({"error": "Invalid JSON"}, status=400)
+
+    keycloak_issuer = settings.KEYCLOAK_ISSUER
+    if not keycloak_issuer:
+        logger.error("sso_login: KEYCLOAK_ISSUER is not configured")
+        return JsonResponse({"error": "SSO not configured"}, status=503)
+    jwks_url = f"{keycloak_issuer}/protocol/openid-connect/certs"
+
+    try:
+        jwks_client = _get_jwks_client(jwks_url)
+        signing_key = jwks_client.get_signing_key_from_jwt(token)
+        decode_kwargs = dict(
+            algorithms=["RS256"],
+            issuer=keycloak_issuer,
+        )
+        client_id = settings.KEYCLOAK_CLIENT_ID
+        if client_id:
+            decode_kwargs["audience"] = client_id
+        else:
+            decode_kwargs["options"] = {"verify_aud": False}
+        payload = jwt.decode(token, signing_key.key, **decode_kwargs)
+    except Exception as e:
+        logger.warning("sso_login: token validation failed — %s: %s", type(e).__name__, e)
+        return JsonResponse({"error": "Invalid token"}, status=401)
+
+    sub = payload.get("sub")
+    if not sub:
+        return JsonResponse({"error": "Invalid token claims"}, status=401)
+
+    email = payload.get("email", "")
+    username = f"kc_{sub}"
+
+    user, created = User.objects.get_or_create(
+        username=username,
+        defaults={
+            "email": email,
+            "first_name": payload.get("given_name", ""),
+            "last_name": payload.get("family_name", ""),
+            "role": "DATA_PROVIDER",
+            "is_active": True,
+        },
+    )
+
+    if not created and email and user.email != email:
+        user.email = email
+        user.save(update_fields=["email"])
+
+    login(request, user, backend="django.contrib.auth.backends.ModelBackend")
+    return JsonResponse({"status": "ok", "redirect_url": reverse("userhome")})

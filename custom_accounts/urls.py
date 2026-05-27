@@ -89,6 +89,10 @@ urlpatterns = [
     
     path("compare", views.compare_policies, name="compare_policies"),
     
+    #DATAPACTv2
+    path("evaluate", views.evaluate_policies, name="evaluate_policies"),
+    path("process_SotW_evaluation", views.process_SotW_evaluation, name="process_SotW_evaluation"),
+    
     path("testview", views.testview, name="testview"),
     path("callComparisonAPI", views.callComparisonAPI, name="testview"),
     

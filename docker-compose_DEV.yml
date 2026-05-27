@@ -1,0 +1,23 @@
+version: '3'
+services:
+  web-dev:
+    restart: always
+    build: .
+    command: python manage.py runserver 0.0.0.0:8005
+    volumes:
+      - .:/app
+    ports:
+      - "8818:8005"
+    environment:
+      - DEBUG=True
+  
+  api-dev:
+    restart: always
+    build: .
+    command: python api.py
+    volumes:
+      - .:/app
+    ports:
+      - "8819:8001"
+    environment:
+      - DEBUG=True

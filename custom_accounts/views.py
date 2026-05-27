@@ -76,6 +76,11 @@ from custom_accounts.ajax_ontology import (
 )
 from custom_accounts.ajax_ontology import ontology_data_to_dict_tree
 import logging
+
+
+# DATAPACT_v2
+from custom_accounts.ODRL_Evaluator import evaluate_ODRL_from_files_merge_policies
+
 import os
 import requests
 
@@ -1276,6 +1281,82 @@ def compare_policies(request):
     }
 
     return render(request, "../templates/comparison/Comparison.html", context)
+    
+# DATAPACTv2
+# Added decorators to force user athentication for this page
+@login_required(login_url="login")
+#@user_passes_test(lambda u: u.role == "DATACONTROLLER_PROCESSOR")
+@user_passes_test(lambda u: u.role == "DATA_PROVIDER")
+def evaluate_policies(request):
+    print("IN evaluate_policies")
+    
+    ThisUserid = request.user.id
+    
+    # Get records for this user
+    # odrls = ODRLRuleUpload.objects.all()
+    odrls = ODRLRuleUpload.objects.filter(edit_uid = ThisUserid)
+        
+    odrl_list = [
+    # CM0311
+        {"id": odrl.id, "name": odrl.name, "protection": odrl.protection}
+        for odrl in odrls
+    ]
+    
+    # CM2102NEWONT
+    # Get default ontologies
+    ontols_default = CustomOntologyUpload.objects.filter(edit_uid = 999999)
+        
+    ontol_list_default = [
+        # CM0311
+        {"id": ontol.id, "name": ontol.name, "protection": ontol.protection}
+        for ontol in ontols_default
+    ]
+    
+    # Get records for this user
+    # odrls = ODRLRuleUpload.objects.all()
+    ontols = CustomOntologyUpload.objects.filter(edit_uid = ThisUserid)
+        
+    ontol_list = [
+        
+        {"id": ontol.id, "name": ontol.name, "protection": ontol.protection}
+        for ontol in ontols
+    ]
+    
+    # CustOntList=CustomOntologyUpload.objects.all()
+    # SavedPols=ODRLRuleUpload.objects.all()
+    
+    StdOnts=["Application specific integration of ODRL and DPV"]
+    context={"CustOntList":ontol_list_default + ontol_list, "SavedPols":odrl_list, "StdOnts":StdOnts}
+        
+    
+    return render(request, "../templates/evaluate/Evaluate.html", context)
+    
+def process_SotW_evaluation(request):
+    print("IN process_SotW_evaluation")
+    
+    if request.method == "POST":
+        #print("The data received is " + str(request.body))
+        eval_json_obj=json.loads(request.body)
+        #print("The data received is now " + str(eval_json_obj))
+        
+        policy_file=eval_json_obj.get('policy','')
+        SotW_file=eval_json_obj.get('sotw','')
+        print("The policy element of the data received is " + str(policy_file))
+        print("The sotw element of the data received is " + str(SotW_file))
+        
+        try:
+            eval_res_temp=evaluate_ODRL_from_files_merge_policies(policy_file, SotW_file) 
+            
+            eval_res={"Success":eval_res_temp[0],
+                      "Structured_Resp":eval_res_temp[1],
+                      "Message_string":eval_res_temp[2]} 
+                      
+            print("The evaluation results are " + str(eval_res))            
+            return JsonResponse(eval_res, status=200, safe=False)
+        except Exception as err:
+            print("The error message is " + str(err))
+            return JsonResponse({"error": "Unable to evaluate the policy."}, status=405)
+            
 
 def extract_logic_expressions_page(request):
 

@@ -879,7 +879,7 @@ body_tab {
 						
 						<div class="menu-text-bar_free">
 						        <a  class="menubar-button" id="settings"> Settings</a>
-							    <a  class="menubar-button" href="{% url 'logout' %}" id="logout"> Logout</a>
+							    {% if not is_keycloak %}<a  class="menubar-button" href="{% url 'logout' %}" id="logout"> Logout</a>{% endif %}
 						    </div>
 							
 						<div class="container">

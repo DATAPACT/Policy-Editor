@@ -13,6 +13,25 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 import os
 
+KEYCLOAK_ISSUER = os.environ.get("KEYCLOAK_ISSUER", "")
+if not KEYCLOAK_ISSUER:
+    import warnings
+    warnings.warn(
+        "KEYCLOAK_ISSUER is not set. SSO login will fail. "
+        "Set KEYCLOAK_ISSUER=https://<your-keycloak>/realms/<realm> in your environment.",
+        stacklevel=2,
+    )
+KEYCLOAK_CLIENT_ID = os.environ.get("KEYCLOAK_CLIENT_ID", "")
+
+_frame_ancestors_env = os.environ.get("FRAME_ANCESTORS", "")
+if not _frame_ancestors_env:
+    import warnings
+    warnings.warn(
+        "FRAME_ANCESTORS is not set. SSO iframe embedding will not work. "
+        "Set FRAME_ANCESTORS in your .env (local) or environment (production).",
+        stacklevel=2,
+    )
+FRAME_ANCESTORS = _frame_ancestors_env.split()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,17 +44,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-e+dfmqm))kmz9k*e4dt(0=)(=uxc0z9hzmfar1-pif#1r=npin"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DEBUG", "False") == "True"
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "dips.soton.ac.uk"]
+ALLOWED_HOSTS = os.environ.get(
+    "ALLOWED_HOSTS", "localhost,127.0.0.1,dips.soton.ac.uk"
+).split(",")
 
-CSRF_TRUSTED_ORIGINS = [
-    "https://dips.soton.ac.uk",  # Your trusted origin
-]
+CSRF_TRUSTED_ORIGINS = os.environ.get(
+    "CSRF_TRUSTED_ORIGINS", "https://dips.soton.ac.uk"
+).split(",")
 
-CORS_ALLOWED_ORIGINS = [
-    "https://dips.soton.ac.uk",  # Add your origin here
-]
+CORS_ALLOWED_ORIGINS = os.environ.get(
+    "CORS_ALLOWED_ORIGINS", "https://dips.soton.ac.uk"
+).split(",")
 JAZZMIN_SETTINGS = {
     # title of the window (Will default to current_admin_site.site_title if absent or None)
     "site_title": "Super Admin",
@@ -77,13 +98,20 @@ MIDDLEWARE = [
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
-    "django.middleware.clickjacking.XFrameOptionsMiddleware",
     # user custom
+    "custom_accounts.redirect_user_middleware.FrameAncestorsMiddleware",
     "custom_accounts.redirect_user_middleware.UserRedirectMiddleware",
 ]
 
 ROOT_URLCONF = "privux.urls"
 SESSION_COOKIE_NAME = "policy_editor_sessionid"
+# "None" + Secure=True required for cross-site iframe (production HTTPS).
+# Modern browsers exempt localhost from the Secure restriction, so dev HTTP works too.
+# Override via env vars if needed (e.g. COOKIE_SAMESITE=Lax for plain HTTP servers).
+SESSION_COOKIE_SAMESITE = os.environ.get("COOKIE_SAMESITE", "None")
+SESSION_COOKIE_SECURE = os.environ.get("COOKIE_SECURE", "True") == "True"
+CSRF_COOKIE_SAMESITE = os.environ.get("COOKIE_SAMESITE", "None")
+CSRF_COOKIE_SECURE = os.environ.get("COOKIE_SECURE", "True") == "True"
 
 TEMPLATES = [
     {
@@ -96,6 +124,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "custom_accounts.context_processors.sso_config",
             ],
         },
     },
@@ -168,6 +197,4 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 #MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
-X_FRAME_OPTIONS = "DENY"
-
 AUTH_USER_MODEL = "custom_accounts.User"

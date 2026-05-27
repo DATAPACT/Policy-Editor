@@ -35,6 +35,7 @@
         {%block inpagecss%}{% endblock %}
     </style>
     <title>Privacy Editor | {%block title%}{% endblock %}</title>
+    <script>window.TRUSTED_ORIGINS = {{ SSO_TRUSTED_ORIGINS_JSON|safe }};</script>
   </head>
 <body>
 <!-- ======= Header ======= -->
@@ -173,5 +174,6 @@
 <script src="{% static 'js/jquery.quicksearch.js' %}"></script>
 <script src="{% static 'js/bootstrap-datepicker.js' %}"></script>
 <script src="{% static 'js/jquery.multiselect.js' %}"></script>
+<script src="{% static 'js/sso.js' %}?v=8"></script>
 </body>
 </html>

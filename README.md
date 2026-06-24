@@ -18,7 +18,26 @@ python manage.py createsuperuser
 ```
 4. Run the server
 ```bash
-python manage.py runserver 
+# URL for UoS User Management Service
+# This tool requires access to this running service
+API_BASE_URL=URL
+# Content is not currently used but existence is checked. Will be removed in future
+MASTER_PASSWORD="any_string"
+# URL for KeyCLoak service
+# This tool now uses KeyCloak as user authorisation service
+KEYCLOAK_URL=URL
+# Required KeyCloak Realm
+KEYCLOAK_ISSUER=URL/realms/dips_services
+# Required KeyCloak Client
+KEYCLOAK_CLIENT_ID=policy-editor-web
+# Content is not currently used but existence is checked. Will be reviewed in future
+KEYCLOAK_CLIENT_SECRET=
+
+python manage.py runserver
+
+#### How to access
+
+Server_URL:IP_PORT/policy-editor/
 
 ```
 #### KPIs

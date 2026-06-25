@@ -50,6 +50,22 @@ def _get_jwks_client(url: str) -> PyJWKClient:
             if _jwks_client is None:
                 _jwks_client = PyJWKClient(url, cache_keys=True)
     return _jwks_client
+    
+def _build_keycloak_url(path: str) -> str:
+    issuer = settings.KEYCLOAK_ISSUER.rstrip("/")
+    return f"{issuer}{path}"
+    
+#def _decode_keycloak_claims(token: str) -> Dict[str, Any]:
+#    keycloak_issuer = settings.KEYCLOAK_ISSUER
+#    if not keycloak_issuer:
+#        raise ValueError("KEYCLOAK_ISSUER is not configured")
+#    return decode_keycloak_token(
+#        token,
+#        issuer=keycloak_issuer.rstrip("/"),
+#        jwks_url=f"{keycloak_issuer.rstrip('/')}/protocol/openid-connect/certs",
+#        verify_aud=False,
+#        logger=logger,
+#    )
 
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponseServerError
@@ -128,6 +144,7 @@ def index(request):
 
 
 def signin(request):
+    print("We are in the top of signin")
     if request.method == "POST":
 
  # Dealing with coming back to page (next three lines)
@@ -135,24 +152,157 @@ def signin(request):
         #if request.user.is_authenticated:
         #    print("THE USER IS ALREADY LOGGED IN ")
         #    return redirect(reverse("create_rule_dataset_no_user"))
-            
+        print("In POST arm of signin")          
         username = request.POST["username"]
         password = request.POST["password"]
         # CM0304
         request_query = request.POST["request_query"]
+        
+        print("We have got back " + username + " / " + password + " / " + request_query)      
+        
+        master_password = os.getenv("MASTER_PASSWORD")
+        API_BASE_URL = os.environ.get("KEYCLOAK_URL")        
+        
+        #endpoint_url = f"{API_BASE_URL}/user/register/"
+        
+        if not settings.KEYCLOAK_ISSUER or not settings.KEYCLOAK_CLIENT_ID:
+            messages.error(request, "Keycloak login is not configured.")
+            return redirect("login")
+        
+        ######## TRIAL  #####
+        url = f"{API_BASE_URL}/user/login/"
+        print(f'Attempting to log in to {url} with username: {username}')
+        data = {
+            "username": username,
+            "password": password,
+        }
+
+        try:
+            token_url = _build_keycloak_url("/protocol/openid-connect/token")
+            print("Token url is " + token_url)
+            data = {
+                "client_id": settings.KEYCLOAK_CLIENT_ID,
+                "grant_type": "password",
+                "scope": "openid profile email",
+                # Keycloak's token endpoint expects the credential identifier in
+                # the `username` field. That identifier can be the real Keycloak
+                # username and may also be an email depending on realm config.
+                "username": username,
+                "password": password,
+            }
+            if settings.KEYCLOAK_CLIENT_SECRET:
+                data["client_secret"] = settings.KEYCLOAK_CLIENT_SECRET
+            # login is delegated to Keycloak. Negotiation-Tool stores the
+            # Keycloak access token directly instead of asking negotiation-api
+            # to mint an internal JWT.
+            response = requests.post(token_url, data=data, timeout=10)
+            print(f"Response status code: {response.status_code}")
+            print(f"Response content: {response.content}")
+        except requests.RequestException as e:
+            messages.error(request, "Login service is unavailable. Please try again later.")
+            return redirect("login")
+
+        if response.status_code == 200:
+                            
+            resp_data = response.json()
+            # Save token and user info in session
+            access_token = resp_data.get("access_token")
+            
+            if not access_token:
+                messages.error(request, "Keycloak did not return an access token.")
+                return redirect("login")
+                
+            # At this point we have the username and password
+            # But we need to retrieve the email as well (in case user does not exsit in django)
+            # Also keycloak log in supports login via email so we need to confirm user name etc
+                
+            try:
+                # Decode the token WITHOUT verification just to read the data
+                # Note: In full production, you should verify the signature using Keycloak's public keys!
+                decoded_token = jwt.decode(access_token, options={"verify_signature": False})
+    
+                # Extract the email
+                user_email_dec = decoded_token.get("email")
+                user_name_dec = decoded_token.get("preferred_username")
+    
+                print(f"We have decoded User Email: {user_email_dec}")
+                print(f"We have decoded Username: {user_name_dec}")
+
+            except jwt.DecodeError:
+                print("Invalid token format.")
+            
+            print(f"About to check if " + user_name_dec + " exists in the django database")            
+            if not User.objects.filter(username=user_name_dec).exists():
+                # See also code in views.register
+                # This code is here in case a user has successfully logged into the KeyCloak server
+                # but has NOT already registered here in the Django user database.
+                # In this case the user is added to the database using the information provided from KeyCloak
+                
+                
+                #try:
+                    # Decode the token WITHOUT verification just to read the data
+                    # Note: In production, you should verify the signature using Keycloak's public keys!
+                #    decoded_token = jwt.decode(access_token, options={"verify_signature": False})
+    
+                    # Extract the email
+                #    user_email = decoded_token.get("email")
+                #    user_name = decoded_token.get("preferred_username")
+    
+                #    print(f"We are creating a new user the decoded User Email: {user_email}")
+                #    print(f"We are creating a new user the decoded Username: {user_name}")
+
+                #except jwt.DecodeError:
+                #    print("Invalid token format.")
+                
+                print(f"Have not found that " + user_name_dec + " exists in the django database")  
+                    
+                register_user = User.objects.create_user(user_name_dec, user_email_dec, password)
+                register_user.first_name = "first_name" #first_name
+                register_user.last_name = "last_name" #last_name
+        
+                # In short term set to True to avaoid activation loop with emails
+                #    See also activate()
+                # register_user.is_active = False
+                register_user.is_active = True
+    
+                register_user.role = "DATA_PROVIDER"
+                register_user.save()
+            # End if not User.objects.filter(username=user_name): 
+
+            # Save token and user info in session
+            try:
+                # Rotate session to avoid stale cached baselines across logins
+                request.session.cycle_key()
+            except Exception:
+                pass
+            request.session["access_token"] = access_token
+            request.session["refresh_token"] = resp_data.get("refresh_token")
+            request.session["is_sso"] = False
+            # return redirect("datacontrollernegotiation")
+#            # return redirect("datacontrollernegotiation")
+        else:
+            # Extract API error message if any, or default message
+            try:
+                detail = response.json().get("detail", "Invalid username or password.")
+            except Exception:
+                detail = "Invalid username or password."
+
+            messages.error(request, detail)
+            return redirect("login")
+        ######## TRIAL  #####
 # DEBUG       
 #        print("THE USER NAME IS ", username, password)
         print("THE REQUEST QUERY IS ", request_query)
 
-        user_login = authenticate(username=username, password=password)
+        user_login = authenticate(username=user_name_dec, password=password)
 
 # Commented this block out as we do not require redirect code
 # Just added back in line login(request, user_login) and redirect
         if user_login is not None:
             #DEBUG
-            print("THE AUTHENTICATION IS OK ", username, password)
+            print("THE AUTHENTICATION IS OK ", user_name_dec, password)
             login(request, user_login)
-            print("LOGGED IN ", username, password)
+            print("LOGGED IN ", user_name_dec, password)
             # UITEST - Changed the entry oage next two lines
             
             #return redirect(request.POST.get('next'))
@@ -238,14 +388,51 @@ def send_activation_email(register_user, email_host_user, request):
 
 def register(request):
     if request.method == "POST":
+        print("We are in register POST")
+        #user_name = (request.POST.get("username")).str.lower()
         user_name = request.POST.get("username")
+        print("The user name is " + user_name)
+        user_name = user_name.lower()
+        print("Cleaned user_name")
+        #first_name = "first_name" #form_data["first_name"]
+        #last_name = "last_name" #form_data["last_name"]
         first_name = request.POST.get("firstname")
         last_name = request.POST.get("lastname")
-        email = request.POST.get("email")
+        print("Recovered first and last names")
+        email = (request.POST.get("email")).lower()
         password = request.POST.get("password")
         confirm_password = request.POST.get("confirmpassword")
+        user_type = "consumer" # request.POST.get("user_type")  # Default to 'consumer' if not provided
+        organization = request.POST.get("organization")
+        # distinctive_title = request.POST.get("distinctive_title")
+        incorporation = request.POST.get("incorporation")
+        address = request.POST.get("address")
+        vat_no = request.POST.get("vat_no")
+        # legal_representative = request.POST.get("legal_representative")
+        # contact_person = request.POST.get("contact_person")
+        position_title = request.POST.get("position_title")
+        phone = request.POST.get("phone")
+        
+        print("POST fields recovered")
 
-        print(user_name, first_name, last_name, email, password, confirm_password)
+        data = {
+            "first_name": first_name,
+            "last_name": last_name,
+            "name": user_name,
+            "username": user_name,
+            "type": user_type,
+            "username_email": email,
+            "password": password,
+            "organization": organization,
+            # "distinctive_title": distinctive_title,
+            "incorporation": incorporation,
+            "address": address,
+            "vat_no": vat_no,
+            "position_title": position_title,
+            "phone": phone,
+        }
+
+        print(user_name, email, password, confirm_password, data)
 
         if User.objects.filter(username=user_name):
             messages.error(request, "Username exist! Please select new username.")
@@ -265,6 +452,43 @@ def register(request):
         if password != confirm_password:
             messages.error(request, "The confirmation password does not match.")
             return redirect("register")
+        
+        print("Getting environment variables")  
+        
+        master_password = os.getenv("MASTER_PASSWORD")
+        API_BASE_URL = os.environ.get("API_BASE_URL")        
+        
+        endpoint_url = f"{API_BASE_URL}/user/register/"
+        
+        print("Calling user register")  
+        
+        try:
+            response = requests.post(f"{endpoint_url}?master_password_input={master_password}",
+                                     json=data)
+            if response.status_code in [200, 201]:
+                response_data = response.json()
+                print(f"User registered successfully: {response_data}")
+                messages.success(request, "Account created successfully! Please log in.")
+                #return redirect("login")
+            else:
+                print("The registration has failed " + str(response.status_code))
+                # Handle errors returned from FastAPI
+                try: 
+                    try:
+                        print("Trying to build error message")
+                        error_message = response.json().get("detail", "Registration failed.")
+                    except:
+                        error_message = "No more error detail " + str(response.status_code)
+                except ValueError:
+                    error_message = "Unexpected response from the registration service."
+
+                messages.error(request, error_message)
+                print("The error message is " + error_message)
+                return redirect("register")
+
+        except requests.RequestException:
+            messages.error(request, "Registration service is unavailable. Please try again later.")
+            return redirect("register")
             
         # CM2102NEWONT
         # The default ORDL_DPV ontology will now be loaded into the core database
@@ -276,6 +500,9 @@ def register(request):
         #
         
         # Get records for the default ontology user
+        
+        print("Loading ontologies")
+        
         ontologies = CustomOntologyUpload.objects.filter(edit_uid = 999999)
         
         ontology_list = [
@@ -326,8 +553,8 @@ def register(request):
                     return redirect("register")
 
         register_user = User.objects.create_user(user_name, email, password)
-        register_user.first_name = first_name
-        register_user.last_name = last_name
+        register_user.first_name = "first_name" #first_name
+        register_user.last_name = "last_name" #last_name
         
         # In short term set to True to avaoid activation loop with emails
         #    See also activate()
@@ -353,6 +580,7 @@ def register(request):
         # send_activation_email(register_user, settings.EMAIL_HOST_USER, request)
 
         return redirect("login")
+        
     return render(request, "register_login/sign-up.html")
 
 

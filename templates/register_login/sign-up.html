@@ -28,25 +28,64 @@
   <form method="post" action="{% url 'register' %}">
         {% csrf_token %}
                   <div class="mb-4">
-                       <label for="username">Username</label>
+                       <label for="username">Username (Warning: usernames will be forced to lowercase)</label>
                         <input type="text" class="form-control" id="username" name="username"  Required>
                       <div id="usernameHelp" class="form-text">Enter desired username.</div>
                   </div>
-                  <div class="mb-4">
-                    <label for="firstname" class="form-label">First name</label>
-                    <input type="text" class="form-control" id="firstname" name="firstname" aria-describedby="firstnameHelp" Required>
-                    <div id="firstnameHelp" class="form-text">Enter your first name.</div>
+				  
+				  <div class="mb-4">
+                       <label for="username">First Name</label>
+                        <input type="text" class="form-control" id="firstname" name="firstname"  Required>
+                      <div id="firstnameHelp" class="form-text">Enter first name.</div>
                   </div>
-                  <div class="mb-4">
-                    <label for="lastname" class="form-label">Last name</label>
-                    <input type="text" class="form-control"  name="lastname" id="lastname" aria-describedby="lastnameHelp" Required>
-                    <div id="lastnameHelp" class="form-text">Enter your last name.</div>
+				  
+				  <div class="mb-4">
+                       <label for="username">Last Name</label>
+                        <input type="text" class="form-control" id="lastname" name="lastname"  Required>
+                      <div id="lastnameHelp" class="form-text">Enter last name.</div>
                   </div>
+                  
                   <div class="mb-4">
-                    <label for="email" class="form-label">Email address</label>
+                    <label for="email" class="form-label">Email address (Warning: emails will be forced to lowercase)</label>
                     <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" Required>
                     <div id="emailHelp" class="form-text">Enter your registered email address.</div>
                   </div>
+				  
+				  <div class="mb-4">
+                    <label for="firstname" class="form-label">Organization</label>
+                    <input type="text" class="form-control" id="organization" name="organization" aria-describedby="organizationHelp" Required>
+                    <div id="firstnameHelp" class="form-text">Enter your organization.</div>
+                  </div>
+                  			  
+                  <div class="mb-4">
+                    <label for="lastname" class="form-label">Incorporation</label>
+                    <input type="text" class="form-control"  name="incorporation" id="incorporation" aria-describedby="incorporationHelp" Required>
+                    <div id="lastnameHelp" class="form-text">Enter your incorporation.</div>
+                  </div>
+				  <div class="mb-4">
+                    <label for="firstname" class="form-label">Address</label>
+                    <input type="text" class="form-control" id="address" name="address" aria-describedby="addressHelp" Required>
+                    <div id="firstnameHelp" class="form-text">Enter your address.</div>
+                  </div>
+			  
+                  <div class="mb-4">
+                    <label for="lastname" class="form-label">VAT No</label>
+                    <input type="text" class="form-control"  name="vat_no" id="vat_no" aria-describedby="vatNoHelp" Required>
+                    <div id="lastnameHelp" class="form-text">Enter your VAT No.</div>
+                  </div>
+
+				  <div class="mb-4">
+                    <label for="firstname" class="form-label">Position Title</label>
+                    <input type="text" class="form-control" id="position_title" name="position_title" aria-describedby="PositionTitleHelp" Required>
+                    <div id="firstnameHelp" class="form-text">Enter your position title.</div>
+                  </div>	
+
+				  <div class="mb-4">
+                    <label for="firstname" class="form-label">Phone number</label>
+                    <input type="text" class="form-control" id="phone" name="phone" aria-describedby="phoneHelp" Required>
+                    <div id="firstnameHelp" class="form-text">Enter your phone number.</div>
+                  </div>	
+						  
                   <div class="mb-4">
                     <label for="password" class="form-label">Password</label>
                     <input type="password" class="form-control" id="password" name="password" Required>

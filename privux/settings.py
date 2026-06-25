@@ -23,6 +23,10 @@ if not KEYCLOAK_ISSUER:
     )
 KEYCLOAK_CLIENT_ID = os.environ.get("KEYCLOAK_CLIENT_ID", "")
 
+API_BASE_URL = os.environ.get("API_BASE_URL")
+KEYCLOAK_CLIENT_SECRET = os.environ.get("KEYCLOAK_CLIENT_SECRET", "")
+
+
 _frame_ancestors_env = os.environ.get("FRAME_ANCESTORS", "")
 if not _frame_ancestors_env:
     import warnings

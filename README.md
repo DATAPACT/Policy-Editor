@@ -35,8 +35,9 @@ KEYCLOAK_CLIENT_SECRET=
 
 python manage.py runserver
 
-#### How to access
-
+5. Access GUI via browser
+```bash
+# URL for django server service
 Server_URL:IP_PORT/policy-editor/
 
 ```
